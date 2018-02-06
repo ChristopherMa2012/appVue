@@ -1,0 +1,23 @@
+{
+  "name": "800vue",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "babel app.js --out-dir build --copy-files --source-maps && babel  build/app.js && babel src --out-dir build/src --source-maps",
+    "debug": "node --nolazy --inspect-brk=9229 build/app.js"
+  },
+  "author": "ma",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mongoose": "^5.0.2",
+    "path": "^0.12.7"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.6.1"
+  }
+}

@@ -1,0 +1,1 @@
+export let apiUrl = 'http://api.800vue.com:800/';
