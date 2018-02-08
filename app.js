@@ -5,7 +5,7 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cookieParser from 'cookie-parser';
 import session from 'express-session';
-import router from './src/route/index';
+import router from './server/route/index';
 import mongoose from 'mongoose';
 // import { fail } from 'assert';
 
