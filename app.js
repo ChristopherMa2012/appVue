@@ -23,7 +23,7 @@ mongoose.connect('mongodb://localhost/800vue');
 app.all("*", (req, res, next) => {
 	res.set("Access-Control-Allow-origin", "http://res.800vue.com:8080");
 	res.set("Access-Control-Allow-Headers", "Content-Type");
-	res.set("Access-Control-Allow-Methods", "GET,PUT,POST");
+	//res.set("Access-Control-Allow-Methods", "GET,PUT,POST");
 	res.set("Access-Control-Allow-Credentials", true);
 	if (req.method === 'OPTIONS') {
 		res.status(200).end();
@@ -33,11 +33,11 @@ app.all("*", (req, res, next) => {
 })
 app.use((session({
 	secret: 'CHRISMA',
-	cookie: {
-		domain: '.800vue.com',
-		maxAge: 7200 * 1000,
-		httpOnly:false
-	}
+	// cookie: {
+	// 	domain: '.800vue.com',
+	// 	maxAge: 7200 * 1000,
+	// 	secure: false
+	// }
 })));
 
 router(app);

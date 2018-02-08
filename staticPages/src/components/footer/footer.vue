@@ -23,26 +23,25 @@
         </svg>
         <figcaption class="f12">我的订单</figcaption>
       </figure>
-      </div>
+    </div>
   </section>
 </template>
 <script>
 import fetch from '@/utils/fetchData';
-import {apiUrl} from '@/config/baseConfig';
-console.log(apiUrl);
+import { apiUrl } from '@/config/baseConfig';
 export default {
-	methods:{
-		toMyOrder(){
-             fetch({
-             	url: apiUrl + 'isLogin',
-             	method: 'get'
-             }).then(res=>{
-             	console.log(res);
-             }).catch(e=>{
-             	console.log(e);
-             })
-		}
-	}
+  methods: {
+    toMyOrder() {
+      fetch({
+        url: apiUrl + 'isLogin',
+        method: 'get'
+      }).then(res => {
+        console.log(res);
+      }).catch(e => {
+        console.log(e);
+      })
+    }
+  }
 }
 
 </script>
@@ -58,8 +57,9 @@ section {
   bottom: 0;
   z-index: 7;
   background-color: white;
-  div,a{
-  	display:block;
+  div,
+  a {
+    display: block;
     width: 50%;
     figure {
       display: inline-block;
