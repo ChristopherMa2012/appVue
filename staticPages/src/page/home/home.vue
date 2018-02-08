@@ -38,38 +38,6 @@
               </router-link>
             </figure>
           </li>
-          <li>
-            <figure>
-              <router-link to="/gdDetail">
-                <div>
-                  <img src="/src/assets/images/index/gdImg.jpg" alt="">
-                </div>
-                <figcaption>
-                  <h3 class="f12">迪巧 维D钙咀嚼钙片迪巧 维D钙咀嚼钙片迪巧 维D钙咀嚼钙片</h3>
-                  <div class="clearfix">
-                    <span class="fl f18">98</span>
-                    <span class="fr f18">128</span>
-                  </div>
-                </figcaption>
-              </router-link>
-            </figure>
-          </li>
-          <li>
-            <figure>
-              <router-link to="/gdDetail">
-                <div>
-                  <img src="/src/assets/images/index/gdImg.jpg" alt="">
-                </div>
-                <figcaption>
-                  <h3 class="f12">迪巧 维D钙咀嚼钙片迪巧 维D钙咀嚼钙片迪巧 维D钙咀嚼钙片</h3>
-                  <div class="clearfix">
-                    <span class="fl f18">98</span>
-                    <span class="fr f18">128</span>
-                  </div>
-                </figcaption>
-              </router-link>
-            </figure>
-          </li>
         </ul>
       </section>
     </section>

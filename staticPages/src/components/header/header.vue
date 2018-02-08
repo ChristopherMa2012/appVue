@@ -15,7 +15,7 @@ import router from "@/router/route"
 export default {
   data() {
     return {
-      pageTitle: "八百方网上药店"
+      pageTitle: "800Vue"
     };
   },
   methods: {

@@ -26,10 +26,10 @@
 <script>
 import pageHead from '@/components/header/header'
 import fetch from '@/utils/fetchData'
+import {apiUrl} from '@/config/baseConfig'
 
 export default {
   data() {
-
     return {
       userName: '',
       password: '',
@@ -51,7 +51,8 @@ export default {
         }
       }).then(res => {
         if(res.success){
-          alert('恭喜你注册成功');
+          let result = confirm('恭喜你注册成功');
+          result && this.$router.push('/');
         } else{
           alert('注册失败。请稍后再试')
         }

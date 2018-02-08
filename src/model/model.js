@@ -2,7 +2,7 @@ import mongoose  from 'mongoose';
 
 let Schema = mongoose.Schema;
 
-let userSchema =  new Schema({
+let user =  new Schema({
 	name: String,
 	sex: String,
 	phone: Number,
@@ -10,4 +10,4 @@ let userSchema =  new Schema({
 	age: Number
 });
 
-export default mongoose.model('UserModel',userSchema);
+export default mongoose.model('user',user);

@@ -5,7 +5,7 @@ import App from './app'
 import router from './router/route'
 import '@/config/pxTorem'
 import '@/utils/consoleLog'
-import {apiUrl} from '@/config/baseConfig'
+
 
 Vue.config.productionTip = false
 
