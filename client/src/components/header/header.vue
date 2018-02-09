@@ -15,7 +15,7 @@ import router from "@/router/route"
 export default {
   data() {
     return {
-      pageTitle: "800Vue"
+      pageTitle: "appVue"
     };
   },
   methods: {
