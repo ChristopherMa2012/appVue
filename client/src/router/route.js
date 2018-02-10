@@ -31,17 +31,17 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
-    },   
+    },
     {
       path: '/register',
       name: 'register',
       component: Register
-    },     
+    },
     {
       path: '/pwdChange',
       name: 'pwdChange',
       component: PwdChange
-    },     
+    },
     {
       path: '/gdDetail',
       name: 'gdDetail',
@@ -80,15 +80,14 @@ export default new Router({
           path: '/payComplete',
           name: 'payComplete',
           component: PayComplete
-        },
-
-        {
-          path: '/myOrder',
-          name: 'myOrder',
-          component: MyOrder
-        },
+        }
 
       ]
+    },
+    {
+      path: '/myOrder',
+      name: 'myOrder',
+      component: MyOrder
     },
     {
       path: '/myPoint',

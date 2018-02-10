@@ -47,12 +47,13 @@
           <span>佰川堂大药房旗舰店</span>
           <span>广西壮族自治区桂平市</span> 发货
         </div>
-        <img src="/src/assets/images/gdDetail/guaruntee.jpg">
+        <img src="/src/assets/images/gdDetail/guarantee.jpg">
       </div>
       <!-- 购买信息 -->
       <div class="buyInfo">
         <div class="activity">
-          <span>活动:<em>优惠券</em></span>
+          <span>活动:</span>
+          <em>优惠券</em>
         </div>
         <div class="specification">
           <span>规格:</span>
@@ -128,12 +129,11 @@ $borderGrey:#8d8d8d;
 
 $imgSrc: '/src/assets/images/gdDetail/';
 .content {
-  background-color: white;
+  background-color: #f0f2f5;
   .carousel {
-    width: 6.8rem;
+    padding: 0 0.2rem;
     height: 6.77rem;
     overflow: hidden;
-    margin: 0 auto;
     position: relative;
     .imgList {
       li {
@@ -164,8 +164,7 @@ $imgSrc: '/src/assets/images/gdDetail/';
     }
   }
   .gdInfo {
-    width: 6.8rem;
-    margin: 0 auto;
+    padding: 0 0.2rem;
     h3 {
       padding-left: 0.75rem;
       background: url($imgSrc + 'rxIcon.jpg') no-repeat;
@@ -175,38 +174,39 @@ $imgSrc: '/src/assets/images/gdDetail/';
       min-height: 0.35rem;
       line-height: 0.35rem;
     }
-    .price{
-      span,em{
+    .price {
+      span,
+      em {
         display: inline-block;
         height: 0.6rem;
         line-height: 0.6rem;
       }
-      span:first-child{
+      span:first-child {
         margin-right: 0.35rem;
-        em{
-          color:$red;
-          &:before{
-            content:'￥';
+        em {
+          color: $red;
+          &:before {
+            content: '￥';
             display: inline-block;
             height: 0.6rem;
             line-height: 0.6rem;
-            color:$red;
+            color: $red;
           }
         }
       }
-      span:nth-child(2){
-        color:$fontGrey;
-        &:before{
-            content:'￥';
-            display: inline-block;
-            height: 0.6rem;
-            line-height: 0.6rem;
+      span:nth-child(2) {
+        color: $fontGrey;
+        &:before {
+          content: '￥';
+          display: inline-block;
+          height: 0.6rem;
+          line-height: 0.6rem;
         }
       }
-      span:last-child{
-            vertical-align: text-bottom;
+      span:last-child {
+        vertical-align: text-bottom;
         background-color: $red;
-        color:white;
+        color: white;
         padding: 0 0.05rem;
         border-radius: 0.05rem;
         height: 0.24rem;
@@ -216,39 +216,139 @@ $imgSrc: '/src/assets/images/gdDetail/';
         margin-top: 0.4rem;
       }
     }
-    .SN{
-      span{
+    .SN {
+      span {
         display: inline-block;
         height: .55rem;
         line-height: .55rem;
       }
     }
-    .guaruntee{
+    .guaruntee {
       background-color: #f5f5f5;
+      span {
+        display: inline-block;
+        height: .55rem;
+        line-height: .55rem;
+        margin-left: .25rem;
+        &:before {
+          display: inline-block;
+          height: .28rem;
+          width: .28rem;
+          border-radius: 50%;
+          border: 0.01rem solid $borderGrey;
+          line-height: .28rem;
+        }
+        &:first-child:before {
+          content: '正';
+        }
+        &:nth-child(2):before {
+          content: '退';
+        }
+        &:last-child:before {
+          content: '保';
+        }
+      }
+    }
+  }
+  /*  <!-- 商家保障 -->*/
+  .shopGuarantee {
+    padding: 0 0.2rem;
+    overflow: hidden;
+    .deliveryTo {
+      span,
+      em {
+        display: inline-block;
+        height: 0.58rem;
+        line-height: 0.58rem;
+      }
+
+      em {
+        font-weight: bold;
+        &:before {
+          content: '';
+          display: inline-block;
+          width: 0.2rem;
+          height: 0.28rem;
+          background: url($imgSrc + 'location.png') no-repeat;
+          background-size: cover;
+          vertical-align: middle;
+          margin: 0 0.1rem 0 0.3rem;
+        }
+      }
+    }
+    .deliveryFee {
+      .span,
+      em {
+        display: inline-block;
+        height: 0.54rem;
+        line-height: 0.54rem;
+      }
+      em {
+        margin: 0 0.2rem;
+        font-weight: bold;
+        &:after {
+          content: '!';
+          display: inline-block;
+          width: 0.26rem;
+          height: 0.26rem;
+          line-height: 0.26rem;
+          text-align: center;
+          border-radius: 50%;
+          border: 0.03rem solid #177ae1;
+          color: #177ae1;
+          margin-left: 0.2rem;
+        }
+      }
+    }
+    .shopTip {
+      span {
+        display: inline-block;
+        height: 0.54rem;
+        line-height: 0.54rem;
+      }
+    }
+    img {
+      width: 6.6rem;
+      height: 0.6rem;
+      margin-bottom: 0.32rem;
+    }
+  }
+  /*购买信息*/
+  .buyInfo {
+    margin-top: 0.2rem;
+    padding: 0 0.2rem;
+    .activity {
+      span {
+        display: inline-block;
+        height: 0.7rem;
+        line-height: 0.7rem;
+        width: 0.8rem;
+      }
+      em {
+        display: inline-block;
+        width: 0.76rem;
+        height: 0.3rem;
+        line-height: 0.3rem;
+        text-align: center;
+        background-color: $red;
+        color: white;
+        border-radius: 0.04rem;
+      }
+    }
+          .specification{
         span{
           display: inline-block;
-          height: .55rem;
-          line-height: .55rem;
-          margin-left: .25rem;
-          &:before{
-            display: inline-block;
-            height: .28rem;
-            width: .28rem;
-            border-radius: 50%;
-            border:0.01rem solid $borderGrey;
-            line-height: .28rem;
-          }
-          &:first-child:before{
-            content:'正';
-          }
-          &:nth-child(2):before{
-            content:'退';
-          }   
-          &:last-child:before{
-            content:'保';
-          }                   
+          width: 0.8rem;
+          height: 0.68rem;
+          line-height: 0.68rem;
         }
-    }
+        select{
+          margin-top: 0.02rem;
+          width: 3.62rem;
+          height: 0.57rem;
+          line-height: 0.57rem;
+        }
+      }
   }
 }
 

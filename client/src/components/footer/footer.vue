@@ -36,7 +36,11 @@ export default {
         url: apiUrl + 'isLogin',
         method: 'get'
       }).then(res => {
-        console.log(res);
+        if(res.isLogin){
+          this.$router.push('/myOrder');
+        }else{
+          this.$router.push('/login');
+        }
       }).catch(e => {
         console.log(e);
       })

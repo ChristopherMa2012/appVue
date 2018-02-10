@@ -5,15 +5,16 @@
       <div class="formBox">
         <div class="userName">
           <span>账号：</span>
-          <input type="text" name="name" placeholder="用户名/邮箱/已验证手机">
+          <input type="text" name="name" placeholder="用户名/邮箱/已验证手机" v-model='userName'>
         </div>
         <div class="pwd">
           <span>密码：</span>
-          <input type="text" name="password" placeholder="请输入密码">
+          <input type="text" name="password" placeholder="请输入密码" v-model='password'>
           <i></i>
         </div>
+        <div class="loginTip">{{loginTip}}</div>
       </div>
-      <div class="loginBtn">登录</div>
+      <div class="loginBtn" @click='loginAction'>登录</div>
       <div class="accOper clearfix">
         <router-link to="/pwdChange" class="forgetPwd fl">忘记密码</router-link>
         <router-link to="/register" class="toRegister fr">立即注册</router-link>
@@ -22,11 +23,41 @@
   </section>
 </template>
 <script>
-import pageHead from '@/components/header/header'
+import pageHead from '@/components/header/header';
+import fetch from '@/utils/fetchData';
+import {apiUrl} from '@/config/baseConfig';
 
 export default {
+  data() {
+    return {
+      userName:'',
+      password:'',
+      loginTip: ''
+    }
+  },
   components: {
     pageHead
+  },
+  methods: {
+    loginAction() {
+      this.loginTip = '';
+      fetch({
+        url: apiUrl + 'login',
+        method: 'post',
+        body: {
+          name: this.userName,
+          password: this.password
+        }
+      }).then(res => {
+        if (res.success) {
+          this.$router.push('/')
+        } else {
+          this.loginTip = '用户名或密码不正确'
+        }
+      }).catch(e => {
+        console.log(e);
+      })
+    }
   }
 }
 
@@ -57,6 +88,10 @@ $red:#e6186f;
         height: 0.6rem;
         line-height: 0.6rem;
       }
+    }
+    .loginTip {
+      color: $red;
+      text-align:right;
     }
   }
   .loginBtn {

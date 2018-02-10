@@ -17,13 +17,33 @@ router.use('/register', (req, res, next) => {
     })
 });
 
+router.use('/login',(req,res,next)=>{
+   let session = req.session;
+   if(session.userInfo){
+       res.send({'isLogin':true,msg:'用户已登录'});
+   }else{
+       UserModel.findOne({'name': req.body.name,'password':req.body.password},(err,result)=>{
+           if(err) {
+               res.send({'success':false,msg:'登陆失败'});
+               handleError(err);
+            }
+            if(result){
+                session.userInfo = Object.create(null);
+                session.userInfo.name = result.name;
+                res.send({'success':true,msg:'登陆成功'});
+            }else{
+               res.send({'success':false,msg:'登陆失败'});
+            }
+       })
+   }
+});
+
 router.use('/isLogin', (req, res, next) => {
-    res.cookie('userName', 'lisi2018', { maxAge: 7200 * 1000, domain: '.800vue.com' });
-    req.session.user = {
-        'name': '李四',
-        'password': 'asdfsdf'
+    if(req.session.userInfo){
+        res.send({'isLogin':true,msg:'用户已登录'});
+    }else{
+        res.send({'isLogin':false,msg:'用户未登录'});
     }
-    res.status(200).send({ 'success': true, msg: '已经登陆' });
 })
 
 export default router;
