@@ -14,7 +14,7 @@
               <span>1358000500</span>
             </div>
             <div class="addrDetail">
-              广东省广州市海珠区赤岗北路118号四季天地三楼东创投资控股八百方
+              广东省广州市大学城广东工业大学
             </div>
           </div>
           <router-link to="/addrEdit" class="oper fl">
@@ -32,7 +32,7 @@
               <span>1358000500</span>
             </div>
             <div class="addrDetail">
-              广东省广州市海珠区赤岗北路118号四季天地三楼东创投资控股八百方
+              广东省广州市大学城广东工业大学
             </div>
           </div>
           <router-link to="/addrEdit" class="oper fl">

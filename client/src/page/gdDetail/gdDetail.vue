@@ -64,16 +64,16 @@
         </div>
         <div class="num">
           <span>数量:</span>
-          <div class="inputBox">
-            <i>-</i>
-            <input type="text" name="gdNum" value="1">
-            <i>+</i>
+          <div class="inputBox clearfix">
+            <i class="fl">-</i>
+            <input type="text" name="gdNum" value="1" class="fl">
+            <i class="fl">+</i>
           </div>
-          <span>库存 <em>23432</em>件</span>
+          <span class="store">库存 <em>23432</em>件</span>
         </div>
       </div>
       <!-- 商家信息 -->
-      <div class="shopInfo clearfix">
+<!--       <div class="shopInfo clearfix">
         <div class="fl">
           <div class="shopName">广州博爱要点</div>
           <div>广东省广州市</div>
@@ -88,19 +88,31 @@
         <div class="fr">
           <img src="/src/assets/images/gdDetail/telephoneIcon.jpg"> 4008855171
         </div>
-      </div>
+      </div> -->
       <!-- 商品说明书/图文详情 -->
       <div class="gdInstructions">
         <div class="tab">
-          <span>药品说明书</span>
+          <span class="isActive">药品说明书</span>
           <span>图文详情</span>
         </div>
-        <div class="instuctions">
+        <div class="instructions" style="display: none;">
           <ul>
             <li>
               <span>药品名称:</span>
               <span>同仁堂六味地黄丸</span>
             </li>
+            <li>
+              <span>通用名称:</span>
+              <span>六味地黄丸</span>
+            </li>  
+            <li>
+              <span>剂型:</span>
+              <span>丸剂（浓缩丸）</span>
+            </li>   
+            <li>
+              <span>主要成分:</span>
+              <span>熟地黄、山茱萸(制)、山药、牡丹皮、茯苓、泽泻</span>
+            </li>                                    
           </ul>
           <img src="/src/assets/images/gdDetail/checkPass.jpg">
         </div>
@@ -335,20 +347,101 @@ $imgSrc: '/src/assets/images/gdDetail/';
         border-radius: 0.04rem;
       }
     }
-          .specification{
-        span{
+    .specification {
+      span {
+        display: inline-block;
+        width: 0.8rem;
+        height: 0.68rem;
+        line-height: 0.68rem;
+      }
+      select {
+        margin-top: 0.02rem;
+        width: 3.62rem;
+        height: 0.57rem;
+        line-height: 0.57rem;
+        border:0.02rem solid $borderGrey;
+      }
+    }
+    .num{
+      padding-bottom: 0.2rem;
+      margin-bottom: 0.2rem;
+      span{
+        display: inline-block;
+        width: 0.8rem;
+        height: 0.7rem;
+        line-height: 0.7rem;
+      }
+      .inputBox{
+        display: inline-block;
+        border:0.02rem solid $borderGrey;
+        width: 2.03rem;
+        vertical-align: middle;
+        i{
           display: inline-block;
-          width: 0.8rem;
-          height: 0.68rem;
-          line-height: 0.68rem;
+          width:0.59rem;
+          height: 0.58rem;
+          line-height: 0.58rem;
+          text-align: center;
         }
-        select{
-          margin-top: 0.02rem;
-          width: 3.62rem;
-          height: 0.57rem;
-          line-height: 0.57rem;
+        input{
+          width: 0.81rem;
+          line-height: 0.58rem;
+          height: 0.58rem;
+          text-align: center;
+          display: inline-block;
+          border-left: 0.01rem solid $borderGrey;
+          border-right: 0.01rem solid $borderGrey;
         }
       }
+      .store{
+        width: unset;
+      }
+    }
+  }
+  /*商品说明书/图文详情*/
+  .gdInstructions{
+    .tab{
+      border-bottom: 0.01rem solid #e5e5e5;
+      span{
+        display: inline-block;
+        width: 49.5%;
+        height: 0.67rem;
+        line-height: 0.67rem;
+        text-align: center;
+        &.isActive{
+          color:$red;
+          border-bottom: 0.03rem solid $red;
+        }
+      }
+    }
+    .instructions{
+      padding:  0.25rem 0.2rem 0;
+      position: relative;
+      li{
+        border-bottom: 0.01rem dotted #e5e5e5;
+        span{
+          display: inline-block;
+          height: 0.5rem;
+          line-height: 0.5rem;
+          &:first-child{
+            width:1.4rem;
+          }
+        }
+      }
+      img{
+        position: absolute;
+        right: 1rem;
+        top: 0.35rem;
+        width: 1.04rem;
+        height: 1.04rem;
+        z-index: 2;
+      }
+    }
+    .imgDetail{
+      img{
+        width: 6.8rem;
+      }
+    }
   }
 }
 

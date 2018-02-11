@@ -26,7 +26,15 @@
 import pageHead from '@/components/header/header';
 import fetch from '@/utils/fetchData';
 import {apiUrl} from '@/config/baseConfig';
+import popup from '@/components/common/popup';
 
+let loginResHandle = status =>{
+   switch(status){
+    case 200: this.$router.push('/');
+    case 202: this.loginTip = '该用户已登录，无须重复登录';
+    case 300: alert('');
+   }
+}
 export default {
   data() {
     return {
@@ -36,7 +44,8 @@ export default {
     }
   },
   components: {
-    pageHead
+    pageHead,
+    popup
   },
   methods: {
     loginAction() {

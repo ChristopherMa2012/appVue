@@ -21,7 +21,7 @@
           <line x1="0.08rem" x2="0.28rem" y1="0.16rem" y2="0.16rem" stroke-width="0.03rem" stroke="grey" />
           <line x1="0.08rem" x2="0.28rem" y1="0.23rem" y2="0.23rem" stroke-width="0.03rem" stroke="grey" />
         </svg>
-        <figcaption class="f12">我的订单</figcaption>
+        <figcaption class="f12">我的</figcaption>
       </figure>
     </div>
   </section>
@@ -37,7 +37,7 @@ export default {
         method: 'get'
       }).then(res => {
         if(res.isLogin){
-          this.$router.push('/myOrder');
+          this.$router.push('/user');
         }else{
           this.$router.push('/login');
         }
