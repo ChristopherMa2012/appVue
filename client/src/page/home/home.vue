@@ -15,10 +15,7 @@
         <h3 class="f14">热销推荐</h3>
       </section>
       <ul class="tabBar clearfix">
-        <li class="isActive">强壮男神</li>
-        <li>心脑血管</li>
-        <li>肝爱健康 </li>
-        <li>神经系统</li>
+        <li v-for="{item,index} in categoryArr" v-bind:class="{isActive:index == curNum }" @click="tabChange(index)">{{index}}</li>
       </ul>
       <section class="tabBarContent">
         <ul class="clearfix">
@@ -49,6 +46,18 @@ import pageHead from '@/components/header/header'
 import pageFoot from '@/components/footer/footer'
 
 export default {
+  data(){
+    return{
+      categoryArr:['中西药品','营养健康','保健器械','健康服务'],
+      isActive:false,
+      curNum: 1
+    }
+  },
+  methods:{
+     tabChange:index =>{
+          this.curNum = index;
+     }
+  },
   components: {
     pageHead,
     pageFoot

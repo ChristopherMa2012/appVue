@@ -1,4 +1,4 @@
-import register from './register'
+import router from './router'
 export default app =>{
-    app.use(register);
+    app.use(router);
 }

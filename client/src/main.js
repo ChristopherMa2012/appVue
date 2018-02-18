@@ -3,10 +3,11 @@
 import Vue from 'vue';
 import App from './app';
 import router from './router/route';
-import { log, popup } from '@/utils/utilsFun';
+import utilsObj from '@/utils/utilsFun';
 import '@/utils/pxTorem';
 
 
+window.Ma = utilsObj;
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */

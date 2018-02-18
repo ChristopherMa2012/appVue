@@ -36,7 +36,7 @@ export default {
         url: apiUrl + 'isLogin',
         method: 'get'
       }).then(res => {
-        if(res.isLogin){
+        if(res.status == 202){
           this.$router.push('/user');
         }else{
           this.$router.push('/login');

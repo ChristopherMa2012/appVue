@@ -9,12 +9,12 @@
         </div>
         <div class="pwd">
           <span>密码：</span>
-          <input type="text" name="password" placeholder="请输入密码" v-model='password'>
+          <input type="text" name="password" placeholder="请输入密码" v-model='password' @keyup.enter="loginAction">
           <i></i>
         </div>
         <div class="loginTip">{{loginTip}}</div>
       </div>
-      <div class="loginBtn" @click='loginAction'>登录</div>
+      <div class="loginBtn"  @click="loginAction">登录</div>
       <div class="accOper clearfix">
         <router-link to="/pwdChange" class="forgetPwd fl">忘记密码</router-link>
         <router-link to="/register" class="toRegister fr">立即注册</router-link>
@@ -24,18 +24,40 @@
 </template>
 <script>
 import pageHead from '@/components/header/header';
-import fetch from '@/utils/fetchData';
 import {apiUrl} from '@/config/baseConfig';
-import popup from '@/components/common/popup';
 
-let loginResHandle = status =>{
+let confirmAction = opts=>{
+   Ma.fetch({
+    url: apiUrl + 'login',
+    method: 'post',
+    body:opts
+   }).then(res=>{
+      loginResHandle(res.status);
+   }).catch(e=>{
+      new Error(e);
+   })
+}
+
+let loginResHandle = (status,self) =>{
    switch(status){
-    case 200: this.$router.push('/');
-    case 202: this.loginTip = '该用户已登录，无须重复登录';
-    case 300: alert('');
+    case 200: self.$router.push('/');break;
+    case 202: self.loginTip = '该用户已登录，无须重复登录';break;
+    case 300: Ma.pop({
+      content: '已有用户在该浏览器登录，是否注销该用户并登录',
+      btnArr: ['确定','取消'],
+      eventArr:[{
+        event:confirmAction,
+        param:{
+          name: self.userName,
+          password: self.password
+        }
+        }]
+    });break;
+    case 400: self.loginTip = '用户名或密码不正确';break;
    }
 }
-export default {
+
+let a = {
   data() {
     return {
       userName:'',
@@ -44,13 +66,12 @@ export default {
     }
   },
   components: {
-    pageHead,
-    popup
+    pageHead
   },
   methods: {
     loginAction() {
       this.loginTip = '';
-      fetch({
+      Ma.fetch({
         url: apiUrl + 'login',
         method: 'post',
         body: {
@@ -58,18 +79,15 @@ export default {
           password: this.password
         }
       }).then(res => {
-        if (res.success) {
-          this.$router.push('/')
-        } else {
-          this.loginTip = '用户名或密码不正确'
-        }
+        loginResHandle(res.status,this);
       }).catch(e => {
         console.log(e);
       })
     }
   }
 }
-
+window.a = a;
+export default a;
 </script>
 <style lang="scss" scoped>
 $borderGrey:#eeeeee;

@@ -24,29 +24,29 @@ router.use('/register', (req, res, next) => {
 
 router.use('/login', (req, res, next) => {
     if (req.body.name == '' || req.body.password == '') {
-        res.send({ status: 400,msg: '登陆失败' });
+        res.send({ status: 400, msg: '登陆失败' });
         return;
     }
     let session = req.session;
     if (session.isLogin) {
-        if(req.body.name == session.userInfo.name){
-            res.send({status: 202, msg: '用户已登录' });
-        }else{
-            res.send({status: 300,msg:'当前已有用户登陆'});
+        if (req.body.name == session.userInfo.name) {
+            res.send({ status: 202, msg: '用户已登录' });
+        } else {
+            res.send({ status: 300, msg: '当前已有用户登陆' });
         }
     } else {
         UserModel.findOne({ 'name': req.body.name, 'password': req.body.password }, (err, result) => {
             if (err) {
-                res.send({ status:400, msg: '登陆失败' });
+                res.send({ status: 400, msg: '登陆失败' });
                 handleError(err);
             }
             if (result) {
                 session.isLogin = true;
                 session.userInfo = Object.create(null);
                 session.userInfo.name = result.name;
-                res.send({ status:200, msg: '登陆成功' });
+                res.send({ status: 200, msg: '登陆成功' });
             } else {
-                res.send({ status:400, msg: '登陆失败' });
+                res.send({ status: 400, msg: '登陆失败' });
             }
         })
     }
@@ -54,9 +54,9 @@ router.use('/login', (req, res, next) => {
 
 router.use('/isLogin', (req, res, next) => {
     if (req.session.isLogin) {
-        res.send({ status:202, msg: '用户已登录' });
+        res.send({ status: 202, msg: '用户已登录' });
     } else {
-        res.send({ status:402, msg: '用户未登录' });
+        res.send({ status: 402, msg: '用户未登录' });
     }
 })
 
