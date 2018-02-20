@@ -1,12 +1,12 @@
 <template>
   <section class="footer clearfix">
-    <router-link to="/search" class="fl">
+    <router-link to="/shopCar" class="fl">
       <figure>
         <svg version="1.1" baseProfile="full" width="0.37rem" height="0.37rem" xmlns="http://www.w3.org/2000/svg">
           <circle cx="0.185rem" cy="0.175rem" r="0.175rem" stroke-width="0.03rem" stroke="grey" fill="white" />
           <line x1="0.3rem" x2="0.36rem" y1="0.3rem" y2="0.36rem" stroke="grey" stroke-width="0.04rem" />
         </svg>
-        <figcaption class="f12">搜索药品</figcaption>
+        <figcaption class="f12">购物车</figcaption>
       </figure>
     </router-link>
     <div class="fr" @click="toMyOrder">

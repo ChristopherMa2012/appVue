@@ -19,15 +19,12 @@
   </ul>
 </template>
 <script>
-export default {
-
-}
-
+export default {};
 </script>
 <style lang='scss' scoped>
 $red: #f40e24;
 $borderColor: #e7e7e7;
-$bgColor:#f0f2f5;
+$bgColor: #f0f2f5;
 ul {
   padding: 0.3rem 0.38rem 0 0.38rem;
   li {
@@ -44,7 +41,7 @@ ul {
       text-align: center;
       position: relative;
       &:before {
-        content: '￥';
+        content: "￥";
         width: 0.2rem;
         display: inline-block;
         color: $red;
@@ -87,5 +84,4 @@ ul {
     }
   }
 }
-
 </style>

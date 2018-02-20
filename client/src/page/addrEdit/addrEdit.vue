@@ -1,6 +1,6 @@
 <template>
   <section class="bodyContain">
-    <page-head></page-head>
+    <page-head page-title="地址编辑"></page-head>
     <section class="content">
       <ul class="contentBox">
         <li class="name">

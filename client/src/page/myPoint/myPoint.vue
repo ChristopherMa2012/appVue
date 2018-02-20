@@ -1,6 +1,6 @@
 <template>
   <section class="bodyContain">
-    <page-head></page-head>
+    <page-head page-title="我的积分"></page-head>
     <section class="content">
       <div class="outline">
         <span>您现有积分：<i>234</i></span>

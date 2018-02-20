@@ -1,14 +1,12 @@
 <template>
   <section class="bodyContain">
-      <page-head></page-head>
+      <page-head page-title="我的订单"></page-head>
       <section class="content">
            <div class="tabBar">
-               <span class="isActive">全部订单</span>
-               <span>待付款</span>
-               <span>待收货</span>
+               <span v-for="(item,index) in tabBarArr" v-bind:class="{isActive: curNum == index}" @click="tabChange(index)">{{item}}</span>
            </div>
            <div class="orderListCon">
-               <ul>
+               <ul v-for="(item,index) in tabBarArr" v-show="curNum == index">
                    <li>
                        <router-link to="/orderDetail" class="clearfix orderStatus">
                            <div class="fl ">
@@ -45,48 +43,9 @@
                        </ul>
                        <div class="balanceBar clearfixd">
                            <div class="total fl">合计：<span>132432.23</span>(含运费￥<span>0.00</span>)</div>
-                           <span class="goToPay fr">去付款</span>
+                           <router-link to='/orderPay' class="goToPay fr">去付款</router-link>
                        </div>
-                   </li>
-                   <li>
-                       <router-link to="/orderDetail" class="clearfix orderStatus">
-                           <div class="fl ">
-                                 <div class="shopName">济南健民大药房</div>
-                                 <div class="dataTime">2015-23-12 23：23：00</div>
-                           </div>
-                           <div class="fr">
-                                待付款
-                           </div>
-                       </router-link>
-                       <ul class="gdListCon">
-                           <li class="clearfix">
-                                <img src="/src/assets/images/myOrder/gdImg.png" alt="" class="fl">
-                                <div class="gdInfo fl">
-                                     <h3>陈李济舒筋健腰丸舒经活络腰间盘腰椎痛白云山</h3>
-                                     <div class="spec">规格：<span>0.9g/片*6片*3板</span></div>
-                                </div>
-                                <div class="priceNum fr">
-                                    <div class="priceAll">213.23</div>
-                                    <div class="num">X123</div>
-                                </div>
-                           </li>
-                           <li class="clearfix">
-                                <img src="/src/assets/images/myOrder/gdImg.png" alt="" class="fl">
-                                <div class="gdInfo fl">
-                                     <h3>陈李济舒筋健腰丸舒经活络腰间盘腰椎痛白云山</h3>
-                                     <div class="spec">规格：<span>0.9g/片*6片*3板</span></div>
-                                </div>
-                                <div class="priceNum fr">
-                                    <div class="priceAll">213.23</div>
-                                    <div class="num">X123</div>
-                                </div>
-                           </li>                           
-                       </ul>
-                       <div class="balanceBar clearfixd">
-                           <div class="total fl">合计：<span>132432.23</span>(含运费￥<span>0.00</span>)</div>
-                           <span class="goToPay fr">去付款</span>
-                       </div>
-                   </li>                  
+                   </li>                 
                </ul>
            </div>
       </section>
@@ -96,7 +55,17 @@
 import pageHead from "@/components/header/header";
 
 export default {
-
+  data() {
+    return {
+      tabBarArr: ["全部订单", "待付款", "待收货"],
+      curNum:0
+    };
+  },
+  methods:{
+      tabChange(index){
+          this.curNum = index;
+      }
+  },
   components: {
     pageHead
   }
@@ -189,7 +158,7 @@ $red: #e6186f;
             color: $red;
           }
         }
-        .goToPay {
+        a {
           display: inline-block;
           width: 1.3rem;
           height: 0.5rem;

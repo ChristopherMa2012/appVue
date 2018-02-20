@@ -11,7 +11,7 @@ window.Ma = utilsObj;
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
-var Ma_vueObj  = new Vue({
+new Vue({
   el: '#app',
   router,
   template: '<app/>',

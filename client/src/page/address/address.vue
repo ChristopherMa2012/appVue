@@ -1,6 +1,6 @@
 <template>
   <section class="bodyContain">
-    <page-head></page-head>
+    <page-head page-title="地址管理"></page-head>
     <section class="content">
       <ul class="addrList">
         <li class="clearfix">

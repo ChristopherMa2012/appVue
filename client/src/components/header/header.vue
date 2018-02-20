@@ -13,11 +13,7 @@
 import router from "@/router/route"
 
 export default {
-  data() {
-    return {
-      pageTitle: "appVue"
-    };
-  },
+ props:['pageTitle'],
   methods: {
     navBack: function() {
 		router.go(-1);

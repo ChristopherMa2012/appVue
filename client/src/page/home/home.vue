@@ -1,6 +1,6 @@
 <template>
   <section class="bodyContain">
-    <page-head></page-head>
+    <page-head page-title="首页"></page-head>
     <section class="content">
       <section class="indexTop">
         <div>
@@ -8,7 +8,7 @@
             <circle cx="0.185rem" cy="0.175rem" r="0.175rem" stroke-width="0.03rem" stroke="grey" fill="white" />
             <line x1="0.3rem" x2="0.36rem" y1="0.3rem" y2="0.36rem" stroke="grey" stroke-width="0.04rem" />
           </svg>
-          <input type="text" placeholder="请输入药品名">
+          <input type="text" placeholder="请输入药品名" @click="searchAction">
         </div>
       </section>
       <section class="hotRecommend">
@@ -35,6 +35,38 @@
               </router-link>
             </figure>
           </li>
+          <li>
+            <figure>
+              <router-link to="/gdDetail">
+                <div>
+                  <img src="/src/assets/images/index/gdImg.jpg" alt="">
+                </div>
+                <figcaption>
+                  <h3 class="f12">迪巧 维D钙咀嚼钙片迪巧 维D钙咀嚼钙片迪巧 维D钙咀嚼钙片</h3>
+                  <div class="clearfix">
+                    <span class="fl f18">98</span>
+                    <span class="fr f18">128</span>
+                  </div>
+                </figcaption>
+              </router-link>
+            </figure>
+          </li>
+          <li>
+            <figure>
+              <router-link to="/gdDetail">
+                <div>
+                  <img src="/src/assets/images/index/gdImg.jpg" alt="">
+                </div>
+                <figcaption>
+                  <h3 class="f12">迪巧 维D钙咀嚼钙片迪巧 维D钙咀嚼钙片迪巧 维D钙咀嚼钙片</h3>
+                  <div class="clearfix">
+                    <span class="fl f18">98</span>
+                    <span class="fr f18">128</span>
+                  </div>
+                </figcaption>
+              </router-link>
+            </figure>
+          </li>                    
         </ul>
       </section>
     </section>
@@ -54,6 +86,9 @@ export default {
     };
   },
   methods: {
+    searchAction(){
+      this.$router.push('/search');
+    },
     tabChange(index){
       this.tabNum = index;
     }
@@ -131,6 +166,7 @@ ul.tabBar {
 .tabBarContent {
   ul {
     padding: 0.3rem 0 0 0.3rem;
+    background-color: white;
     li {
       display: block;
       margin: 0.15rem;

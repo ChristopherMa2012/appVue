@@ -1,6 +1,6 @@
 <template>
   <section class="bodyContain">
-    <page-head></page-head>
+    <page-head page-title="个人中心"></page-head>
     <section class="content">
       <!-- 会员信息头 -->
       <div class="head clearfix">
@@ -31,7 +31,7 @@
           <span class="fl">订单管理</span>
           <router-link to="/myOrder" class="fr">
             <span>查看全部</span>
-            <i class="leftArr"></i>
+            <i class="rightArr"></i>
           </router-link>
         </div>
         <div class="clearfix">
@@ -132,8 +132,9 @@ $imgSrc: '/src/assets/images/user/';
         padding-top: 0.1rem;
         height: 0.7rem;
         border-bottom: 0.01rem solid $lightgrey;
+        overflow: hidden;
         span {
-          display: block;
+          display: inline-block;
           height: 0.6rem;
           line-height: 0.6rem;
         }

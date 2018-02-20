@@ -1,6 +1,6 @@
 <template>
 	<section class="bodyContain">
-	 <page-head></page-head>
+	 <page-head page-title="搜索"></page-head>
 	 <section class="content">
 	 	  <section class="inputBox">
 				   <div>
@@ -8,9 +8,9 @@
 							<circle cx="0.185rem" cy="0.175rem" r="0.175rem" stroke-width="0.03rem" stroke="grey" fill="white" />
 							<line x1="0.3rem" x2="0.36rem" y1="0.3rem" y2="0.36rem" stroke="grey" stroke-width="0.04rem" />
 						</svg>	 	  	    	
-						<input type="text" placeholder="请输入药品名">
+						<input type="text" placeholder="请输入药品名" autofocus>
 						</div>
-						<a href="javascript:;">取消</a>
+						<span @click="cancelBtn">取消</span>
 	 	  </section>
 			 <section class="title f16">大家都在搜</section>
 			 <section class="keywordTitle">
@@ -27,9 +27,21 @@ import pageHead from "@/components/header/header"
 import pageFoot from "@/components/footer/footer"
 
 export default {
+  // directives:{
+  //   focus:{
+  //     inserted:function(el){
+  //       el.focus();
+  //     }
+  //   }
+  // },
   components: {
     pageHead,
     pageFoot
+  },
+  methods:{
+    cancelBtn(){
+      this.$router.go(-1);
+    }
   }
 };
 </script>
@@ -57,7 +69,7 @@ $lightgrey: lightgrey;
         vertical-align: top;
       }
     }
-    a {
+    span {
       display: inline-block;
       width: 1rem;
       height: 0.63rem;

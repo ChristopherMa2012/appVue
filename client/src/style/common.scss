@@ -125,6 +125,7 @@ body {
 }
 .clearfix {
 	zoom: 1;
+
 }
 
 .disFlexR {
@@ -141,8 +142,8 @@ body {
 	width: 0.2rem;
 	height: 0.2rem;
 	border: none;
-	border-top: 2px solid $white;
-	border-right: 2px solid $white;
+	border-top: 2px solid white;
+	border-right: 2px solid white;
 	transform-origin: 50% 50%;
 	transform: rotate(-135deg);
 }

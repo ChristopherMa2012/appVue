@@ -1,6 +1,6 @@
 <template>
   <section class="bodyContain">
-      <page-head></page-head>
+      <page-head page-title="订单详情"></page-head>
       <section class="content">
             <div class="receiverInfo">
                 <div class="name">李先生 13580563555</div>

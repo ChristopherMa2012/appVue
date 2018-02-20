@@ -19,6 +19,8 @@ import UserAssets from '@/page/userAssets/userAssets'
 import Discount from '@/page/userAssets/children/discount/discount'
 import RedPaper from '@/page/userAssets/children/redPaper/redPaper'
 import OrderDetail from '@/page/orderDetail/orderDetail'
+import OrderPay from '@/page/orderPay/orderPay'
+import ShopCar from '@/page/shopCar/shopCar'
 
 Vue.use(Router)
 
@@ -113,6 +115,16 @@ export default new Router({
         name: 'redPaper',
         component: RedPaper
       }]
+    },
+    {
+      path:'/orderPay',
+      name: 'orderpay',
+      component: OrderPay
+    },
+    {
+      path:'/shopCar',
+      name:'shopCar',
+      component: ShopCar
     }
   ]
 })

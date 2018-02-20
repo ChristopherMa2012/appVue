@@ -1,6 +1,6 @@
 <template>
   <section class="bodyContain">
-    <page-head></page-head>
+    <page-head page-title="商品详情"></page-head>
     <section class="content">
       <!-- 轮播图 -->
       <div class="carousel">
@@ -92,10 +92,10 @@
       <!-- 商品说明书/图文详情 -->
       <div class="gdInstructions">
         <div class="tab">
-          <span class="isActive">药品说明书</span>
-          <span>图文详情</span>
+          <span v-bind:class="{isActive:curNum == 0}" @click="tabChange(0)">药品说明书</span>
+          <span v-bind:class="{isActive:curNum == 1}" @click="tabChange(1)">图文详情</span>
         </div>
-        <div class="instructions" style="display: none;">
+        <div class="instructions" v-show="curNum == 0">
           <ul>
             <li>
               <span>药品名称:</span>
@@ -116,7 +116,7 @@
           </ul>
           <img src="/src/assets/images/gdDetail/checkPass.jpg">
         </div>
-        <div class="imgDetail">
+        <div class="imgDetail" v-show="curNum == 1">
           <img src="/src/assets/images/gdDetail/gdImg.jpg">
         </div>
       </div>
@@ -127,6 +127,16 @@
 import pageHead from '@/components/header/header'
 
 export default {
+  data(){
+    return{
+       curNum : 0
+    }
+  },
+  methods:{
+     tabChange(index){
+       this.curNum = index;
+     }
+  },
   components: {
     pageHead
   }
