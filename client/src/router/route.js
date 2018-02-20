@@ -18,6 +18,7 @@ import AddrEdit from '@/page/addrEdit/addrEdit'
 import UserAssets from '@/page/userAssets/userAssets'
 import Discount from '@/page/userAssets/children/discount/discount'
 import RedPaper from '@/page/userAssets/children/redPaper/redPaper'
+import OrderDetail from '@/page/orderDetail/orderDetail'
 
 Vue.use(Router)
 
@@ -88,6 +89,11 @@ export default new Router({
       path: '/myOrder',
       name: 'myOrder',
       component: MyOrder
+    },
+    {
+      path:'/orderDetail',
+      name:'orderDetail',
+      component: OrderDetail
     },
     {
       path: '/myPoint',

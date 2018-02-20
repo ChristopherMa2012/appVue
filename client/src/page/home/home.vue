@@ -15,10 +15,10 @@
         <h3 class="f14">热销推荐</h3>
       </section>
       <ul class="tabBar clearfix">
-        <li v-for="{item,index} in categoryArr" v-bind:class="{isActive:index == curNum }" @click="tabChange(index)">{{index}}</li>
+        <li v-for="(item,index) in categoryArr" v-bind:class="{isActive:index == tabNum }" @click="tabChange(index)">{{item}}</li>
       </ul>
       <section class="tabBarContent">
-        <ul class="clearfix">
+        <ul class="clearfix" v-for="(item,index) in categoryArr" v-show="index == tabNum">
           <li>
             <figure>
               <router-link to="/gdDetail">
@@ -42,37 +42,36 @@
   </section>
 </template>
 <script>
-import pageHead from '@/components/header/header'
-import pageFoot from '@/components/footer/footer'
+import pageHead from "@/components/header/header";
+import pageFoot from "@/components/footer/footer";
 
 export default {
-  data(){
-    return{
-      categoryArr:['中西药品','营养健康','保健器械','健康服务'],
-      isActive:false,
-      curNum: 1
-    }
+  data() {
+    return {
+      categoryArr: ["中西药品", "营养健康", "保健器械", "健康服务"],
+      isActive: false,
+      tabNum: 1
+    };
   },
-  methods:{
-     tabChange:index =>{
-          this.curNum = index;
-     }
+  methods: {
+    tabChange(index){
+      this.tabNum = index;
+    }
   },
   components: {
     pageHead,
     pageFoot
   }
-}
-
+};
 </script>
 <style lang="scss" scoped>
-$lightgrey:lightgrey;
+$lightgrey: lightgrey;
 $red: #e6186f;
-$imgSrc: '/src/assets/images/index/';
+$imgSrc: "/src/assets/images/index/";
 
 .indexTop {
   height: 3.6rem;
-  background: url($imgSrc + 'topBg.jpg') no-repeat center center;
+  background: url($imgSrc + "topBg.jpg") no-repeat center center;
   background-size: cover;
   overflow: hidden;
   div {
@@ -137,7 +136,7 @@ ul.tabBar {
       margin: 0.15rem;
       width: 3.02rem;
       float: left;
-      figure>a>div {
+      figure > a > div {
         width: 2.98rem;
         height: 2.98rem;
         border: 0.02rem solid $lightgrey;
@@ -172,5 +171,4 @@ ul.tabBar {
     }
   }
 }
-
 </style>
