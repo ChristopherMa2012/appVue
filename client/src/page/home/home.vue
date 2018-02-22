@@ -15,7 +15,7 @@
         <h3 class="f14">热销推荐</h3>
       </section>
       <ul class="tabBar clearfix">
-        <li v-for="(item,index) in categoryArr" v-bind:class="{isActive:index == tabNum }" @click="tabChange(index)">{{item}}</li>
+        <li v-for="(item,index) in categoryArr" :class="{isActive:index == tabNum }" @click="tabChange(index)">{{item}}</li>
       </ul>
       <section class="tabBarContent">
         <ul class="clearfix" v-for="(item,index) in categoryArr" v-show="index == tabNum">

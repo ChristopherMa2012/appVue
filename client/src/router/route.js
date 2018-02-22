@@ -26,105 +26,106 @@ Vue.use(Router)
 
 export default new Router({
   routes: [{
-      path: '/',
-      name: 'app',
-      component: Home
-    },
-    {
-      path: '/login',
-      name: 'login',
-      component: Login
-    },
-    {
-      path: '/register',
-      name: 'register',
-      component: Register
-    },
-    {
-      path: '/pwdChange',
-      name: 'pwdChange',
-      component: PwdChange
-    },
-    {
-      path: '/gdDetail',
-      name: 'gdDetail',
-      component: GdDetail
-    },
-    {
-      path: '/search',
-      name: 'search',
-      component: Search
-    },
-    {
-      path: '/searchRes',
-      name: 'searchRes',
-      component: SearchRes
-    },
-    {
-      path: '/address',
-      name: 'address',
-      component: Address
-    },
-    {
-      path: '/addrEdit',
-      name: 'addrEdit',
-      component: AddrEdit
-    },
-    {
-      path: '/user',
-      name: 'user',
-      component: User,
-      children: [{
-          path: '/orderConfirm',
-          name: 'orderConfirm',
-          component: OrderConfirm
-        },
-        {
-          path: '/payComplete',
-          name: 'payComplete',
-          component: PayComplete
-        }
+    path: '/',
+    name: 'app',
+    component: Home
+  },
+  {
+    path: '/login',
+    name: 'login',
+    component: Login
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: Register
+  },
+  {
+    path: '/pwdChange',
+    name: 'pwdChange',
+    component: PwdChange
+  },
+  {
+    path: '/gdDetail',
+    name: 'gdDetail',
+    component: GdDetail
+  },
+  {
+    path: '/search',
+    name: 'search',
+    component: Search
+  },
+  {
+    path: '/searchRes',
+    name: 'searchRes',
+    component: SearchRes
+  },
+  {
+    path: '/address',
+    name: 'address',
+    component: Address
+  },
+  {
+    path: '/addrEdit',
+    name: 'addrEdit',
+    component: AddrEdit
+  },
+  {
+    path: '/orderConfirm',
+    name: 'orderConfirm',
+    component: OrderConfirm
+  },
+  {
+    path: '/user',
+    name: 'user',
+    component: User,
+    children: [
+      {
+        path: '/payComplete',
+        name: 'payComplete',
+        component: PayComplete
+      }
 
-      ]
-    },
-    {
-      path: '/myOrder',
-      name: 'myOrder',
-      component: MyOrder
-    },
-    {
-      path:'/orderDetail',
-      name:'orderDetail',
-      component: OrderDetail
-    },
-    {
-      path: '/myPoint',
-      name: 'myPoint',
-      component: MyPoint
-    },
-    {
-      path: '/userAssets/:id',
-      name: 'userAssets',
-      component: UserAssets,
-      children: [{
-        path: 'discount',
-        name: 'discount',
-        component: Discount
-      }, {
-        path: 'redPaper',
-        name: 'redPaper',
-        component: RedPaper
-      }]
-    },
-    {
-      path:'/orderPay',
-      name: 'orderpay',
-      component: OrderPay
-    },
-    {
-      path:'/shopCar',
-      name:'shopCar',
-      component: ShopCar
-    }
+    ]
+  },
+  {
+    path: '/myOrder',
+    name: 'myOrder',
+    component: MyOrder
+  },
+  {
+    path: '/orderDetail',
+    name: 'orderDetail',
+    component: OrderDetail
+  },
+  {
+    path: '/myPoint',
+    name: 'myPoint',
+    component: MyPoint
+  },
+  {
+    path: '/userAssets/:id',
+    name: 'userAssets',
+    component: UserAssets,
+    children: [{
+      path: 'discount',
+      name: 'discount',
+      component: Discount
+    }, {
+      path: 'redPaper',
+      name: 'redPaper',
+      component: RedPaper
+    }]
+  },
+  {
+    path: '/orderPay',
+    name: 'orderpay',
+    component: OrderPay
+  },
+  {
+    path: '/shopCar',
+    name: 'shopCar',
+    component: ShopCar
+  }
   ]
 })

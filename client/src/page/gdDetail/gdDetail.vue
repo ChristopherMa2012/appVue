@@ -72,28 +72,11 @@
           <span class="store">库存 <em>23432</em>件</span>
         </div>
       </div>
-      <!-- 商家信息 -->
-<!--       <div class="shopInfo clearfix">
-        <div class="fl">
-          <div class="shopName">广州博爱要点</div>
-          <div>广东省广州市</div>
-          <div class="starClass">
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-            <i></i>
-          </div>
-        </div>
-        <div class="fr">
-          <img src="/src/assets/images/gdDetail/telephoneIcon.jpg"> 4008855171
-        </div>
-      </div> -->
       <!-- 商品说明书/图文详情 -->
       <div class="gdInstructions">
         <div class="tab">
-          <span v-bind:class="{isActive:curNum == 0}" @click="tabChange(0)">药品说明书</span>
-          <span v-bind:class="{isActive:curNum == 1}" @click="tabChange(1)">图文详情</span>
+          <span :class="{isActive:curNum == 0}" @click="tabChange(0)">药品说明书</span>
+          <span :class="{isActive:curNum == 1}" @click="tabChange(1)">图文详情</span>
         </div>
         <div class="instructions" v-show="curNum == 0">
           <ul>
@@ -121,35 +104,42 @@
         </div>
       </div>
     </section>
+     <section class="operBar clearfix">
+         <router-link to="/shopCar" class="fl">
+         <i></i>
+         购物车
+         </router-link>
+         <router-link to="/orderConfirm" class="fr">立即购买</router-link>
+         <span class="fr">加入购物车</span>
+     </section>
   </section>
 </template>
 <script>
-import pageHead from '@/components/header/header'
+import pageHead from "@/components/header/header";
 
 export default {
-  data(){
-    return{
-       curNum : 0
-    }
+  data() {
+    return {
+      curNum: 0
+    };
   },
-  methods:{
-     tabChange(index){
-       this.curNum = index;
-     }
+  methods: {
+    tabChange(index) {
+      this.curNum = index;
+    }
   },
   components: {
     pageHead
   }
-}
-
+};
 </script>
 <style lang="scss" scoped>
 $imgBg: #eeeeee;
-$red:#df064e;
-$fontGrey:#cccccc;
-$borderGrey:#8d8d8d;
+$red: #df064e;
+$fontGrey: #cccccc;
+$borderGrey: #8d8d8d;
 
-$imgSrc: '/src/assets/images/gdDetail/';
+$imgSrc: "/src/assets/images/gdDetail/";
 .content {
   background-color: #f0f2f5;
   .carousel {
@@ -189,7 +179,7 @@ $imgSrc: '/src/assets/images/gdDetail/';
     padding: 0 0.2rem;
     h3 {
       padding-left: 0.75rem;
-      background: url($imgSrc + 'rxIcon.jpg') no-repeat;
+      background: url($imgSrc + "rxIcon.jpg") no-repeat;
       background-size: 7%;
       background-position: 3% 12%;
       margin: 0.25rem 0;
@@ -208,7 +198,7 @@ $imgSrc: '/src/assets/images/gdDetail/';
         em {
           color: $red;
           &:before {
-            content: '￥';
+            content: "￥";
             display: inline-block;
             height: 0.6rem;
             line-height: 0.6rem;
@@ -219,7 +209,7 @@ $imgSrc: '/src/assets/images/gdDetail/';
       span:nth-child(2) {
         color: $fontGrey;
         &:before {
-          content: '￥';
+          content: "￥";
           display: inline-block;
           height: 0.6rem;
           line-height: 0.6rem;
@@ -234,40 +224,40 @@ $imgSrc: '/src/assets/images/gdDetail/';
         height: 0.24rem;
         line-height: 0.24rem;
         text-align: center;
-        margin-left: .3rem;
+        margin-left: 0.3rem;
         margin-top: 0.4rem;
       }
     }
     .SN {
       span {
         display: inline-block;
-        height: .55rem;
-        line-height: .55rem;
+        height: 0.55rem;
+        line-height: 0.55rem;
       }
     }
     .guaruntee {
       background-color: #f5f5f5;
       span {
         display: inline-block;
-        height: .55rem;
-        line-height: .55rem;
-        margin-left: .25rem;
+        height: 0.55rem;
+        line-height: 0.55rem;
+        margin-left: 0.25rem;
         &:before {
           display: inline-block;
-          height: .28rem;
-          width: .28rem;
+          height: 0.28rem;
+          width: 0.28rem;
           border-radius: 50%;
           border: 0.01rem solid $borderGrey;
-          line-height: .28rem;
+          line-height: 0.28rem;
         }
         &:first-child:before {
-          content: '正';
+          content: "正";
         }
         &:nth-child(2):before {
-          content: '退';
+          content: "退";
         }
         &:last-child:before {
-          content: '保';
+          content: "保";
         }
       }
     }
@@ -287,11 +277,11 @@ $imgSrc: '/src/assets/images/gdDetail/';
       em {
         font-weight: bold;
         &:before {
-          content: '';
+          content: "";
           display: inline-block;
           width: 0.2rem;
           height: 0.28rem;
-          background: url($imgSrc + 'location.png') no-repeat;
+          background: url($imgSrc + "location.png") no-repeat;
           background-size: cover;
           vertical-align: middle;
           margin: 0 0.1rem 0 0.3rem;
@@ -309,7 +299,7 @@ $imgSrc: '/src/assets/images/gdDetail/';
         margin: 0 0.2rem;
         font-weight: bold;
         &:after {
-          content: '!';
+          content: "!";
           display: inline-block;
           width: 0.26rem;
           height: 0.26rem;
@@ -369,31 +359,31 @@ $imgSrc: '/src/assets/images/gdDetail/';
         width: 3.62rem;
         height: 0.57rem;
         line-height: 0.57rem;
-        border:0.02rem solid $borderGrey;
+        border: 0.02rem solid $borderGrey;
       }
     }
-    .num{
+    .num {
       padding-bottom: 0.2rem;
       margin-bottom: 0.2rem;
-      span{
+      span {
         display: inline-block;
         width: 0.8rem;
         height: 0.7rem;
         line-height: 0.7rem;
       }
-      .inputBox{
+      .inputBox {
         display: inline-block;
-        border:0.02rem solid $borderGrey;
+        border: 0.02rem solid $borderGrey;
         width: 2.03rem;
         vertical-align: middle;
-        i{
+        i {
           display: inline-block;
-          width:0.59rem;
+          width: 0.59rem;
           height: 0.58rem;
           line-height: 0.58rem;
           text-align: center;
         }
-        input{
+        input {
           width: 0.81rem;
           line-height: 0.58rem;
           height: 0.58rem;
@@ -403,42 +393,42 @@ $imgSrc: '/src/assets/images/gdDetail/';
           border-right: 0.01rem solid $borderGrey;
         }
       }
-      .store{
+      .store {
         width: unset;
       }
     }
   }
   /*商品说明书/图文详情*/
-  .gdInstructions{
-    .tab{
+  .gdInstructions {
+    .tab {
       border-bottom: 0.01rem solid #e5e5e5;
-      span{
+      span {
         display: inline-block;
         width: 49.5%;
         height: 0.67rem;
         line-height: 0.67rem;
         text-align: center;
-        &.isActive{
-          color:$red;
+        &.isActive {
+          color: $red;
           border-bottom: 0.03rem solid $red;
         }
       }
     }
-    .instructions{
-      padding:  0.25rem 0.2rem 0;
+    .instructions {
+      padding: 0.25rem 0.2rem 0;
       position: relative;
-      li{
+      li {
         border-bottom: 0.01rem dotted #e5e5e5;
-        span{
+        span {
           display: inline-block;
           height: 0.5rem;
           line-height: 0.5rem;
-          &:first-child{
-            width:1.4rem;
+          &:first-child {
+            width: 1.4rem;
           }
         }
       }
-      img{
+      img {
         position: absolute;
         right: 1rem;
         top: 0.35rem;
@@ -447,12 +437,37 @@ $imgSrc: '/src/assets/images/gdDetail/';
         z-index: 2;
       }
     }
-    .imgDetail{
-      img{
+    .imgDetail {
+      img {
         width: 6.8rem;
       }
     }
   }
 }
-
+.operBar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  z-index: 6;
+  width: 7.2rem;
+  background-color: white;
+  border-top: 0.01rem solid $borderGrey;
+   a,span{
+     display: inline-block;
+     height: 0.8rem;
+     line-height: 0.8rem;
+     text-align: center;
+     width: 27%;
+   }
+   span{
+     width: 35%;
+     background-color: #7c89de;
+     color: white;
+   }
+   &>*:nth-child(2){
+     width: 35%;
+     background-color: #454ab3;
+     color: white;     
+   }
+}
 </style>
