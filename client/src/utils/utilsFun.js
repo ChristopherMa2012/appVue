@@ -82,15 +82,15 @@ utilsObj.pop = opts => {
         + `<div class="oper clearfix"></div></section>`
     let popup = document.createElement('section');
     popup.classList = 'popupMask';
-    debugger;
     popup.innerHTML = str;
     let oper = popup.querySelector('.oper');
     let btnArr = opts.btnArr;
-    let eventArr = opts.eventArr;
+    let eventArr = opts.eventArr ? opts.eventArr : [];
     if (btnArr.length) {
         let btn = [];
         btnArr.forEach((element, index) => {
             btn[index] = document.createElement('span');
+            if(btnArr.length < 2) btn[index].style = 'width:100%';
             btn[index].innerText = element;
             if(eventArr.length && eventArr[index]){
                 btn[index].addEventListener("click",opts=>{

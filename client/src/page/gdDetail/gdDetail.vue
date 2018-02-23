@@ -47,7 +47,7 @@
           <span>佰川堂大药房旗舰店</span>
           <span>广西壮族自治区桂平市</span> 发货
         </div>
-        <img src="/src/assets/images/gdDetail/guarantee.jpg">
+        <!-- <img src="/src/assets/images/gdDetail/guarantee.jpg"> -->
       </div>
       <!-- 购买信息 -->
       <div class="buyInfo">
@@ -97,7 +97,7 @@
               <span>熟地黄、山茱萸(制)、山药、牡丹皮、茯苓、泽泻</span>
             </li>                                    
           </ul>
-          <img src="/src/assets/images/gdDetail/checkPass.jpg">
+          <!-- <img src="/src/assets/images/gdDetail/checkPass.jpg"> -->
         </div>
         <div class="imgDetail" v-show="curNum == 1">
           <img src="/src/assets/images/gdDetail/gdImg.jpg">

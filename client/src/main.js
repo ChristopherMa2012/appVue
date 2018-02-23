@@ -7,6 +7,7 @@ import utilsObj from '@/utils/utilsFun';
 import '@/utils/pxTorem';
 
 
+
 window.Ma = utilsObj;
 Vue.config.productionTip = false
 

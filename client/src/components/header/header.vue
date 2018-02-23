@@ -3,21 +3,19 @@
 		  <span class="leftArr fl" @click="navBack"></span>
 		  <h3 class="f18">{{pageTitle}}</h3>
 		  <span class="more fr">
-		  	<em>.</em>
-		  	<em>.</em>
-		  	<em>.</em>
+       ...
 		  </span>
 	</section>
 </template>
 <script>
-import router from "@/router/route"
+import router from "@/router/route";
 
 export default {
- props:['pageTitle'],
+  props: ["pageTitle"],
   methods: {
     navBack: function() {
-		router.go(-1);
-	}
+      router.go(-1);
+    }
   }
 };
 </script>
@@ -55,15 +53,15 @@ section {
     font-size: 0;
     margin-right: 0.3rem;
   }
-  & em {
-    display: inline-block;
-    color: white;
-    width: 0.18rem;
-    height: 0.9rem;
-    line-height: 0.72rem;
-    vertical-align: middle;
-    text-align: center;
-    font-size: 18px;
-  }
+  // & em {
+  //   display: inline-block;
+  //   color: white;
+  //   width: 0.18rem;
+  //   height: 0.9rem;
+  //   line-height: 0.72rem;
+  //   vertical-align: middle;
+  //   text-align: center;
+  //   font-size: 18px;
+  // }
 }
 </style>

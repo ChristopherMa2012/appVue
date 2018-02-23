@@ -3,57 +3,58 @@
     <page-head page-title="地址管理"></page-head>
     <section class="content">
       <ul class="addrList">
-        <li class="clearfix">
+        <li class="clearfix" v-for="item in addrList">
           <div class="fl setDef">
             <span class="circle"></span>
             <span>设为默认</span>
           </div>
           <div class="fl userAddr">
             <div>
-              <span>马友友</span>
-              <span>1358000500</span>
+              <span>{{item.name}}</span>
+              <span>{{item.phone}}</span>
             </div>
             <div class="addrDetail">
-              广东省广州市大学城广东工业大学
+              {{item.province}} {{item.city}} {{item.area}}{{item.addrDetail}}
             </div>
           </div>
-          <router-link to="/addrEdit" class="oper fl">
-            编辑
-          </router-link>
-        </li>
-        <li class="clearfix">
-          <div class="fl setDef">
-            <span class="circle"></span>
-            <span>设为默认</span>
-          </div>
-          <div class="fl userAddr">
-            <div>
-              <span>马友友</span>
-              <span>1358000500</span>
-            </div>
-            <div class="addrDetail">
-              广东省广州市大学城广东工业大学
-            </div>
-          </div>
-          <router-link to="/addrEdit" class="oper fl">
+          <router-link to="/addrEdit/edit" class="oper fl">
             编辑
           </router-link>
         </li>
       </ul>
       <div class="newAddr">
-      	   <router-link to="/addrEdit">新增地址</router-link>
+      	   <router-link to="/addrEdit/newAdd">新增地址</router-link>
       </div>
     </section>
   </section>
 </template>
 <script>
-import pageHead from '@/components/header/header';
+import pageHead from "@/components/header/header";
+import { apiUrl } from "@/config/baseConfig";
+
 export default {
+  data() {
+    return {
+      addrList: []
+    };
+  },
+  created: function() {
+    Ma.fetch({
+      url: apiUrl + "addrList",
+      method: "get"
+    })
+      .then(res => {
+        console.log(res);
+        this.addrList = res.addrList;
+      })
+      .catch(e => {
+        console.log(e);
+      });
+  },
   components: {
     pageHead
   }
-}
-
+};
 </script>
 <style lang="scss" scoped>
 $lightgrey: #8e8e8e;
@@ -105,24 +106,23 @@ $red: #e6186f;
     }
   }
   .newAddr {
-  	position:fixed;
-  	left:0;
-  	bottom:0;
-  	z-index:4;
-  	width:100%;
-  	height:0.88rem;
-  	padding-top:0.1rem;
-  	text-align:center;
-  	a{
-  		display:inline-block;
-  		width:3.7rem;
-  		height:0.7rem;
-  		line-height:0.7rem;
-  		text-align:center;
-  		color:white;
-  		background-color:$red;
-  	}
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 4;
+    width: 100%;
+    height: 0.88rem;
+    padding-top: 0.1rem;
+    text-align: center;
+    a {
+      display: inline-block;
+      width: 3.7rem;
+      height: 0.7rem;
+      line-height: 0.7rem;
+      text-align: center;
+      color: white;
+      background-color: $red;
+    }
   }
 }
-
 </style>

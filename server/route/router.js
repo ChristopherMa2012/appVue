@@ -1,19 +1,17 @@
 import express from 'express';
-import UserModel from '../model/model';
+import model from '../model/model';
 
 let router = express.Router();
 
 router.use('/register', (req, res, next) => {
-    let user = new UserModel({
+    let user = new model.User({
         name: req.body.userName,
         password: req.body.password
     })
     user.save(err => {
-        if (err) {
-            return handleError(err);
-        } else {
-            res.send({ "success": true, 'msg': '注册成功' });
-        }
+        if (err) return handleError(err);
+        res.send({ "success": true, 'msg': '注册成功' });
+
     })
 });
 // status: 200 登陆成功
@@ -35,7 +33,7 @@ router.use('/login', (req, res, next) => {
             res.send({ status: 300, msg: '当前已有用户登陆' });
         }
     } else {
-        UserModel.findOne({ 'name': req.body.name, 'password': req.body.password }, (err, result) => {
+        model.User.findOne({ 'name': req.body.name, 'password': req.body.password }, (err, result) => {
             if (err) {
                 res.send({ status: 400, msg: '登陆失败' });
                 handleError(err);
@@ -44,6 +42,7 @@ router.use('/login', (req, res, next) => {
                 session.isLogin = true;
                 session.userInfo = Object.create(null);
                 session.userInfo.name = result.name;
+                session.userInfo.userId = result.id;
                 res.send({ status: 200, msg: '登陆成功' });
             } else {
                 res.send({ status: 400, msg: '登陆失败' });
@@ -60,4 +59,30 @@ router.use('/isLogin', (req, res, next) => {
     }
 })
 
+//新增收货地址
+router.use('/addAddress', (req, res, next) => {
+    let body = req.body;
+    let address = new model.Address({
+        userId: req.session.userInfo.userId,
+        name: body.name,
+        phone: body.phone,
+        province: body.province,
+        city: body.city,
+        area: body.area,
+        addrDetail: body.addrDetail
+
+    });
+    address.save(err => {
+        if (err) return new handleError(err);
+        res.send({ status: 200, msg: '新增收货地址成功' })
+
+    })
+});
+//收货地址列表
+router.use('/addrList',(req,res,next) => {
+    model.Address.find({'userId': req.session.userInfo.userId},(err,address)=>{
+        if(err) return handleError(err);
+        res.send({addrList:address});
+    })
+});
 export default router;
