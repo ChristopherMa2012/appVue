@@ -1,4 +1,4 @@
-# 800-vue
+#  appvue
 
 > A Vue.js project
 
