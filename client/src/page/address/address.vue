@@ -17,7 +17,7 @@
               {{item.province}} {{item.city}} {{item.area}}{{item.addrDetail}}
             </div>
           </div>
-          <router-link to="/addrEdit/edit" class="oper fl">
+          <router-link :to="{name: 'addrEdit',params:{funway:'edit',addrInfo:item}}" class="oper fl">
             编辑
           </router-link>
         </li>
@@ -35,21 +35,29 @@ import { apiUrl } from "@/config/baseConfig";
 export default {
   data() {
     return {
-      addrList: []
+      addrList: [],
+      toAddrEdit: null
     };
   },
   created: function() {
-    Ma.fetch({
-      url: apiUrl + "addrList",
-      method: "get"
-    })
-      .then(res => {
-        console.log(res);
-        this.addrList = res.addrList;
-      })
-      .catch(e => {
-        console.log(e);
+    this.pageInit();
+  },
+  watch: {
+    $route(to, from) {
+      if (to.name == "address") return;
+      this.pageInit();
+    }
+  },
+  methods: {
+    pageInit: () => {
+      Ma.fetch({
+        url: apiUrl + "addrList",
+        method: "get",
+        callback: res => {
+          this.addrList = res.addrList;
+        }
       });
+    }
   },
   components: {
     pageHead
@@ -79,7 +87,7 @@ $red: #e6186f;
         width: 0.3rem;
         height: 0.3rem;
         border-radius: 50%;
-        border: 0.01rem solid $lightgrey;
+        border: 0.02rem solid $lightgrey;
       }
     }
     .userAddr {
@@ -92,8 +100,8 @@ $red: #e6186f;
         font-weight: bold;
       }
       div:last-child {
-        height: 0.54rem;
-        line-height: 0.27rem;
+        max-height: 0.6rem;
+        line-height: 0.3rem;
         overflow: hidden;
       }
     }

@@ -17,5 +17,8 @@ new Vue({
   router,
   template: '<app/>',
   components: { App },
+  created:function(){
+    
+  },
   replace: true
 })

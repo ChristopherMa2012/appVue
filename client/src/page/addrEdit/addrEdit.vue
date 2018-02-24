@@ -37,7 +37,7 @@
 </template>
 <script>
 import pageHead from "@/components/header/header";
-import {apiUrl} from '@/config/baseConfig';
+import { apiUrl } from "@/config/baseConfig";
 
 export default {
   data() {
@@ -53,21 +53,48 @@ export default {
     };
   },
   created: function() {
+    this.dataInit();
     this.watchReactAction();
   },
   watch: {
     $route(to, from) {
+      if (to.name == "address") return;
+      this.dataInit();
       this.watchReactAction();
     }
   },
   methods: {
-    deleteAction: function(e) {},
+    deleteAction: function(e) {
+      Ma.fetch({
+        url: apiUrl + 'deleteAddr',
+        method: 'get',
+        body:{
+          addrId: this.$route.params.addrInfo._id
+        }
+      }).then(res=>{
+        let self = this;
+        Ma.pop({
+          content:res.msg,
+          arrBtn:['确定'],
+          eventArr:[function(){self.$router.go(-1)}]
+        })
+      }).catch(e=>{
+        Ma.log(e);
+      })
+    },
     saveAction: function(e) {
-      if(this.name && this.phone && this.province && this.city && this.area && this.addrDetail){
+      if (
+        this.name &&
+        this.phone &&
+        this.province &&
+        this.city &&
+        this.area &&
+        this.addrDetail
+      ) {
         Ma.fetch({
-          url: apiUrl + 'addAddress',
-          method: 'post',
-          body:{
+          url: apiUrl + "addAddress",
+          method: "post",
+          body: {
             name: this.name,
             phone: this.phone,
             province: this.province,
@@ -75,18 +102,28 @@ export default {
             area: this.area,
             addrDetail: this.addrDetail
           }
-        }).then(res=>{
-           Ma.pop({
-             content: res.msg
-           })
-        }).catch(e=>{
-          console.log(e);
         })
-      }else{
+          .then(res => {
+            if (res.status == 402) {
+              this.$router.push("/login");
+              return;
+            }
+            let self = this;
+            Ma.pop({
+              content: res.msg,
+              btnArr: ["确定"],
+              eventArr: [self.addAddrSucc]
+            });
+          })
+          .catch(e => {
+            Ma.log("请填写弹框按钮数组参数");
+            console.log(e);
+          });
+      } else {
         Ma.pop({
-          content:'请填写完整再提交',
-          btnArr: ['确定']
-        })
+          content: "请填写完整再提交",
+          btnArr: ["确定"]
+        });
       }
     },
     watchReactAction: function() {
@@ -98,6 +135,21 @@ export default {
         this.pageTitle = "修改收货地址";
         this.showDelBtn = true;
       }
+    },
+    //新增地址成功回调函数
+    addAddrSucc: function() {
+      this.$router.go(-1);
+    },
+    //编辑收货地址数据初始化
+    dataInit: function() {
+      let addrInfo = this.$route.params.addrInfo;
+      if (addrInfo == undefined) return;
+      this.name = addrInfo.name;
+      this.phone = addrInfo.phone;
+      this.province = addrInfo.province;
+      this.city = addrInfo.city;
+      this.area = addrInfo.area;
+      this.addrDetail = addrInfo.addrDetail;
     }
   },
   components: {

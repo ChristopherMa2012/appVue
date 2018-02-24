@@ -23,81 +23,85 @@
   </section>
 </template>
 <script>
-import pageHead from '@/components/header/header';
-import {apiUrl} from '@/config/baseConfig';
+import pageHead from "@/components/header/header";
+import { apiUrl } from "@/config/baseConfig";
 
-let confirmAction = opts=>{
-   Ma.fetch({
-    url: apiUrl + 'login',
-    method: 'post',
-    body:opts
-   }).then(res=>{
-      loginResHandle(res.status);
-   }).catch(e=>{
-      new Error(e);
-   })
-}
-
-let loginResHandle = (status,self) =>{
-   switch(status){
-    case 200: self.$router.push('/');break;
-    case 202: self.loginTip = '该用户已登录，无须重复登录';break;
-    case 300: Ma.pop({
-      content: '已有用户在该浏览器登录，是否注销该用户并登录',
-      btnArr: ['确定','取消'],
-      eventArr:[{
-        event:confirmAction,
-        param:{
-          name: self.userName,
-          password: self.password
-        }
-        }]
-    });break;
-    case 400: self.loginTip = '用户名或密码不正确';break;
-   }
-}
-
-let a = {
+export default {
   data() {
     return {
-      userName:'',
-      password:'',
-      loginTip: ''
-    }
+      userName: "",
+      password: "",
+      loginTip: ""
+    };
   },
   components: {
     pageHead
   },
   methods: {
-    loginAction() {
-      this.loginTip = '';
+    confirmAction(opts) {
       Ma.fetch({
-        url: apiUrl + 'login',
-        method: 'post',
+        url: apiUrl + "login",
+        method: "post",
+        body: opts,
+        callback: res => {
+          this.loginResHandle(res.status);
+        }
+      });
+    },
+    loginResHandle(status, self) {
+      switch (status) {
+        case 200:
+          self.$router.push("/");
+          break;
+        case 202:
+          self.loginTip = "该用户已登录，无须重复登录";
+          break;
+        case 300:
+          Ma.pop({
+            content: "已有用户在该浏览器登录，是否注销该用户并登录",
+            btnArr: ["确定", "取消"],
+            eventArr: [
+              {
+                event: confirmAction,
+                param: {
+                  name: self.userName,
+                  password: self.password
+                }
+              }
+            ]
+          });
+          break;
+        case 400:
+          self.loginTip = "用户名或密码不正确";
+          break;
+      }
+    },
+    loginAction() {
+      this.loginTip = "";
+      Ma.fetch({
+        url: apiUrl + "login",
+        method: "post",
         body: {
           name: this.userName,
           password: this.password
+        },
+        callback: res => {
+          this.loginResHandle(res.status, this);
         }
-      }).then(res => {
-        loginResHandle(res.status,this);
-      }).catch(e => {
-        console.log(e);
-      })
+      });
     }
   }
-}
-window.a = a;
-export default a;
+};
 </script>
 <style lang="scss" scoped>
-$borderGrey:#eeeeee;
-$red:#e6186f;
+$borderGrey: #eeeeee;
+$red: #e6186f;
 .content {
   overflow: hidden;
   background-color: white;
   .formBox {
     width: 6rem;
-    margin: .4rem auto 0;
+    margin: 0.4rem auto 0;
     .userName {
       margin-bottom: 0.2rem;
     }
@@ -106,7 +110,7 @@ $red:#e6186f;
       border-bottom: 0.02rem solid $borderGrey;
       span {
         display: inline-block;
-        width: 0.8rem;
+        width: 0.9rem;
         height: 0.6rem;
         line-height: 0.6rem;
       }
@@ -118,7 +122,7 @@ $red:#e6186f;
     }
     .loginTip {
       color: $red;
-      text-align:right;
+      text-align: right;
     }
   }
   .loginBtn {
@@ -138,5 +142,4 @@ $red:#e6186f;
     }
   }
 }
-
 </style>

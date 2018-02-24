@@ -20,6 +20,7 @@ router.use('/register', (req, res, next) => {
 // status: 400 登陆失败
 // status: 402 用户未登录
 
+//登录
 router.use('/login', (req, res, next) => {
     if (req.body.name == '' || req.body.password == '') {
         res.send({ status: 400, msg: '登陆失败' });
@@ -50,7 +51,7 @@ router.use('/login', (req, res, next) => {
         })
     }
 });
-
+//校验是否已经登录
 router.use('/isLogin', (req, res, next) => {
     if (req.session.isLogin) {
         res.send({ status: 202, msg: '用户已登录' });
@@ -59,30 +60,5 @@ router.use('/isLogin', (req, res, next) => {
     }
 })
 
-//新增收货地址
-router.use('/addAddress', (req, res, next) => {
-    let body = req.body;
-    let address = new model.Address({
-        userId: req.session.userInfo.userId,
-        name: body.name,
-        phone: body.phone,
-        province: body.province,
-        city: body.city,
-        area: body.area,
-        addrDetail: body.addrDetail
 
-    });
-    address.save(err => {
-        if (err) return new handleError(err);
-        res.send({ status: 200, msg: '新增收货地址成功' })
-
-    })
-});
-//收货地址列表
-router.use('/addrList',(req,res,next) => {
-    model.Address.find({'userId': req.session.userInfo.userId},(err,address)=>{
-        if(err) return handleError(err);
-        res.send({addrList:address});
-    })
-});
 export default router;

@@ -66,7 +66,7 @@ export default new Router({
     component: Address
   },
   {
-    path: '/addrEdit/:funway',
+    path: '/addrEdit/',
     name: 'addrEdit',
     component: AddrEdit
   },
