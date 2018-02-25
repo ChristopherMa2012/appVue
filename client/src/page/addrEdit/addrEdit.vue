@@ -54,33 +54,33 @@ export default {
   },
   created: function() {
     this.dataInit();
-    this.watchReactAction();
   },
   watch: {
     $route(to, from) {
       if (to.name == "address") return;
       this.dataInit();
-      this.watchReactAction();
     }
   },
   methods: {
     deleteAction: function(e) {
       Ma.fetch({
-        url: apiUrl + 'deleteAddr',
-        method: 'get',
-        body:{
-          addrId: this.$route.params.addrInfo._id
+        url: apiUrl + "deleteAddr",
+        method: "get",
+        body: {
+          addrId: this.addrId
+        },
+        callback: res => {
+          let callback = () => {
+            this.$router.go(-1);
+          };          
+          Ma.pop({
+            content: res.msg,
+            btnArr: ["确定"],
+            eventArr: [{event:callback}]
+          });
+
         }
-      }).then(res=>{
-        let self = this;
-        Ma.pop({
-          content:res.msg,
-          arrBtn:['确定'],
-          eventArr:[function(){self.$router.go(-1)}]
-        })
-      }).catch(e=>{
-        Ma.log(e);
-      })
+      });
     },
     saveAction: function(e) {
       if (
@@ -101,9 +101,8 @@ export default {
             city: this.city,
             area: this.area,
             addrDetail: this.addrDetail
-          }
-        })
-          .then(res => {
+          },
+          callback: res => {
             if (res.status == 402) {
               this.$router.push("/login");
               return;
@@ -112,28 +111,15 @@ export default {
             Ma.pop({
               content: res.msg,
               btnArr: ["确定"],
-              eventArr: [self.addAddrSucc]
+              eventArr: [{'event':self.addAddrSucc}]
             });
-          })
-          .catch(e => {
-            Ma.log("请填写弹框按钮数组参数");
-            console.log(e);
-          });
+          }
+        })
       } else {
         Ma.pop({
           content: "请填写完整再提交",
           btnArr: ["确定"]
         });
-      }
-    },
-    watchReactAction: function() {
-      let funWay = this.$route.params.funway;
-      if (funWay == "newAdd") {
-        this.pageTitle = "新增收货地址";
-        this.showDelBtn = false;
-      } else {
-        this.pageTitle = "修改收货地址";
-        this.showDelBtn = true;
       }
     },
     //新增地址成功回调函数
@@ -142,14 +128,29 @@ export default {
     },
     //编辑收货地址数据初始化
     dataInit: function() {
-      let addrInfo = this.$route.params.addrInfo;
-      if (addrInfo == undefined) return;
-      this.name = addrInfo.name;
-      this.phone = addrInfo.phone;
-      this.province = addrInfo.province;
-      this.city = addrInfo.city;
-      this.area = addrInfo.area;
-      this.addrDetail = addrInfo.addrDetail;
+      let funWay = this.$route.params.funway;
+      if (funWay == "newAdd") {
+        this.name = "";
+        this.phone = "";
+        this.province = "";
+        this.city = "";
+        this.area = "";
+        this.addrDetail = "";
+        this.addrId = "";
+        this.pageTitle = "新增收货地址";
+        this.showDelBtn = false;
+        return;
+      }
+      let addrObj = JSON.parse(sessionStorage.getItem("addrObj"));
+      this.name = addrObj.name;
+      this.phone = addrObj.phone;
+      this.province = addrObj.province;
+      this.city = addrObj.city;
+      this.area = addrObj.area;
+      this.addrDetail = addrObj.addrDetail;
+      this.addrId = addrObj._id;
+      this.pageTitle = "修改收货地址";
+      this.showDelBtn = true;
     }
   },
   components: {

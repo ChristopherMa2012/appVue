@@ -3,7 +3,7 @@
     <page-head page-title="地址管理"></page-head>
     <section class="content">
       <ul class="addrList">
-        <li class="clearfix" v-for="item in addrList">
+        <li class="clearfix" v-for="(item,index) in addrList">
           <div class="fl setDef">
             <span class="circle"></span>
             <span>设为默认</span>
@@ -17,13 +17,13 @@
               {{item.province}} {{item.city}} {{item.area}}{{item.addrDetail}}
             </div>
           </div>
-          <router-link :to="{name: 'addrEdit',params:{funway:'edit',addrInfo:item}}" class="oper fl">
+          <span class="oper fl" @click="editAction(index)">
             编辑
-          </router-link>
+          </span>
         </li>
       </ul>
       <div class="newAddr">
-      	   <router-link to="/addrEdit/newAdd">新增地址</router-link>
+      	   <span @click="addAction()">新增地址</span>
       </div>
     </section>
   </section>
@@ -44,12 +44,11 @@ export default {
   },
   watch: {
     $route(to, from) {
-      if (to.name == "address") return;
       this.pageInit();
     }
   },
   methods: {
-    pageInit: () => {
+    pageInit:function() {
       Ma.fetch({
         url: apiUrl + "addrList",
         method: "get",
@@ -57,6 +56,13 @@ export default {
           this.addrList = res.addrList;
         }
       });
+    },
+    editAction:function(index){
+       sessionStorage.setItem('addrObj',JSON.stringify(this.addrList[index]));
+       this.$router.push({name:'addrEdit',params:{funway:'edit'}});
+    },
+    addAction:function(){
+      this.$router.push({name:'addrEdit',params:{funway:'newAdd'}})
     }
   },
   components: {
@@ -122,7 +128,7 @@ $red: #e6186f;
     height: 0.88rem;
     padding-top: 0.1rem;
     text-align: center;
-    a {
+    span {
       display: inline-block;
       width: 3.7rem;
       height: 0.7rem;

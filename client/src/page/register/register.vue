@@ -85,7 +85,7 @@ $red:#e6186f;
       border-bottom: 0.02rem solid $borderGrey;
       span {
         display: inline-block;
-        width: 1.2rem;
+        width: 1.4rem;
         height: 0.6rem;
         line-height: 0.6rem;
       }

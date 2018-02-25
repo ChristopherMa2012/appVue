@@ -49,7 +49,7 @@ $red:#e6186f;
       border-bottom: 0.02rem solid $borderGrey;
       span {
         display: inline-block;
-        width: 0.8rem;
+        width: 0.9rem;
         height: 0.6rem;
         line-height: 0.6rem;
       }

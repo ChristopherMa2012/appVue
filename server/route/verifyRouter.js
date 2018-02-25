@@ -10,6 +10,13 @@ router.all('*', (req, res, next) => {
     next();
 
 })
+//收货地址列表
+router.use('/addrList', (req, res, next) => {
+    model.Address.find({ 'userId': req.session.userInfo.userId }, (err, address) => {
+        if (err) return handleError(err);
+        res.send({ addrList: address });
+    })
+});
 //新增收货地址
 router.use('/addAddress', (req, res, next) => {
     let body = req.body;
@@ -29,12 +36,14 @@ router.use('/addAddress', (req, res, next) => {
 
     })
 });
-//收货地址列表
-router.use('/addrList', (req, res, next) => {
-    model.Address.find({ 'userId': req.session.userInfo.userId }, (err, address) => {
-        if (err) return handleError(err);
-        res.send({ addrList: address });
+//删除收货地址
+router.use('/deleteAddr',(req,res,next)=>{
+    let addrId = req.query.addrId;
+    model.Address.remove({_id:addrId},err =>{
+        if(err) return handleError(err);
+        res.send({status:200,msg:'删除成功'});
     })
-});
+})
+
 
 export default router;
