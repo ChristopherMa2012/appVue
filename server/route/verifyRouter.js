@@ -44,6 +44,20 @@ router.use('/deleteAddr',(req,res,next)=>{
         res.send({status:200,msg:'删除成功'});
     })
 })
+//修改收货地址
+router.use('/addrModify',(req,res,next)=>{
+    let addrObj = req.body;
+    // model.Address.save({
+    //     '_id': 'ObjectId(' + addrObj.addrId + ')',
+    //     'name':addrObj.name,
+    //     'phone':addrObj.phone,
+    //     'province': addrObj.province,
+    //     'city': addrObj.city,
+    //     'area':addrObj.area,
+    //     'addrDetail':addrObj.addrDetail
+    // })
+   res.send({status:200,msg:'修改成功'});   
+})
 
 
 export default router;

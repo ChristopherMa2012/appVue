@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no, minimal-ui">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>商品上架页面</title>
+    <script>
+        function MaFetch(opts) {
+            let optsData = Object.create(null);
+            // optsData.mode = 'cors';
+            // optsData.credentials = 'inlucde';
+            // optsData.cache = 'no-cache';
+
+            //get请求方式
+            if (opts.method.toUpperCase() === 'GET') {
+                optsData.method = 'GET';
+                if (opts.body != undefined) {
+                    opts.url += '?';
+                    opts.body && Object.keys(opts.body).forEach(item => {
+                        opts.url += `${item}=${opts.body[item]}&`
+                    })
+                    opts.url = opts.url.slice(0, -1)
+                }
+            }
+            //post请求方式
+            if (opts.method.toUpperCase() === 'POST') {
+                optsData.method = 'POST';
+                //json数据
+                if (Object.prototype.toString.call(opts.body) !== "[object FormData]") {
+                    optsData.body = JSON.stringify(opts.body);
+                    optsData.headers = {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    }
+                    //form表单
+                } else {
+                    optsData.body = opts.body;
+                    optsData.headers = {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/x-www-form-urlencoded'
+                    }
+
+                }
+            }
+            // Object.keys(optsData).forEach(item => {
+            //   if (opts.optsData.hasOwnProperty(item)) return;
+            //   opts.optsData[item] = optsData[item]
+            // });
+            fetch(opts.url, {
+                mode: 'cors',
+                credentials: 'include',
+                method: optsData.method,
+                headers: optsData.headers,
+                body: optsData.body || {}
+            }).then(resp => {
+                return resp.json();
+            }).then(result => {
+                if (result.status == 402) {
+                    location.replace('http://res.appvue.com:8080/#/login');
+                } else {
+                    opts.callback(result);
+                }
+            }).catch(e => {
+                console.log(e);
+            })
+        }
+    </script>
+    <style type='text/css'>
+        table {
+            width: 440px;
+            margin: 60px auto 0;
+        }
+
+        td,
+        input {
+            height: 40px;
+            line-height: 40px;
+        }
+
+        input {
+            width: 300px;
+        }
+
+        button {
+            width: 60px;
+            margin: 50px auto 0;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <thead>
+            <colgroup>
+                <col width="130px">
+                <col width="300px">
+            </colgroup>
+        </thead>
+        <tbody>
+            <tr>
+                <td>商品标题：</td>
+                <td>
+                    <input type="text" id="gdTitle">
+                </td>
+            </tr>
+            <tr>
+                <td>价格：</td>
+                <td>
+                    <input type="text" id="price">
+                </td>
+            </tr>
+            <tr>
+                <td>原价：</td>
+                <td>
+                    <input type="text" id="originPrice">
+                </td>
+            </tr>
+            <tr>
+                <td>商品编码：</td>
+                <td>
+                    <input type="text" id="gdSN">
+                </td>
+            </tr>
+            <tr>
+                <td>规格：</td>
+                <td>
+                    <input type="text" id="specifications">
+                </td>
+            </tr>
+            <tr>
+                <td>商品名称：</td>
+                <td>
+                    <input type="text" id="gdName">
+                </td>
+            </tr>
+            <tr>
+                <td>商品产地：</td>
+                <td>
+                    <input type="text" id="productionPlace">
+                </td>
+            </tr>
+            <tr>
+                <td>有效期</td>
+                <td>
+                    <input type="text" id="expires">
+                </td>
+            </tr>
+            <tr>
+                <td>主要成分：</td>
+                <td>
+                    <input type="text" id="component">
+                </td>
+            </tr>
+            <tr>
+                <td>图片链接：</td>
+                <td>
+                    <input type="text" id="imgUrl">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button id="submit">提交</button>
+    <script>
+        var btn = document.querySelector("#submit");
+        btn.addEventListener('click', function () {
+            var inputArr = document.querySelectorAll("input");
+            var gdInfoObj = Object.create(null);
+            Object.keys(inputArr).forEach(function (item, index) {
+                gdInfoObj[inputArr[index].id] = inputArr[index].value
+            })
+            MaFetch({
+                url: 'http://api.appvue.com:800/addGood',
+                method: 'post',
+                body: gdInfoObj,
+                callback: function (res) {
+                    alert('新增商品成功');
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

@@ -91,8 +91,9 @@ export default {
         this.area &&
         this.addrDetail
       ) {
+        let url = this.addrId ? 'addrModify' : 'addAddress';
         Ma.fetch({
-          url: apiUrl + "addAddress",
+          url: apiUrl + url,
           method: "post",
           body: {
             name: this.name,
@@ -100,13 +101,10 @@ export default {
             province: this.province,
             city: this.city,
             area: this.area,
-            addrDetail: this.addrDetail
+            addrDetail: this.addrDetail,
+            addrId: this.addrId
           },
           callback: res => {
-            if (res.status == 402) {
-              this.$router.push("/login");
-              return;
-            }
             let self = this;
             Ma.pop({
               content: res.msg,
