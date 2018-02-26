@@ -3,7 +3,7 @@
     <page-head page-title="地址管理"></page-head>
     <section class="content">
       <ul class="addrList">
-        <li class="clearfix" v-for="(item,index) in addrList">
+        <li class="clearfix" v-for="(item,index) in addrList" :key="index">
           <div class="fl setDef">
             <span class="circle"></span>
             <span>设为默认</span>

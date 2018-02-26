@@ -22,8 +22,23 @@ let address = new Schema({
 	addrDetail: String
 })
 
+//商品模型
+let goods = new Schema({
+    gdSN:Number,
+    gdTitle: String,
+    gdName:String,
+    price: Number,
+    originPrice: Number,
+    specifications:Array,
+    productionPlace:String,
+    expires: String,
+	component:String,
+	goods_type:String,
+    imgUrl:String
+})
 let model = {
 	User: mongoose.model('user',user),
-	Address: mongoose.model('address',address)
+	Address: mongoose.model('address',address),
+	Goods: mongoose.model('goods',goods)
 }
 export default model;

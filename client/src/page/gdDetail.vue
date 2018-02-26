@@ -6,10 +6,7 @@
       <div class="carousel">
         <ul class="imgList">
           <li>
-            <img src="/src/assets/images/gdDetail/gdImg.jpg">
-          </li>
-          <li>
-            <img src="/src/assets/images/gdDetail/gdImg.jpg">
+            <img :src="gdDetailObj.imgUrl">
           </li>
         </ul>
         <ul class="point">
@@ -19,14 +16,14 @@
       </div>
       <!-- 商品信息 -->
       <div class="gdInfo">
-        <h3>西洋参片吉林敖东长白山西洋参切片含片花旗参片包邮</h3>
+        <h3>{{gdDetailObj.gdTitle}}</h3>
         <div class="price">
-          <span>价格：<em>123.34</em></span>
-          <span>123.23</span>
+          <span>价格：<em>{{gdDetailObj.price}}</em></span>
+          <span>{{gdDetailObj.originPrice}}</span>
           <span>货到付款</span>
         </div>
         <div class="SN">
-          编码： <span>345345345</span>
+          编码： <span>{{gdDetailObj.gdSN}}</span>
         </div>
         <div class="guaruntee">
           保障:
@@ -58,8 +55,7 @@
         <div class="specification">
           <span>规格:</span>
           <select>
-            <option>6瓶*10g</option>
-            <option>6瓶*10g</option>
+            <option v-for="(item,index) in specifications" :key="index">{{item}}</option>
           </select>
         </div>
         <div class="num">
@@ -116,12 +112,27 @@
 </template>
 <script>
 import pageHead from "@/components/header";
+import {apiUrl} from "@/config/baseConfig";
 
 export default {
   data() {
     return {
-      curNum: 0
+      curNum: 0,
+      gdDetailObj: null,
+      specifications:[]
     };
+  },
+  created:function(){
+    let gdSN = this.$route.params.gdSN;
+     Ma.fetch({
+       url: apiUrl + 'gdDetail',
+       method: 'get',
+       body:{gdSN: gdSN},
+       callback:res=>{
+         this.gdDetailObj = res.goodsInfo;
+         this.specifications = res.goodsInfo.specifications;
+       }
+     })
   },
   methods: {
     tabChange(index) {
@@ -345,6 +356,7 @@ $imgSrc: "/src/assets/images/gdDetail/";
         background-color: $red;
         color: white;
         border-radius: 0.04rem;
+        vertical-align: middle
       }
     }
     .specification {
@@ -404,7 +416,7 @@ $imgSrc: "/src/assets/images/gdDetail/";
       border-bottom: 0.01rem solid #e5e5e5;
       span {
         display: inline-block;
-        width: 49.5%;
+        width: 49%;
         height: 0.67rem;
         line-height: 0.67rem;
         text-align: center;

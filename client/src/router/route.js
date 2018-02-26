@@ -44,7 +44,7 @@ export default new Router({
     component: PwdChange
   },
   {
-    path: '/gdDetail',
+    path: '/gdDetail/:gdSN',
     name: 'gdDetail',
     component: GdDetail
   },

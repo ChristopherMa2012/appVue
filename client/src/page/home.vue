@@ -15,58 +15,26 @@
         <h3 class="f14">热销推荐</h3>
       </section>
       <ul class="tabBar clearfix">
-        <li v-for="(item,index) in categoryArr" :class="{isActive:index == tabNum }" @click="tabChange(index)">{{item}}</li>
+        <li v-for="(item,index) in categoryArr" :class="{isActive:index == tabNum }" @click="tabChange(index)" :key="index">{{item}}</li>
       </ul>
       <section class="tabBarContent">
-        <ul class="clearfix" v-for="(item,index) in categoryArr" v-show="index == tabNum">
-          <li>
+        <ul class="clearfix" v-for="(item,index) in categoryArr" v-show="index == tabNum" :key="index">
+          <li v-for="item in goodsList[index]" :key="item.gdSN">
             <figure>
-              <router-link to="/gdDetail">
+              <router-link :to="{path:'/gdDetail/'+ item.gdSN}">
                 <div>
-                  <img src="/src/assets/images/index/gdImg.jpg" alt="">
+                  <img :src="item.imgUrl">
                 </div>
                 <figcaption>
-                  <h3 class="f12">迪巧 维D钙咀嚼钙片迪巧 维D钙咀嚼钙片迪巧 维D钙咀嚼钙片</h3>
+                  <h3 class="f12">{{item.gdTitle}}</h3>
                   <div class="clearfix">
-                    <span class="fl f18">98</span>
-                    <span class="fr f18">128</span>
+                    <span class="fl f18">{{item.price}}</span>
+                    <span class="fr f18">{{item.originPrice}}</span>
                   </div>
                 </figcaption>
               </router-link>
             </figure>
           </li>
-          <li>
-            <figure>
-              <router-link to="/gdDetail">
-                <div>
-                  <img src="/src/assets/images/index/gdImg.jpg" alt="">
-                </div>
-                <figcaption>
-                  <h3 class="f12">迪巧 维D钙咀嚼钙片迪巧 维D钙咀嚼钙片迪巧 维D钙咀嚼钙片</h3>
-                  <div class="clearfix">
-                    <span class="fl f18">98</span>
-                    <span class="fr f18">128</span>
-                  </div>
-                </figcaption>
-              </router-link>
-            </figure>
-          </li>
-          <li>
-            <figure>
-              <router-link to="/gdDetail">
-                <div>
-                  <img src="/src/assets/images/index/gdImg.jpg" alt="">
-                </div>
-                <figcaption>
-                  <h3 class="f12">迪巧 维D钙咀嚼钙片迪巧 维D钙咀嚼钙片迪巧 维D钙咀嚼钙片</h3>
-                  <div class="clearfix">
-                    <span class="fl f18">98</span>
-                    <span class="fr f18">128</span>
-                  </div>
-                </figcaption>
-              </router-link>
-            </figure>
-          </li>                    
         </ul>
       </section>
     </section>
@@ -83,22 +51,23 @@ export default {
     return {
       categoryArr: ["中西药品", "营养健康", "保健器械", "健康服务"],
       isActive: false,
-      tabNum: 1,
+      tabNum: 0,
       goodsList:[]
     };
   },
   created:function(){
       this.pageInit();
   },
-  watch(to,from){
+  watch:{
+     $route(to,from){
 
+     }
   },
   methods: {
     pageInit(){
        Ma.fetch({
-         url: apiUrl + '/goodsList',
+         url: apiUrl + 'goodsList',
          method:'get',
-         body:{goods_type: 1},
          callback:res=>{
            this.goodsList = res.goodsList;
          }
