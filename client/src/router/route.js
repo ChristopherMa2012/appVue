@@ -1,26 +1,24 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import App from '@/app'
-import Home from '@/page/home/home'
-import Login from '@/page/login/login'
-import Register from '@/page/register/register'
-import PwdChange from '@/page/pwdChange/pwdChange'
-import GdDetail from '@/page/gdDetail/gdDetail'
-import Search from '@/page/search/search'
-import SearchRes from '@/page/searchRes/searchRes'
-import User from '@/page/user/user'
-import OrderConfirm from '@/page/orderConfirm/orderConfirm'
-import PayComplete from '@/page/payComplete/payComplete'
-import MyPoint from '@/page/myPoint/myPoint'
-import MyOrder from '@/page/myOrder/myOrder'
-import Address from '@/page/address/address'
-import AddrEdit from '@/page/addrEdit/addrEdit'
-import UserAssets from '@/page/userAssets/userAssets'
-import Discount from '@/page/userAssets/children/discount/discount'
-import RedPaper from '@/page/userAssets/children/redPaper/redPaper'
-import OrderDetail from '@/page/orderDetail/orderDetail'
-import OrderPay from '@/page/orderPay/orderPay'
-import ShopCar from '@/page/shopCar/shopCar'
+import Home from '@/page/home'
+import Login from '@/page/login'
+import Register from '@/page/register'
+import PwdChange from '@/page/pwdChange'
+import GdDetail from '@/page/gdDetail'
+import Search from '@/page/search'
+import SearchRes from '@/page/searchRes'
+import User from '@/page/user'
+import OrderConfirm from '@/page/orderConfirm'
+import PayComplete from '@/page/payComplete'
+import MyPoint from '@/page/myPoint'
+import MyOrder from '@/page/myOrder'
+import Address from '@/page/address'
+import AddrEdit from '@/page/addrEdit'
+import UserAssets from '@/page/userAssets'
+import OrderDetail from '@/page/orderDetail'
+import OrderPay from '@/page/orderPay'
+import ShopCar from '@/page/shopCar'
 
 Vue.use(Router)
 
@@ -106,16 +104,7 @@ export default new Router({
   {
     path: '/userAssets/:id',
     name: 'userAssets',
-    component: UserAssets,
-    children: [{
-      path: 'discount',
-      name: 'discount',
-      component: Discount
-    }, {
-      path: 'redPaper',
-      name: 'redPaper',
-      component: RedPaper
-    }]
+    component: UserAssets
   },
   {
     path: '/orderPay',

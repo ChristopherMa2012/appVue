@@ -52,7 +52,7 @@
   </section>
 </template>
 <script>
-import pageHead from "@/components/header/header";
+import pageHead from "@/components/header";
 
 export default {
   data() {

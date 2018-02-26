@@ -74,18 +74,36 @@
   </section>
 </template>
 <script>
-import pageHead from "@/components/header/header";
-import pageFoot from "@/components/footer/footer";
+import pageHead from "@/components/header";
+import pageFoot from "@/components/footer";
+import {apiUrl} from "@/config/baseConfig";
 
 export default {
   data() {
     return {
       categoryArr: ["中西药品", "营养健康", "保健器械", "健康服务"],
       isActive: false,
-      tabNum: 1
+      tabNum: 1,
+      goodsList:[]
     };
   },
+  created:function(){
+      this.pageInit();
+  },
+  watch(to,from){
+
+  },
   methods: {
+    pageInit(){
+       Ma.fetch({
+         url: apiUrl + '/goodsList',
+         method:'get',
+         body:{goods_type: 1},
+         callback:res=>{
+           this.goodsList = res.goodsList;
+         }
+       })
+    },
     searchAction(){
       this.$router.push('/search');
     },

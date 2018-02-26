@@ -23,8 +23,8 @@
 	</section>
 </template>
 <script>
-import pageHead from "@/components/header/header"
-import pageFoot from "@/components/footer/footer"
+import pageHead from "@/components/header"
+import pageFoot from "@/components/footer"
 
 export default {
   // directives:{
