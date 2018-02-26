@@ -5,7 +5,7 @@
             <ul>
               <li class="clearfix">
                    <i class="circle fl"></i>
-                   <img src="/src/assets/images/shopCar/gdImg.jpg" alt="" class="fl">
+                   <img src="/src/assets/images/shopCar/gdImg.jpg" class="fl">
                    <div class="gdInfo fl">
                        <h4>罗亚 苹果6是手机壳保护套 软asdfsfsafsadfsdafsdafsdf发生飞洒打发阿斯蒂芬撒啊师傅阿三123123asdf保护套 软壳壳</h4>
                        <div class="specifi">颜色：拉斯是士大夫士大夫 4*2 </div>
@@ -21,7 +21,7 @@
               </li>
               <li class="clearfix">
                    <i class="circle fl"></i>
-                   <img src="/src/assets/images/shopCar/gdImg.jpg" alt="" class="fl">
+                   <img src="/src/assets/images/shopCar/gdImg.jpg" class="fl">
                    <div class="gdInfo fl">
                        <h4>罗亚 苹果6是手机壳保护套 软asdfsfsafsadfsdafsdafsdf发生飞洒打发阿斯蒂芬撒啊师傅阿三123123asdf保护套 软壳壳</h4>
                        <div class="specifi">颜色：拉斯是士大夫士大夫 4*2 </div>
@@ -78,9 +78,9 @@ $red: #df064e;
   width: 0.3rem;
   height: 0.3rem;
   border-radius: 50%;
-  border: 0.01rem solid $borderGrey;
+  border: 0.02rem solid $borderGrey;
   margin: 0.3rem 0.2rem 0;
-  vertical-align: middle;
+
 }
 .content {
   ul {
@@ -91,7 +91,7 @@ $red: #df064e;
 
       img {
         width: 1.5rem;
-        height: 100%;
+        height: 1.5rem;
         margin-right: 0.2rem;
       }
       .gdInfo {

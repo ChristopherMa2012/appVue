@@ -99,7 +99,7 @@
                 <col width="300px">
             </colgroup>
         </thead>
-        <tbody>
+        <tbody id="table1">
             <tr>
                 <td>商品标题：</td>
                 <td>
@@ -111,7 +111,7 @@
                 <td>
                     <input type="text" id="goods_type">
                 </td>
-            </tr>            
+            </tr>
             <tr>
                 <td>价格：</td>
                 <td>
@@ -137,6 +137,22 @@
                 </td>
             </tr>
             <tr>
+                <td>图片链接：</td>
+                <td>
+                    <input type="text" id="imgUrl">
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <thead>
+            <colgroup>
+                <col width="130px">
+                <col width="300px">
+            </colgroup>
+        </thead>
+        <tbody id="table2">
+            <tr>
                 <td>商品名称：</td>
                 <td>
                     <input type="text" id="gdName">
@@ -160,19 +176,15 @@
                     <input type="text" id="component">
                 </td>
             </tr>
-            <tr>
-                <td>图片链接：</td>
-                <td>
-                    <input type="text" id="imgUrl">
-                </td>
-            </tr>
         </tbody>
     </table>
+
     <button id="submit">提交</button>
     <script>
         var btn = document.querySelector("#submit");
         btn.addEventListener('click', function () {
-            var inputArr = document.querySelectorAll("input");
+            var inputArr1 = document.querySelectorAll("#table1 input");
+            var inputArr2 = document.querySelectorAll("#table2 input");
             var gdInfoObj = Object.create(null);
             Object.keys(inputArr).forEach(function (item, index) {
                 gdInfoObj[inputArr[index].id] = inputArr[index].value

@@ -4,9 +4,9 @@
     <section class="content">
       <!-- 会员信息头 -->
       <div class="head clearfix">
-        <img src="../assets/images/user/userHead.png" alt="用户头像" class="userImg fl">
+        <img src="../assets/images/user/userHead.jpg" alt="用户头像" class="userImg fl">
         <div class="fl userInfo">
-          <div class="userName">我是一条水里的鱼</div>
+          <div class="userName">christopherma2012</div>
           <div class="userDegree">注册会员</div>
         </div>
       </div>

@@ -37,15 +37,15 @@ router.use('/addAddress', (req, res, next) => {
     })
 });
 //删除收货地址
-router.use('/deleteAddr',(req,res,next)=>{
+router.use('/deleteAddr', (req, res, next) => {
     let addrId = req.query.addrId;
-    model.Address.remove({_id:addrId},err =>{
-        if(err) return handleError(err);
-        res.send({status:200,msg:'删除成功'});
+    model.Address.remove({ _id: addrId }, err => {
+        if (err) return handleError(err);
+        res.send({ status: 200, msg: '删除成功' });
     })
 })
 //修改收货地址
-router.use('/addrModify',(req,res,next)=>{
+router.use('/addrModify', (req, res, next) => {
     let addrObj = req.body;
     // model.Address.save({
     //     '_id': 'ObjectId(' + addrObj.addrId + ')',
@@ -56,8 +56,23 @@ router.use('/addrModify',(req,res,next)=>{
     //     'area':addrObj.area,
     //     'addrDetail':addrObj.addrDetail
     // })
-   res.send({status:200,msg:'修改成功'});   
+    res.send({ status: 200, msg: '修改成功' });
 })
-
+//购物车商品列表
+router.use('/addShopCar', (req, res) => {
+    let goodInfo = req.body;
+    let shopCarGoods = new model.ShopCarGd({
+        gdSN: goodInfo.gdSN,
+        gdTitle: goodInfo.gdTitle,
+        price: goodInfo.price,
+        specifications: goodInfo.specifications,
+        num: goodInfo.num,
+        imgUrl: goodInfo.imgUrl
+    })
+    shopCarGoods.save(err=>{
+        if(err) return handleError(err);
+        res.send({status:200,msg:'加入购物车成功!'});
+    })
+})
 
 export default router;

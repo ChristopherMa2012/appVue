@@ -36,9 +36,21 @@ let goods = new Schema({
 	goods_type:String,
     imgUrl:String
 })
+//购物车商品模型
+let shopCarGd = new Schema({
+	gdSN:Number,
+	gdTitle: String,
+	specifications: String,
+	price:Number,
+	num: Number,
+	imgUrl:String
+})
+
+
 let model = {
 	User: mongoose.model('user',user),
 	Address: mongoose.model('address',address),
-	Goods: mongoose.model('goods',goods)
+	Goods: mongoose.model('goods',goods),
+	ShopCarGd: mongoose.model('shopCarGd',shopCarGd)
 }
 export default model;

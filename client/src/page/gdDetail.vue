@@ -6,7 +6,7 @@
       <div class="carousel">
         <ul class="imgList">
           <li>
-            <img :src="gdDetailObj.imgUrl">
+            <img :src="imgUrl">
           </li>
         </ul>
         <ul class="point">
@@ -16,14 +16,14 @@
       </div>
       <!-- 商品信息 -->
       <div class="gdInfo">
-        <h3>{{gdDetailObj.gdTitle}}</h3>
+        <h3>{{gdTitle}}</h3>
         <div class="price">
-          <span>价格：<em>{{gdDetailObj.price}}</em></span>
-          <span>{{gdDetailObj.originPrice}}</span>
+          <span>价格：<em>{{price}}</em></span>
+          <span>{{originPrice}}</span>
           <span>货到付款</span>
         </div>
         <div class="SN">
-          编码： <span>{{gdDetailObj.gdSN}}</span>
+          编码： <span>{{gdSN}}</span>
         </div>
         <div class="guaruntee">
           保障:
@@ -62,7 +62,7 @@
           <span>数量:</span>
           <div class="inputBox clearfix">
             <i class="fl">-</i>
-            <input type="text" name="gdNum" value="1" class="fl">
+            <input type="text" name="gdNum" :value="num" class="fl">
             <i class="fl">+</i>
           </div>
           <span class="store">库存 <em>23432</em>件</span>
@@ -106,37 +106,77 @@
          购物车
          </router-link>
          <router-link to="/orderConfirm" class="fr">立即购买</router-link>
-         <span class="fr">加入购物车</span>
+         <span class="fr" @click="addShopCar()">加入购物车</span>
      </section>
   </section>
 </template>
 <script>
 import pageHead from "@/components/header";
-import {apiUrl} from "@/config/baseConfig";
+import { apiUrl } from "@/config/baseConfig";
 
 export default {
   data() {
     return {
       curNum: 0,
-      gdDetailObj: null,
-      specifications:[]
+      specifications: [],
+      gdTitle: "",
+      price: 0.0,
+      specifications: [],
+      originPrice: 0.0,
+      gdSN: "",
+      imgUrl: "",
+      num: 1
     };
   },
-  created:function(){
-    let gdSN = this.$route.params.gdSN;
-     Ma.fetch({
-       url: apiUrl + 'gdDetail',
-       method: 'get',
-       body:{gdSN: gdSN},
-       callback:res=>{
-         this.gdDetailObj = res.goodsInfo;
-         this.specifications = res.goodsInfo.specifications;
-       }
-     })
+  created: function() {
+    this.pageInit();
+  },
+  watch: {
+    $route(to, from) {
+      if (to.name !== "gdDetail") return;
+      this.pageInit();
+    }
   },
   methods: {
+    pageInit() {
+      let gdSN = this.$route.params.gdSN;
+      Ma.fetch({
+        url: apiUrl + "gdDetail",
+        method: "get",
+        body: { gdSN: gdSN },
+        callback: res => {
+          let G = res.goodsInfo;
+          this.gdTitle = G.gdTitle;
+          this.price = G.price;
+          this.specifications = G.specifications;
+          this.originPrice = G.originPrice;
+          this.gdSN = G.gdSN;
+          this.imgUrl = G.imgUrl;
+        }
+      });
+    },
     tabChange(index) {
       this.curNum = index;
+    },
+    addShopCar() {
+      Ma.fetch({
+        url: apiUrl + "addShopCar",
+        method: "post",
+        body: {
+          gdSN: this.gdSN,
+          gdTitle: this.gdTitle,
+          price: this.price,
+          specifications: this.specifications,
+          imgUrl: this.imgUrl,
+          num: this.num
+        },
+        callback: res => {
+          Ma.pop({
+            content: res.msg,
+            btnArr: ["确定"]
+          });
+        }
+      });
     }
   },
   components: {
@@ -356,7 +396,7 @@ $imgSrc: "/src/assets/images/gdDetail/";
         background-color: $red;
         color: white;
         border-radius: 0.04rem;
-        vertical-align: middle
+        vertical-align: middle;
       }
     }
     .specification {
@@ -464,22 +504,23 @@ $imgSrc: "/src/assets/images/gdDetail/";
   width: 7.2rem;
   background-color: white;
   border-top: 0.01rem solid $borderGrey;
-   a,span{
-     display: inline-block;
-     height: 0.8rem;
-     line-height: 0.8rem;
-     text-align: center;
-     width: 27%;
-   }
-   span{
-     width: 35%;
-     background-color: #7c89de;
-     color: white;
-   }
-   &>*:nth-child(2){
-     width: 35%;
-     background-color: #454ab3;
-     color: white;     
-   }
+  a,
+  span {
+    display: inline-block;
+    height: 0.8rem;
+    line-height: 0.8rem;
+    text-align: center;
+    width: 27%;
+  }
+  span {
+    width: 35%;
+    background-color: #7c89de;
+    color: white;
+  }
+  & > *:nth-child(2) {
+    width: 35%;
+    background-color: #454ab3;
+    color: white;
+  }
 }
 </style>
