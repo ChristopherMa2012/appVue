@@ -9,7 +9,7 @@
         <figcaption class="f12">购物车</figcaption>
       </figure>
     </router-link>
-    <div class="fr" @click="toMyOrder">
+    <router-link to="/user" class="fr">
       <figure>
         <svg version="1.1" baseProfile="full" width="0.36rem" height="0.36rem" xmlns="http://www.w3.org/2000/svg">
           <rect x="0" y="0.01rem" width="0.36rem" height="0.35rem" rx="0.1rem" ry="0.1rem" stroke="grey" stroke-width="0.03rem" fill="white" />
@@ -23,7 +23,7 @@
         </svg>
         <figcaption class="f12">我的</figcaption>
       </figure>
-    </div>
+    </router-link>
   </section>
 </template>
 <script>
@@ -31,20 +31,20 @@ import fetch from '@/utils/fetchData';
 import { apiUrl } from '@/config/baseConfig';
 export default {
   methods: {
-    toMyOrder() {
-      fetch({
-        url: apiUrl + 'isLogin',
-        method: 'get'
-      }).then(res => {
-        if(res.status == 202){
-          this.$router.push('/user');
-        }else{
-          this.$router.push('/login');
-        }
-      }).catch(e => {
-        console.log(e);
-      })
-    }
+    //toMyOrder() {
+    //   fetch({
+    //     url: apiUrl + 'isLogin',
+    //     method: 'get'
+    //   }).then(res => {
+    //     if(res.status == 202){
+    //       this.$router.push('/user');
+    //     }else{
+    //       this.$router.push('/login');
+    //     }
+    //   }).catch(e => {
+    //     console.log(e);
+    //   })
+    // }
   }
 }
 
