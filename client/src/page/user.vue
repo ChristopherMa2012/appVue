@@ -6,22 +6,22 @@
       <div class="head clearfix">
         <img src="../assets/images/user/userHead.jpg" alt="用户头像" class="userImg fl">
         <div class="fl userInfo">
-          <div class="userName">christopherma2012</div>
+          <div class="userName">{{name}}</div>
           <div class="userDegree">注册会员</div>
         </div>
       </div>
       <!-- 资产 -->
       <div class="asset clearfix">
         <router-link to="/myPoint" class="fl">
-          <div class="">5000</div>
+          <div class="">{{point}}</div>
           <div>积分</div>
         </router-link>
-        <router-link to="/userAssets/com/redPaper" class="fl">
-          <div>12</div>
+        <router-link to="/userAssets/redPaper" class="fl">
+          <div>{{redPaper}}</div>
           <div>红包</div>
         </router-link>
-        <router-link to="/userAssets/com/discount" class="fl">
-          <div>43</div>
+        <router-link to="/userAssets/discount" class="fl">
+          <div>{{discount}}</div>
           <div>优惠券</div>
         </router-link>
       </div>
@@ -65,18 +65,50 @@
 </template>
 <script>
 import pageHead from "@/components/header";
+import {apiUrl} from "@/config/baseConfig";
 
 export default {
+  data() {
+    return {
+      name: "",
+      point: 0,
+      redPaper: 0,
+      discount: 0
+    };
+  },
+  watch: {
+    $route(to, from) {
+      if (to.name == "user") {
+        this.pageInit();
+      }
+    }
+  },
+  created: function() {
+    this.pageInit();
+  },
+  methods: {
+    pageInit() {
+      Ma.fetch({
+        url: apiUrl + "userInfo",
+        method: "get",
+        callback: res => {
+          this.name = res.userInfo.name;
+          this.point = res.userInfo.point;
+          this.redPaper = res.userInfo.redPaper;
+          this.discount = res.userInfo.discount;
+        }
+      });
+    }
+  },
   components: {
     pageHead
   }
 };
-
 </script>
 <style lang="scss" scoped>
 $lightgrey: #c2c2c2;
 $red: #e6186f;
-$imgSrc: '/src/assets/images/user/';
+$imgSrc: "/src/assets/images/user/";
 .content {
   .head {
     background: url($imgSrc + "userCenterBg.png") no-repeat;
@@ -168,7 +200,7 @@ $imgSrc: '/src/assets/images/user/';
     }
   }
   .serviceList {
-    padding:0  0.32rem;
+    padding: 0 0.32rem;
     a {
       display: block;
       width: 100%;
@@ -177,14 +209,14 @@ $imgSrc: '/src/assets/images/user/';
         display: inline-block;
         width: 0.21rem;
         height: 0.27rem;
-        margin-right:0.17rem;
-        vertical-align:middle;
+        margin-right: 0.17rem;
+        vertical-align: middle;
       }
       &:first-child {
         height: 0.83rem;
         line-height: 0.83rem;
         i {
-          background: url($imgSrc + 'addrIcon.png') no-repeat;
+          background: url($imgSrc + "addrIcon.png") no-repeat;
           background-size: cover;
         }
       }
@@ -194,7 +226,7 @@ $imgSrc: '/src/assets/images/user/';
         i {
           width: 0.28rem;
           height: 0.28rem;
-          background: url($imgSrc + 'serviceIcon.png') no-repeat;
+          background: url($imgSrc + "serviceIcon.png") no-repeat;
           background-size: cover;
         }
       }
@@ -205,12 +237,11 @@ $imgSrc: '/src/assets/images/user/';
         i {
           width: 0.28rem;
           height: 0.28rem;
-          background: url($imgSrc + 'aboutIcon.png') no-repeat;
+          background: url($imgSrc + "aboutIcon.png") no-repeat;
           background-size: cover;
         }
       }
     }
   }
 }
-
 </style>

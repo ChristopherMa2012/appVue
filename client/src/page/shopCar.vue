@@ -3,38 +3,22 @@
       <page-head page-title='购物车'></page-head>
       <section class="content">
             <ul>
-              <li class="clearfix">
+              <li class="clearfix" v-for="(item,index) in goodsList" :key="index">
                    <i class="circle fl"></i>
-                   <img src="/src/assets/images/shopCar/gdImg.jpg" class="fl">
+                   <img :src="item.imgUrl" class="fl">
                    <div class="gdInfo fl">
-                       <h4>罗亚 苹果6是手机壳保护套 软asdfsfsafsadfsdafsdafsdf发生飞洒打发阿斯蒂芬撒啊师傅阿三123123asdf保护套 软壳壳</h4>
-                       <div class="specifi">颜色：拉斯是士大夫士大夫 4*2 </div>
+                       <h4>{{item.gdTitle}}</h4>
+                       <div class="specifi">{{item.specifications}}</div>
                        <div class="clearfix">
-                            <span class="price fl">￥22.00</span>
+                            <span class="price fl">￥{{item.price}}</span>
                             <div class="num fr">
-                                <i class="minus">-</i>
-                                <input type="text" value="1">
-                                <i class="plus">+</i>
+                                <i class="minus" @click="minus(index)">-</i>
+                                <input type="text" :value="item.num">
+                                <i class="plus"  @click="plus(index)">+</i>
                             </div>
                        </div>
                    </div>
-              </li>
-              <li class="clearfix">
-                   <i class="circle fl"></i>
-                   <img src="/src/assets/images/shopCar/gdImg.jpg" class="fl">
-                   <div class="gdInfo fl">
-                       <h4>罗亚 苹果6是手机壳保护套 软asdfsfsafsadfsdafsdafsdf发生飞洒打发阿斯蒂芬撒啊师傅阿三123123asdf保护套 软壳壳</h4>
-                       <div class="specifi">颜色：拉斯是士大夫士大夫 4*2 </div>
-                       <div class="clearfix">
-                            <span class="price fl">￥22.00</span>
-                            <div class="num fr">
-                                <i class="minus">-</i>
-                                <input type="text" value="1">
-                                <i class="plus">+</i>
-                            </div>
-                       </div>
-                   </div>
-              </li>              
+              </li>       
             </ul>
             <div class="settlementBar clearfix">
                 <div class="fl">
@@ -60,10 +44,63 @@
 </template>
 <script>
 import pageHead from "@/components/header";
+import { apiUrl } from "@/config/baseConfig";
 
 export default {
   data() {
-    return {};
+    return {
+      goodsList: []
+    };
+  },
+  created: function() {
+    this.pageInit();
+  },
+  watch: {
+    $route(to, from) {
+      if(from.name=='shopCar') return;
+      this.pageInit();
+    }
+  },
+  methods: {
+    pageInit() {
+      Ma.fetch({
+        url: apiUrl + "shopCarList",
+        method: "get",
+        callback: res => {
+          this.goodsList = res.goodsList;
+        }
+      });
+    },
+    minus(index) {
+      let num   = this.goodsList[index].num;
+      if ( num == 1) {
+        num = 1;
+      } else {
+        this.shopCarNumMod(1, index);
+      }
+    },
+    plus(index) {
+      let num   = this.goodsList[index].num;
+      if (num >= this.storage) {
+        num = this.storage;
+      } else {
+        this.shopCarNumMod(2, index);
+      }
+    },
+    shopCarNumMod(way, index) {
+      Ma.fetch({
+        url: apiUrl + "shopCarNumMod",
+        method: "get",
+        body: { modifyWay: way, gdSN: this.goodsList[index].gdSN },
+        callback: res => {
+          if (res.status == 200 && way == 1) {
+            this.goodsList[index].num--;
+          } else if (res.status == 200 && way == 2) {
+           this.goodsList[index].num++;
+          } 
+        }
+      });
+    }
   },
   components: {
     pageHead
@@ -80,7 +117,6 @@ $red: #df064e;
   border-radius: 50%;
   border: 0.02rem solid $borderGrey;
   margin: 0.3rem 0.2rem 0;
-
 }
 .content {
   ul {

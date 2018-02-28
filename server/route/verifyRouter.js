@@ -10,6 +10,10 @@ router.all('*', (req, res, next) => {
     next();
 
 })
+//用户信息
+router.get('/userInfo',(req,res)=>{
+    res.send({status:200,msg:'请求成功',userInfo:req.session.userInfo});
+})
 //收货地址列表
 router.use('/addrList', (req, res, next) => {
     model.Address.find({ 'userId': req.session.userInfo.userId }, (err, address) => {
@@ -58,10 +62,11 @@ router.use('/addrModify', (req, res, next) => {
     // })
     res.send({ status: 200, msg: '修改成功' });
 })
-//购物车商品列表
+//加入购物车
 router.use('/addShopCar', (req, res) => {
     let goodInfo = req.body;
-    let shopCarGoods = new model.ShopCarGd({
+    let shopCar = new model.ShopCarGd({
+        userId: req.session.userInfo.userId,
         gdSN: goodInfo.gdSN,
         gdTitle: goodInfo.gdTitle,
         price: goodInfo.price,
@@ -69,10 +74,38 @@ router.use('/addShopCar', (req, res) => {
         num: goodInfo.num,
         imgUrl: goodInfo.imgUrl
     })
-    shopCarGoods.save(err=>{
-        if(err) return handleError(err);
-        res.send({status:200,msg:'加入购物车成功!'});
+    shopCar.save(err => {
+        if (err) return handleError(err);
+        res.send({ status: 200, msg: '加入购物车成功!' });
     })
 })
 
+//购物车商品列表
+router.use('/shopCarList', (req, res) => {
+    model.ShopCarGd.find({ userId: req.session.userInfo.userId }, (err, result) => {
+        if (err) return handleError(err);
+        res.send({ status: 200, goodsList: result });
+    })
+})
+//修改购物车商品数量
+router.use('/shopCarNumMod', (req, res) => {
+    let userId = req.session.userInfo.userId;
+    let gdSN = req.query.gdSN;
+    //way = 1 减  way =2 加
+    let way = req.query.modifyWay;
+    model.ShopCarGd.findOne({ userId: userId, gdSN: gdSN }, (err, result) => {
+        if (err) return handleError(err);
+        let num = result.num;
+        if (way == 1 && num > 1) {
+            num--;
+        } else if (way == 1 && num == 1) {
+            res.send({ status: 200, msg: '商品数量更新成功' });
+            return;
+        }
+        if (way == 2) num++;
+        model.ShopCarGd.findOneAndUpdate({ userId: userId, gdSN: gdSN }, { num: num }, () => {
+            res.send({ status: 200, msg: '商品数量更新成功' });
+        })
+    })
+})
 export default router;

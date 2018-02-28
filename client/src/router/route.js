@@ -102,7 +102,7 @@ export default new Router({
     component: MyPoint
   },
   {
-    path: '/userAssets/:id',
+    path: '/userAssets/:module',
     name: 'userAssets',
     component: UserAssets
   },

@@ -47,7 +47,24 @@ export default {
       curNum: 0
     };
   },
+  watch:{
+    $route(to,from){
+      if(to.name == 'userAssets'){
+        this.pageInit();
+      }
+    }
+  },
+  created: function() {
+     this.pageInit();
+  },
   methods: {
+    pageInit(){
+    if (this.$route.params.module == "redPaper") {
+      this.curNum = 1;
+    } else {
+      this.curNum = 0;
+    }
+    },
     tabChange(index) {
       this.curNum = index;
     }

@@ -6,7 +6,10 @@ let router = express.Router();
 router.use('/register', (req, res, next) => {
     let user = new model.User({
         name: req.body.userName,
-        password: req.body.password
+        password: req.body.password,
+        point:0,
+        redPaper:2,
+        discount:0
     })
     user.save(err => {
         if (err) return handleError(err);
@@ -44,6 +47,9 @@ router.use('/login', (req, res) => {
                 session.userInfo = Object.create(null);
                 session.userInfo.name = result.name;
                 session.userInfo.userId = result.id;
+                session.userInfo.point = result.point;
+                session.userInfo.redPaper = result.redPaper;
+                session.userInfo.discount = result.discount;
                 res.send({ status: 200, msg: '登陆成功' });
             } else {
                 res.send({ status: 400, msg: '登陆失败' });

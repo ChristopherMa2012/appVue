@@ -8,7 +8,10 @@ let user =  new Schema({
 	sex: String,
 	phone: Number,
 	password: String,
-	age: Number
+	age: Number,
+	point: Number,
+	redPaper: Number,
+	discount:Number
 });
 
 //收货地址模型
@@ -38,6 +41,7 @@ let goods = new Schema({
 })
 //购物车商品模型
 let shopCarGd = new Schema({
+	userId: String,
 	gdSN:Number,
 	gdTitle: String,
 	specifications: String,

@@ -61,9 +61,9 @@
         <div class="num">
           <span>数量:</span>
           <div class="inputBox clearfix">
-            <i class="fl">-</i>
+            <i class="fl" @click="minus()">-</i>
             <input type="text" name="gdNum" :value="num" class="fl">
-            <i class="fl">+</i>
+            <i class="fl" @click="plus()">+</i>
           </div>
           <span class="store">库存 <em>23432</em>件</span>
         </div>
@@ -125,7 +125,8 @@ export default {
       originPrice: 0.0,
       gdSN: "",
       imgUrl: "",
-      num: 1
+      num: 1,
+      storage: 200
     };
   },
   created: function() {
@@ -177,6 +178,20 @@ export default {
           });
         }
       });
+    },
+    minus() {
+      if (this.num == 1) {
+        this.num = 1;
+      } else {
+        this.num--;
+      }
+    },
+    plus() {
+      if (this.num >= this.storage) {
+        this.num = this.storage;
+      } else {
+        this.num++;
+      }
     }
   },
   components: {
