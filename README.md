@@ -8,10 +8,10 @@ vuex将于项目完成后添加
 /screenShots 为项目页面截图 
 
 # 运行方式  
-**前端资源服务：**进入路径 /client,  在空白处shift + 右键打开命令行或者直接右键再点击 git bash(需要安装git)，输入命令npm start即可打开。  
+**前端资源服务：**  进入路径 /client,  在空白处shift + 右键打开命令行或者直接右键再点击 git bash(需要安装git)，输入命令npm start即可打开。  
 **后台服务：**   
-1、直接项目根目录下，打开命令行输入npm run build即可；  
-2、使用vsCode调试时，新建launch.json后，可使用以下配置：  
+方法1、直接项目根目录下，打开命令行输入npm run build即可；  
+方法2、使用vsCode调试时，新建launch.json后，可使用以下配置：  
 ```javascript  
 {
     // 使用 IntelliSense 了解相关属性。 
