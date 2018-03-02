@@ -3,9 +3,9 @@
       <page-head :params="paramsObj"></page-head>
       <section class="content">
             <ul>
-              <li class="clearfix" v-for="(item,index) in goodsList" :key="index">
-                   <i class="circle fl" :class="{checkedCircle: item.checked }" @click="select(index)" v-show="!paramsObj.editMode"></i>
-                   <i class="circle fl" v-show="paramsObj.editMode" @click="editSelect(index)"></i>
+              <li class="clearfix" v-for="(item,index) in goodsList" :key="index" v-show="item.gdItemShow">
+                   <i class="circle fl" :class="{checkedCircle: item.checked }" @click="select(index)" v-show="paramsObj.editMode"></i>
+                   <i class="circle fl" :class="{checkedCircle: item.editChecked }" v-show="!paramsObj.editMode" @click="editSelect(index)"></i>
                    <img :src="item.imgUrl" class="fl">
                    <div class="gdInfo fl">
                        <h4>{{item.gdTitle}}</h4>
@@ -31,13 +31,13 @@
             </div>
             <div class="editBar clearfix" v-else>
                 <div class="fl">
-                  <i class="circle" :class="{checkedCircle:checkedAll}" @click="select(-1)"></i>
+                  <i class="circle" :class="{checkedCircle:editCheckedAll}" @click="editSelect(-1)"></i>
                   <span>全选</span>
                 </div>
                 <div class="fr">
                   <button>分享</button>
                   <button>移入关注</button>
-                  <button>删除</button>
+                  <button @click="gdDeleteAction()">删除</button>
                 </div>
             </div>
       </section>
@@ -46,31 +46,31 @@
 <script>
 import pageHead from "@/components/header";
 import { apiUrl } from "@/config/baseConfig";
-import {bus} from '@/common/bus';
+import { bus } from "@/common/bus";
 
 export default {
   data() {
     return {
       operMode: true, //true为 正常结算模式；false为编辑模式
       checkedAll: false, //全选
+      editCheckedAll: false, //编辑模式下的全选
       goodsList: [],
       totalPrice: "0.00",
-      paramsObj:{
-        pageTitle: '购物车',
+      paramsObj: {
+        pageTitle: "购物车",
         moreBtnStatus: false,
-        editMode:true
+        editMode: true
       }
     };
   },
   created: function() {
     this.pageInit();
-    bus.$on('headEdit',()=>{
+    bus.$on("headEdit", () => {
       this.paramsObj.editMode = false;
     });
-    bus.$on('headEditComplete',()=>{
+    bus.$on("headEditComplete", () => {
       this.paramsObj.editMode = true;
-    })
- 
+    });
   },
   watch: {
     $route(to, from) {
@@ -84,7 +84,11 @@ export default {
         url: apiUrl + "shopCarList",
         method: "get",
         callback: res => {
-          res.goodsList.forEach(item => {item.checked = false;item.editCheck = false});
+          res.goodsList.forEach(item => {
+            item.checked = false;
+            item.editChecked = false;
+            item.gdItemShow  = true;
+          });
           this.goodsList = res.goodsList;
         }
       });
@@ -148,15 +152,15 @@ export default {
       }
 
       if (this.checkedAll) {
+        this.checkedAll = false;
         this.goodsList.forEach(item => {
           item.checked = false;
-          this.checkedAll = false;
         });
         this.totalPrice = 0.0;
       } else {
+        this.checkedAll = true;
         this.goodsList.forEach(item => {
           item.checked = true;
-          this.checkedAll = true;
         });
         let temPrice = 0;
         this.goodsList.forEach(item => {
@@ -165,8 +169,49 @@ export default {
         this.totalPrice = temPrice.toFixed(2);
       }
     },
-    editSelect(index){
-         
+    editSelect(index) {
+      if (index == -1) {
+        if (this.editCheckedAll) {
+          this.editCheckedAll = false;
+          this.goodsList.forEach(item => {
+            item.editChecked = false;
+          });
+        } else {
+          this.editCheckedAll = true;
+          this.goodsList.forEach(item => {
+            item.editChecked = true;
+          });
+        }
+      } else {
+        if (this.goodsList[index].editChecked) {
+          this.goodsList[index].editChecked = false;
+          this.editCheckedAll = false;
+        } else {
+          this.goodsList[index].editChecked = true;
+          this.editCheckedAll = this.goodsList.every(item => item.editChecked == true);
+        }
+      }
+    },
+    gdDeleteAction(){
+      let gdSNArr = [];
+      let self = this;
+      this.goodsList.forEach(item=>{
+        if(item.editChecked) gdSNArr.push(item.gdSN);
+      })
+      Ma.fetch({
+        url: apiUrl + 'gdDelete',
+        method:'post',
+        body:{
+          gdSNArr
+        },
+        callback(res){
+          if(res.status == 200){
+              gdSNArr.forEach((item,index)=>{
+                self.goodsList[index].gdItemShow = false;
+              })
+          }
+        }
+      })
     }
   },
   components: {

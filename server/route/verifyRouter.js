@@ -108,4 +108,14 @@ router.use('/shopCarNumMod', (req, res) => {
         })
     })
 })
+//删除购物车商品
+router.post('/gdDelete',(req,res)=>{
+    let arr = req.body.gdSNArr;
+    arr.forEach(item => {
+        model.ShopCarGd.remove({gdSN: item},function(err){
+            if(err) return handleError(err);
+            res.send({status:200,msg:'删除成功'});
+        });
+    });
+})
 export default router;

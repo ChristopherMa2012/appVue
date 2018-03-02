@@ -5,7 +5,7 @@
 		  <span class="more fr" v-show="params.moreBtnStatus">
        ...
 		  </span>
-      <span class="oper fr" v-if="params.editMode"  @click="edit()">
+      <span class="oper fr" v-if="params.editMode || false"  @click="edit()">
          编辑
       </span>
       <span class="oper fr" v-else  @click="complete()">
