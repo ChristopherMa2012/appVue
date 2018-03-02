@@ -1,10 +1,11 @@
 <template>
   <section class="bodyContain">
-      <page-head page-title='购物车'></page-head>
+      <page-head :params="paramsObj"></page-head>
       <section class="content">
             <ul>
               <li class="clearfix" v-for="(item,index) in goodsList" :key="index">
-                   <i class="circle fl"></i>
+                   <i class="circle fl" :class="{checkedCircle: item.checked }" @click="select(index)" v-show="!paramsObj.editMode"></i>
+                   <i class="circle fl" v-show="paramsObj.editMode" @click="editSelect(index)"></i>
                    <img :src="item.imgUrl" class="fl">
                    <div class="gdInfo fl">
                        <h4>{{item.gdTitle}}</h4>
@@ -20,17 +21,17 @@
                    </div>
               </li>       
             </ul>
-            <div class="settlementBar clearfix">
+            <div class="settlementBar clearfix"   v-if="paramsObj.editMode">
                 <div class="fl">
-                   <i class="circle"></i>
+                   <i class="circle" :class="{checkedCircle:checkedAll}"  @click="select(-1)"></i>
                    <span>全选</span>
-                   <span class="total">合计：<em>￥000000.0000</em></span>
-                </div>
+                   <span class="total">合计：<em>￥{{totalPrice}}</em></span>
+                </div>  
                 <div class="settleBtn fr">去结算</div>
             </div>
-            <div class="editBar clearfix">
+            <div class="editBar clearfix" v-else>
                 <div class="fl">
-                  <i class="circle"></i>
+                  <i class="circle" :class="{checkedCircle:checkedAll}" @click="select(-1)"></i>
                   <span>全选</span>
                 </div>
                 <div class="fr">
@@ -45,19 +46,35 @@
 <script>
 import pageHead from "@/components/header";
 import { apiUrl } from "@/config/baseConfig";
+import {bus} from '@/common/bus';
 
 export default {
   data() {
     return {
-      goodsList: []
+      operMode: true, //true为 正常结算模式；false为编辑模式
+      checkedAll: false, //全选
+      goodsList: [],
+      totalPrice: "0.00",
+      paramsObj:{
+        pageTitle: '购物车',
+        moreBtnStatus: false,
+        editMode:true
+      }
     };
   },
   created: function() {
     this.pageInit();
+    bus.$on('headEdit',()=>{
+      this.paramsObj.editMode = false;
+    });
+    bus.$on('headEditComplete',()=>{
+      this.paramsObj.editMode = true;
+    })
+ 
   },
   watch: {
     $route(to, from) {
-      if(from.name=='shopCar') return;
+      if (from.name == "shopCar") return;
       this.pageInit();
     }
   },
@@ -67,24 +84,33 @@ export default {
         url: apiUrl + "shopCarList",
         method: "get",
         callback: res => {
+          res.goodsList.forEach(item => {item.checked = false;item.editCheck = false});
           this.goodsList = res.goodsList;
         }
       });
     },
     minus(index) {
-      let num   = this.goodsList[index].num;
-      if ( num == 1) {
+      let num = this.goodsList[index].num;
+      if (num == 1) {
         num = 1;
       } else {
         this.shopCarNumMod(1, index);
+        if (!this.goodsList[index].checked) return;
+        this.totalPrice = (
+          Number(this.totalPrice) - this.goodsList[index].price
+        ).toFixed(2);
       }
     },
     plus(index) {
-      let num   = this.goodsList[index].num;
+      let num = this.goodsList[index].num;
       if (num >= this.storage) {
         num = this.storage;
       } else {
         this.shopCarNumMod(2, index);
+        if (!this.goodsList[index].checked) return;
+        this.totalPrice = (
+          Number(this.totalPrice) + this.goodsList[index].price
+        ).toFixed(2);
       }
     },
     shopCarNumMod(way, index) {
@@ -96,10 +122,51 @@ export default {
           if (res.status == 200 && way == 1) {
             this.goodsList[index].num--;
           } else if (res.status == 200 && way == 2) {
-           this.goodsList[index].num++;
-          } 
+            this.goodsList[index].num++;
+          }
         }
       });
+    },
+    select(index) {
+      if (index != -1) {
+        if (this.goodsList[index].checked) {
+          this.goodsList[index].checked = false;
+          this.checkedAll = false;
+          this.totalPrice = (
+            Number(this.totalPrice) -
+            this.goodsList[index].price * this.goodsList[index].num
+          ).toFixed(2);
+        } else {
+          this.goodsList[index].checked = true;
+          this.checkedAll = this.goodsList.every(item => item.checked == true);
+          this.totalPrice = (
+            Number(this.totalPrice) +
+            this.goodsList[index].price * this.goodsList[index].num
+          ).toFixed(2);
+        }
+        return;
+      }
+
+      if (this.checkedAll) {
+        this.goodsList.forEach(item => {
+          item.checked = false;
+          this.checkedAll = false;
+        });
+        this.totalPrice = 0.0;
+      } else {
+        this.goodsList.forEach(item => {
+          item.checked = true;
+          this.checkedAll = true;
+        });
+        let temPrice = 0;
+        this.goodsList.forEach(item => {
+          temPrice += item.price * item.num;
+        });
+        this.totalPrice = temPrice.toFixed(2);
+      }
+    },
+    editSelect(index){
+         
     }
   },
   components: {
@@ -114,9 +181,21 @@ $red: #df064e;
   display: inline-block;
   width: 0.3rem;
   height: 0.3rem;
+  line-height: 0.3rem;
   border-radius: 50%;
   border: 0.02rem solid $borderGrey;
   margin: 0.3rem 0.2rem 0;
+}
+.checkedCircle {
+  position: relative;
+  border: 0.02rem solid $red;
+  background-color: $red;
+  text-align: center;
+  &:before {
+    content: "✓";
+    display: block;
+    color: white;
+  }
 }
 .content {
   ul {

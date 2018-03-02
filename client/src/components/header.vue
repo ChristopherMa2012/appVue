@@ -1,20 +1,37 @@
 <template>
 	<section class="header clearfix">
 		  <span class="leftArr fl" @click="navBack"></span>
-		  <h3 class="f18">{{pageTitle}}</h3>
-		  <span class="more fr">
+		  <h3 class="f18">{{params.pageTitle}}</h3>
+		  <span class="more fr" v-show="params.moreBtnStatus">
        ...
 		  </span>
+      <span class="oper fr" v-if="params.editMode"  @click="edit()">
+         编辑
+      </span>
+      <span class="oper fr" v-else  @click="complete()">
+         完成
+      </span>      
 	</section>
 </template>
 <script>
 import router from "@/router/route";
+import {bus} from '@/common/bus';
 
 export default {
-  props: ["pageTitle"],
+  data(){
+     return{
+     }
+  },
+  props: ["params"],
   methods: {
     navBack: function() {
       router.go(-1);
+    },
+    edit(){
+      bus.$emit('headEdit');
+    },
+    complete(){
+      bus.$emit('headEditComplete')
     }
   }
 };
@@ -52,6 +69,13 @@ section {
     width: 0.54rem;
     font-size: 0;
     margin-right: 0.3rem;
+  }
+  & .oper{
+    display: inline-block;
+    height: 0.9rem;
+    line-height: 0.9rem;
+    padding: 0 0.2rem;
+    color:white;
   }
   // & em {
   //   display: inline-block;

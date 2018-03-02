@@ -54,10 +54,6 @@ utilsObj.fetch = opts => {
 
     }
   }
-  // Object.keys(optsData).forEach(item => {
-  //   if (opts.optsData.hasOwnProperty(item)) return;
-  //   opts.optsData[item] = optsData[item]
-  // });
   fetch(opts.url, {
     mode: 'cors',
     credentials: 'include',
