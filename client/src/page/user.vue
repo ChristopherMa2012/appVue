@@ -1,6 +1,6 @@
 <template>
   <section class="bodyContain">
-    <page-head page-title="个人中心"></page-head>
+    <page-head :params="paramsObj"></page-head>
     <section class="content">
       <!-- 会员信息头 -->
       <div class="head clearfix">
@@ -65,7 +65,7 @@
 </template>
 <script>
 import pageHead from "@/components/header";
-import {apiUrl} from "@/config/baseConfig";
+import { apiUrl } from "@/config/baseConfig";
 
 export default {
   data() {
@@ -73,7 +73,12 @@ export default {
       name: "",
       point: 0,
       redPaper: 0,
-      discount: 0
+      discount: 0,
+      paramsObj: {
+        pageTitle: "用户中心",
+        moreBtnStatus: true,
+        editMode: false
+      }
     };
   },
   watch: {

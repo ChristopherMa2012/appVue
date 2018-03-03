@@ -1,6 +1,6 @@
 <template>
   <section class="bodyContain">
-      <page-head page-title="我的订单"></page-head>
+      <page-head></page-head>
       <section class="content">
            <div class="tabBar">
                <span v-for="(item,index) in tabBarArr" v-bind:class="{isActive: curNum == index}" @click="tabChange(index)">{{item}}</span>
@@ -58,7 +58,7 @@ export default {
   data() {
     return {
       tabBarArr: ["全部订单", "待付款", "待收货"],
-      curNum:0
+      curNum:0      
     };
   },
   methods:{

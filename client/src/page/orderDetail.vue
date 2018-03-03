@@ -1,6 +1,6 @@
 <template>
   <section class="bodyContain">
-      <page-head page-title="订单详情"></page-head>
+      <page-head></page-head>
       <section class="content">
             <div class="receiverInfo">
                 <div class="name">李先生 13580563555</div>
@@ -292,12 +292,12 @@ $imgSrc: "/src/assets/images/orderDetail/";
         height: 0.8rem;
         line-height: 0.8rem;
         font-weight: bold;
-        color:$red;
-        &:before{
-            content:'￥';
-            display: inline-block;
-            width: 0.2rem;
-            line-height: 0.8rem;
+        color: $red;
+        &:before {
+          content: "￥";
+          display: inline-block;
+          width: 0.2rem;
+          line-height: 0.8rem;
         }
       }
     }

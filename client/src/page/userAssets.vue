@@ -1,6 +1,6 @@
 <template>
 	<section class="bodyContain">
-		<page-head page-title="个人资产"></page-head>
+		<page-head :params="paramsObj"></page-head>
 		<section class="content">
 			<div class="tabBar">
 				<span  v-bind:class="{isActive: curNum == 0 }" @click="tabChange(0)">商家优惠券</span>
@@ -44,26 +44,31 @@ import pageHead from "@/components/header";
 export default {
   data() {
     return {
-      curNum: 0
+      curNum: 0,
+      paramsObj: {
+        pageTitle: "用户资产",
+        moreBtnStatus: true,
+        editMode: false
+      }
     };
   },
-  watch:{
-    $route(to,from){
-      if(to.name == 'userAssets'){
+  watch: {
+    $route(to, from) {
+      if (to.name == "userAssets") {
         this.pageInit();
       }
     }
   },
   created: function() {
-     this.pageInit();
+    this.pageInit();
   },
   methods: {
-    pageInit(){
-    if (this.$route.params.module == "redPaper") {
-      this.curNum = 1;
-    } else {
-      this.curNum = 0;
-    }
+    pageInit() {
+      if (this.$route.params.module == "redPaper") {
+        this.curNum = 1;
+      } else {
+        this.curNum = 0;
+      }
     },
     tabChange(index) {
       this.curNum = index;

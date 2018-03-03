@@ -1,6 +1,6 @@
 <template>
   <section class="bodyContain">
-    <page-head page-title="商品详情"></page-head>
+    <page-head></page-head>
     <section class="content">
       <!-- 轮播图 -->
       <div class="carousel">
@@ -71,32 +71,20 @@
       <!-- 商品说明书/图文详情 -->
       <div class="gdInstructions">
         <div class="tab">
-          <span :class="{isActive:curNum == 0}" @click="tabChange(0)">药品说明书</span>
+          <span :class="{isActive:curNum == 0}" @click="tabChange(0)">商品简介</span>
           <span :class="{isActive:curNum == 1}" @click="tabChange(1)">图文详情</span>
         </div>
-        <div class="instructions" v-show="curNum == 0">
+        <div class="instructions" v-show="curNum == 0" >
           <ul>
-            <li>
-              <span>药品名称:</span>
-              <span>同仁堂六味地黄丸</span>
-            </li>
-            <li>
-              <span>通用名称:</span>
-              <span>六味地黄丸</span>
-            </li>  
-            <li>
-              <span>剂型:</span>
-              <span>丸剂（浓缩丸）</span>
-            </li>   
-            <li>
-              <span>主要成分:</span>
-              <span>熟地黄、山茱萸(制)、山药、牡丹皮、茯苓、泽泻</span>
-            </li>                                    
+            <li v-for="(item,index) in goodInstructions" :key="index">
+              <span>{{item.name}}:</span>
+              <span>{{item.value}}</span>
+            </li>                                 
           </ul>
           <!-- <img src="/src/assets/images/gdDetail/checkPass.jpg"> -->
         </div>
         <div class="imgDetail" v-show="curNum == 1">
-          <img src="/src/assets/images/gdDetail/gdImg.jpg">
+          <img :src="imgUrl">
         </div>
       </div>
     </section>
@@ -119,9 +107,9 @@ export default {
     return {
       curNum: 0,
       specifications: [],
+      goodInstructions:[],
       gdTitle: "",
       price: 0.0,
-      specifications: [],
       originPrice: 0.0,
       gdSN: "",
       imgUrl: "",
@@ -153,6 +141,7 @@ export default {
           this.originPrice = G.originPrice;
           this.gdSN = G.gdSN;
           this.imgUrl = G.imgUrl;
+          this.goodInstructions = G.goodInstructions;
         }
       });
     },
@@ -515,7 +504,7 @@ $imgSrc: "/src/assets/images/gdDetail/";
   position: fixed;
   bottom: 0;
   left: 0;
-  z-index: 6;
+  z-index: 5;
   width: 7.2rem;
   background-color: white;
   border-top: 0.01rem solid $borderGrey;

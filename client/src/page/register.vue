@@ -1,6 +1,6 @@
 <template>
   <section class="bodyContain">
-    <page-head page-title="用户注册"></page-head>
+    <page-head></page-head>
     <section class="content">
       <div class="formBox">
         <div class="userName">

@@ -1,6 +1,6 @@
 <template>
   <section class="bodyContain">
-    <page-head page-title="密码更改"></page-head>
+    <page-head></page-head>
     <section class="content">
       <div class="formBox">
         <div class="userName">

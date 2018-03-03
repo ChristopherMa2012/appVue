@@ -1,6 +1,6 @@
 <template>
   <section class="bodyContain">
-    <page-head page-title="用户登录"></page-head>
+    <page-head></page-head>
     <section class="content">
       <div class="formBox">
         <div class="userName">

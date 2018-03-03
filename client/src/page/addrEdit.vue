@@ -1,6 +1,6 @@
 <template>
   <section class="bodyContain">
-    <page-head :page-title= 'pageTitle'></page-head>
+    <page-head></page-head>
     <section class="content">
       <ul class="contentBox">
         <li class="name">
@@ -42,14 +42,13 @@ import { apiUrl } from "@/config/baseConfig";
 export default {
   data() {
     return {
-      pageTitle: "修改收货地址",
       showDelBtn: true,
       name: "",
       phone: "",
       province: "",
       city: "",
       area: "",
-      addrDetail: ""
+      addrDetail: ""  
     };
   },
   created: function() {

@@ -1,6 +1,6 @@
 <template>
 	<section class="bodyContain">
-	 <page-head page-title="搜索"></page-head>
+	 <page-head></page-head>
 	 <section class="content">
 	 	  <section class="inputBox">
 				   <div>

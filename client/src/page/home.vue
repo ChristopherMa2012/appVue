@@ -1,6 +1,6 @@
 <template>
   <section class="bodyContain">
-    <page-head page-title="首页"></page-head>
+    <page-head></page-head>
     <section class="content">
       <section class="indexTop">
         <div>
@@ -44,7 +44,7 @@
 <script>
 import pageHead from "@/components/header";
 import pageFoot from "@/components/footer";
-import {apiUrl} from "@/config/baseConfig";
+import { apiUrl } from "@/config/baseConfig";
 
 export default {
   data() {
@@ -52,31 +52,29 @@ export default {
       categoryArr: ["中西药品", "营养健康", "保健器械", "健康服务"],
       isActive: false,
       tabNum: 0,
-      goodsList:[]
+      goodsList: [],
     };
   },
-  created:function(){
-      this.pageInit();
+  created: function() {
+    this.pageInit();
   },
-  watch:{
-     $route(to,from){
-
-     }
+  watch: {
+    $route(to, from) {}
   },
   methods: {
-    pageInit(){
-       Ma.fetch({
-         url: apiUrl + 'goodsList',
-         method:'get',
-         callback:res=>{
-           this.goodsList = res.goodsList;
-         }
-       })
+    pageInit() {
+      Ma.fetch({
+        url: apiUrl + "goodsList",
+        method: "get",
+        callback: res => {
+          this.goodsList = res.goodsList;
+        }
+      });
     },
-    searchAction(){
-      this.$router.push('/search');
+    searchAction() {
+      this.$router.push("/search");
     },
-    tabChange(index){
+    tabChange(index) {
       this.tabNum = index;
     }
   },

@@ -155,25 +155,25 @@
             <tr>
                 <td>商品名称：</td>
                 <td>
-                    <input type="text" id="gdName">
+                    <input type="text" id="gdName"  data-name="商品名称">
                 </td>
             </tr>
             <tr>
                 <td>商品产地：</td>
                 <td>
-                    <input type="text" id="productionPlace">
+                    <input type="text" id="productionPlace" data-name="商品产地">
                 </td>
             </tr>
             <tr>
                 <td>有效期</td>
                 <td>
-                    <input type="text" id="expires">
+                    <input type="text" id="expires" data-name="有效期">
                 </td>
             </tr>
             <tr>
                 <td>主要成分：</td>
                 <td>
-                    <input type="text" id="component">
+                    <input type="text" id="component" data-name="主要成分">
                 </td>
             </tr>
         </tbody>
@@ -186,9 +186,18 @@
             var inputArr1 = document.querySelectorAll("#table1 input");
             var inputArr2 = document.querySelectorAll("#table2 input");
             var gdInfoObj = Object.create(null);
-            Object.keys(inputArr).forEach(function (item, index) {
-                gdInfoObj[inputArr[index].id] = inputArr[index].value
+            Object.keys(inputArr1).forEach(function (item, index) {
+                gdInfoObj[inputArr1[index].id] = inputArr1[index].value
             })
+            gdInfoObj.goodInstructions=[];
+            Object.keys(inputArr2).forEach((item,index)=>{
+                //gdInfoObj.goodInstructions[inputArr2[index].id] = inputArr2[index].value
+                var obj = Object.create(null);
+                obj.name = inputArr2[index].dataset.name;
+                obj.value = inputArr2[index].value;
+                gdInfoObj.goodInstructions.push(obj);
+            })
+            gdInfoObj.specifications = gdInfoObj.specifications.split(';')
             MaFetch({
                 url: 'http://api.appvue.com:800/addGood',
                 method: 'post',

@@ -1,11 +1,11 @@
 <template>
   <section class="bodyContain">
-      <page-head :params="paramsObj"></page-head>
+      <page-head page-title='购物车'></page-head>
       <section class="content">
             <ul>
               <li class="clearfix" v-for="(item,index) in goodsList" :key="index" v-show="item.gdItemShow">
-                   <i class="circle fl" :class="{checkedCircle: item.checked }" @click="select(index)" v-show="paramsObj.editMode"></i>
-                   <i class="circle fl" :class="{checkedCircle: item.editChecked }" v-show="!paramsObj.editMode" @click="editSelect(index)"></i>
+                   <i class="circle fl" :class="{checkedCircle: item.checked }" @click="select(index)" v-show="editMode"></i>
+                   <i class="circle fl" :class="{checkedCircle: item.editChecked }" v-show="!editMode" @click="editSelect(index)"></i>
                    <img :src="item.imgUrl" class="fl">
                    <div class="gdInfo fl">
                        <h4>{{item.gdTitle}}</h4>
@@ -21,7 +21,7 @@
                    </div>
               </li>       
             </ul>
-            <div class="settlementBar clearfix"   v-if="paramsObj.editMode">
+            <div class="settlementBar clearfix"   v-if="editMode">
                 <div class="fl">
                    <i class="circle" :class="{checkedCircle:checkedAll}"  @click="select(-1)"></i>
                    <span>全选</span>
@@ -56,20 +56,16 @@ export default {
       editCheckedAll: false, //编辑模式下的全选
       goodsList: [],
       totalPrice: "0.00",
-      paramsObj: {
-        pageTitle: "购物车",
-        moreBtnStatus: false,
-        editMode: true
-      }
+      editMode: true
     };
   },
   created: function() {
     this.pageInit();
     bus.$on("headEdit", () => {
-      this.paramsObj.editMode = false;
+      this.editMode = false;
     });
     bus.$on("headEditComplete", () => {
-      this.paramsObj.editMode = true;
+      this.editMode = true;
     });
   },
   watch: {
@@ -87,7 +83,7 @@ export default {
           res.goodsList.forEach(item => {
             item.checked = false;
             item.editChecked = false;
-            item.gdItemShow  = true;
+            item.gdItemShow = true;
           });
           this.goodsList = res.goodsList;
         }
@@ -188,30 +184,32 @@ export default {
           this.editCheckedAll = false;
         } else {
           this.goodsList[index].editChecked = true;
-          this.editCheckedAll = this.goodsList.every(item => item.editChecked == true);
+          this.editCheckedAll = this.goodsList.every(
+            item => item.editChecked == true
+          );
         }
       }
     },
-    gdDeleteAction(){
+    gdDeleteAction() {
       let gdSNArr = [];
       let self = this;
-      this.goodsList.forEach(item=>{
-        if(item.editChecked) gdSNArr.push(item.gdSN);
-      })
+      this.goodsList.forEach(item => {
+        if (item.editChecked) gdSNArr.push(item.gdSN);
+      });
       Ma.fetch({
-        url: apiUrl + 'gdDelete',
-        method:'post',
-        body:{
+        url: apiUrl + "gdDelete",
+        method: "post",
+        body: {
           gdSNArr
         },
-        callback(res){
-          if(res.status == 200){
-              gdSNArr.forEach((item,index)=>{
-                self.goodsList[index].gdItemShow = false;
-              })
+        callback(res) {
+          if (res.status == 200) {
+            gdSNArr.forEach((item, index) => {
+              self.goodsList[index].gdItemShow = false;
+            });
           }
         }
-      })
+      });
     }
   },
   components: {

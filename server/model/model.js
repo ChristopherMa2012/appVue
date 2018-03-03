@@ -1,9 +1,9 @@
-import mongoose  from 'mongoose';
+import mongoose from 'mongoose';
 
 let Schema = mongoose.Schema;
 
 //用户模型
-let user =  new Schema({
+let user = new Schema({
 	name: String,
 	sex: String,
 	phone: Number,
@@ -11,12 +11,12 @@ let user =  new Schema({
 	age: Number,
 	point: Number,
 	redPaper: Number,
-	discount:Number
+	discount: Number
 });
 
 //收货地址模型
 let address = new Schema({
-	userId:String,
+	userId: String,
 	name: String,
 	phone: String,
 	province: String,
@@ -27,34 +27,31 @@ let address = new Schema({
 
 //商品模型
 let goods = new Schema({
-    gdSN:Number,
-    gdTitle: String,
-    gdName:String,
-    price: Number,
-    originPrice: Number,
-    specifications:Array,
-    productionPlace:String,
-    expires: String,
-	component:String,
-	goods_type:String,
-    imgUrl:String
+	gdSN: Number,
+	gdTitle: String,
+	price: Number,
+	originPrice: Number,
+	specifications: Array,
+	goods_type: String,
+	imgUrl: String,
+	goodInstructions: Array
 })
 //购物车商品模型
 let shopCarGd = new Schema({
 	userId: String,
-	gdSN:Number,
+	gdSN: Number,
 	gdTitle: String,
 	specifications: String,
-	price:Number,
+	price: Number,
 	num: Number,
-	imgUrl:String
+	imgUrl: String
 })
 
 
 let model = {
-	User: mongoose.model('user',user),
-	Address: mongoose.model('address',address),
-	Goods: mongoose.model('goods',goods),
-	ShopCarGd: mongoose.model('shopCarGd',shopCarGd)
+	User: mongoose.model('user', user),
+	Address: mongoose.model('address', address),
+	Goods: mongoose.model('goods', goods),
+	ShopCarGd: mongoose.model('shopCarGd', shopCarGd)
 }
 export default model;

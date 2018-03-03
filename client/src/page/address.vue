@@ -1,6 +1,6 @@
 <template>
   <section class="bodyContain">
-    <page-head page-title="地址管理"></page-head>
+    <page-head></page-head>
     <section class="content">
       <ul class="addrList">
         <li class="clearfix" v-for="(item,index) in addrList" :key="index">
@@ -48,7 +48,7 @@ export default {
     }
   },
   methods: {
-    pageInit:function() {
+    pageInit: function() {
       Ma.fetch({
         url: apiUrl + "addrList",
         method: "get",
@@ -57,12 +57,12 @@ export default {
         }
       });
     },
-    editAction:function(index){
-       sessionStorage.setItem('addrObj',JSON.stringify(this.addrList[index]));
-       this.$router.push({name:'addrEdit',params:{funway:'edit'}});
+    editAction: function(index) {
+      sessionStorage.setItem("addrObj", JSON.stringify(this.addrList[index]));
+      this.$router.push({ name: "addrEdit", params: { funway: "edit" } });
     },
-    addAction:function(){
-      this.$router.push({name:'addrEdit',params:{funway:'newAdd'}})
+    addAction: function() {
+      this.$router.push({ name: "addrEdit", params: { funway: "newAdd" } });
     }
   },
   components: {

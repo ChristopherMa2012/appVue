@@ -1,6 +1,6 @@
 <template>
    <section class="bodyContain">
-        <page-head page-title="搜索结果"></page-head>
+        <page-head></page-head>
         <section class="content">
             <div class="inputBox">
                  <svg version="1.1" baseProfile="full" width="0.37rem" height="0.37rem" xmlns="http://www.w3.org/2000/svg">

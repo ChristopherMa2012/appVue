@@ -7,9 +7,9 @@ router.use('/register', (req, res, next) => {
     let user = new model.User({
         name: req.body.userName,
         password: req.body.password,
-        point:0,
-        redPaper:2,
-        discount:0
+        point: 0,
+        redPaper: 2,
+        discount: 0
     })
     user.save(err => {
         if (err) return handleError(err);
@@ -67,17 +67,17 @@ router.use('/isLogin', (req, res) => {
 })
 //商品上架
 router.use('/addGood', (req, res) => {
-    let body = req.body;
-    let obj = Object.create(null);
-    obj.gdSN = 234234324;
-    Object.keys(body).forEach(item => {
-        obj[item] = body[item];
-    })
+    let obj = req.body;
+    //Object.setPrototypeof(obj,null);
+    //let obj = Object.create(null);
+    // obj.gdSN = 234234324;
+    // Object.keys(body).forEach(item => {
+    //     obj[item] = body[item];
+    // })
     let goods = new model.Goods(obj);
     goods.save(err => {
         if (err) return handleError(err);
         res.send({ status: 200, 'msg': '添加成功' });
-
     })
 })
 //商品列表
