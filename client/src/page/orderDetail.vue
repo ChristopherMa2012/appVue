@@ -52,7 +52,7 @@
                 </div>
                 <ul class="gdListCon">
                     <li class="clearfix">
-                        <img src="/src/assets/images/myOrder/gdImg.png" alt="" class="fl">
+                        <img src="~@/assets/images/myOrder/gdImg.png" alt="" class="fl">
                         <div class="gdInfo fl">
                                 <h3>陈李济舒筋健腰丸舒经活络腰间盘腰椎痛白云山</h3>
                                 <div class="spec">规格：<span>0.9g/片*6片*3板</span></div>
@@ -63,7 +63,7 @@
                         </div>
                     </li>
                     <li class="clearfix">
-                        <img src="/src/assets/images/myOrder/gdImg.png" alt="" class="fl">
+                        <img src="~@/assets/images/myOrder/gdImg.png" alt="" class="fl">
                         <div class="gdInfo fl">
                                 <h3>陈李济舒筋健腰丸舒经活络腰间盘腰椎痛白云山</h3>
                                 <div class="spec">规格：<span>0.9g/片*6片*3板</span></div>

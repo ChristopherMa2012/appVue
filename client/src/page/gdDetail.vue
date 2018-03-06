@@ -44,7 +44,7 @@
           <span>佰川堂大药房旗舰店</span>
           <span>广西壮族自治区桂平市</span> 发货
         </div>
-        <!-- <img src="/src/assets/images/gdDetail/guarantee.jpg"> -->
+        <!-- <img src="~@/assets/images/gdDetail/guarantee.jpg"> -->
       </div>
       <!-- 购买信息 -->
       <div class="buyInfo">
@@ -81,7 +81,7 @@
               <span>{{item.value}}</span>
             </li>                                 
           </ul>
-          <!-- <img src="/src/assets/images/gdDetail/checkPass.jpg"> -->
+          <!-- <img src="~@/assets/images/gdDetail/checkPass.jpg"> -->
         </div>
         <div class="imgDetail" v-show="curNum == 1">
           <img :src="imgUrl">

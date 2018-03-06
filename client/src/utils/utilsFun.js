@@ -64,7 +64,7 @@ utilsObj.fetch = opts => {
     return resp.json();
   }).then(result => {
     if (result.status == 402) {
-       location.replace('http://res.appvue.com:8080/#/login');
+       location.replace('http://vueapp.tech/#/login');
     } else {
       opts.callback(result);
     }

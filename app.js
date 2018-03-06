@@ -21,7 +21,7 @@ app.use(cookieParser());
 mongoose.connect('mongodb://localhost/appvue');
 
 app.all("*", (req, res, next) => {
-	res.set("Access-Control-Allow-origin", "http://res.appvue.com:8080");
+	res.set("Access-Control-Allow-origin", "http://vueapp.tech");
 	res.set("Access-Control-Allow-Headers", "Content-Type");
 	//res.set("Access-Control-Allow-Methods", "GET,PUT,POST");
 	res.set("Access-Control-Allow-Credentials", true);
@@ -34,7 +34,7 @@ app.all("*", (req, res, next) => {
 app.use((session({
 	secret: 'CHRISMA',
 	cookie: {
-		domain: '.appvue.com',
+		domain: '.vueapp.tech',
 		maxAge: 7200 * 1000,
 		secure: false,
 		httpOnly:true
@@ -43,4 +43,4 @@ app.use((session({
 router(app);
 
 app.listen(process.env.PORT || 800);
-console.log('server正监听800端口，请访问  http://api.appvue.com:800');
+console.log('server正监听800端口，请访问  http://vueapp.tech:800');

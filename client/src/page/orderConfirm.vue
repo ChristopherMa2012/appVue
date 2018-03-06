@@ -2,7 +2,7 @@
   <section class="bodyContain">
       <page-head></page-head>
       <section class="content">
-
+           
       </section>
   </section>
 </template>
@@ -11,7 +11,7 @@ import pageHead from '@/components/header'
 
 export default {
      components:{
-         pageHead
+         pageHead               
      }
 }
 </script>

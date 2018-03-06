@@ -27,7 +27,7 @@
                    <span>全选</span>
                    <span class="total">合计：<em>￥{{totalPrice}}</em></span>
                 </div>  
-                <div class="settleBtn fr">去结算</div>
+                <div class="settleBtn fr" @click="settleBtn">去结算</div>
             </div>
             <div class="editBar clearfix" v-else>
                 <div class="fl">
@@ -210,6 +210,19 @@ export default {
           }
         }
       });
+    },
+    settleBtn(){
+     let isChecked =  this.goodsList.every(item=>{
+        return item.checked == false
+      })
+      if(isChecked){
+        Ma.pop({
+          content:'请选择要购买的商品',
+          btnArr: ['确定']
+        })
+        return;
+      }
+      this.$router.push('/orderConfirm');
     }
   },
   components: {

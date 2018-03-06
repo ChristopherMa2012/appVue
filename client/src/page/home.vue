@@ -87,7 +87,7 @@ export default {
 <style lang="scss" scoped>
 $lightgrey: lightgrey;
 $red: #e6186f;
-$imgSrc: "/src/assets/images/index/";
+$imgSrc: "../assets/images/index/";
 
 .indexTop {
   height: 3.6rem;

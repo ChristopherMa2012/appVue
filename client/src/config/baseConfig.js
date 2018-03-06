@@ -1,1 +1,1 @@
-export let apiUrl = 'http://api.appvue.com:800/';
+export let apiUrl = 'http://vueapp.tech:800/';

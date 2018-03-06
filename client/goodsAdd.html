@@ -58,7 +58,7 @@
                 return resp.json();
             }).then(result => {
                 if (result.status == 402) {
-                    location.replace('http://res.appvue.com:8080/#/login');
+                    location.replace('http://vueapp.tech/#/login');
                 } else {
                     opts.callback(result);
                 }
@@ -199,7 +199,7 @@
             })
             gdInfoObj.specifications = gdInfoObj.specifications.split(';')
             MaFetch({
-                url: 'http://api.appvue.com:800/addGood',
+                url: 'http://vueapp.tech:800/addGood',
                 method: 'post',
                 body: gdInfoObj,
                 callback: function (res) {
