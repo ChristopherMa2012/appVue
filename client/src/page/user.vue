@@ -113,7 +113,7 @@ export default {
 <style lang="scss" scoped>
 $lightgrey: #c2c2c2;
 $red: #e6186f;
-$imgSrc: "/src/assets/images/user/";
+$imgSrc: "../assets/images/user/";
 .content {
   .head {
     background: url($imgSrc + "userCenterBg.png") no-repeat;

@@ -73,7 +73,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 $borderGrey: #dfdfdf;
-$imgSrc: "/src/assets/images/myOrder/";
+$imgSrc: "../assets/images/myOrder/";
 $red: #e6186f;
 .content {
   .tabBar {

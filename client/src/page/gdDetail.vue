@@ -194,7 +194,7 @@ $red: #df064e;
 $fontGrey: #cccccc;
 $borderGrey: #8d8d8d;
 
-$imgSrc: "/src/assets/images/gdDetail/";
+$imgSrc: "../assets/images/gdDetail/";
 .content {
   background-color: #f0f2f5;
   .carousel {

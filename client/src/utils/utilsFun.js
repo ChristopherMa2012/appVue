@@ -54,17 +54,25 @@ utilsObj.fetch = opts => {
 
     }
   }
-  fetch(opts.url, {
-    mode: 'cors',
-    credentials: 'include',
-    method: optsData.method,
-    headers: optsData.headers,
-    body: optsData.body || {}
-  }).then(resp => {
+  let param = optsData.body ?
+    {
+      mode: 'cors',
+      credentials: 'include',
+      method: optsData.method,
+      headers: optsData.headers,
+      body: optsData.body
+    } : {
+      mode: 'cors',
+      credentials: 'include',
+      method: optsData.method,
+      headers: optsData.headers
+    }
+
+  fetch(opts.url, param).then(resp => {
     return resp.json();
   }).then(result => {
     if (result.status == 402) {
-       location.replace('http://vueapp.tech/#/login');
+      location.replace('http://www.vueapp.tech:8080/#/login');
     } else {
       opts.callback(result);
     }
