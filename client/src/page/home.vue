@@ -44,16 +44,22 @@
 <script>
 import pageHead from "@/components/header";
 import pageFoot from "@/components/footer";
+import { mapState } from "vuex";
 import { apiUrl } from "@/config/baseConfig";
 
 export default {
   data() {
     return {
-      categoryArr: ["中西药品", "营养健康", "保健器械", "健康服务"],
       isActive: false,
       tabNum: 0,
-      goodsList: [],
+      goodsList: []
     };
+  },
+  computed: {
+    ...mapState({
+      categoryArr: state => state.home.categoryArr
+    })
+    //...mapState(['categoryArr'])
   },
   created: function() {
     this.pageInit();
