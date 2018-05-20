@@ -18,12 +18,15 @@
       <div class="gdInfo">
         <h3>{{gdTitle}}</h3>
         <div class="price">
-          <span>价格：<em>{{price}}</em></span>
+          <span>价格：
+            <em>{{price}}</em>
+          </span>
           <span>{{originPrice}}</span>
           <span>货到付款</span>
         </div>
         <div class="SN">
-          编码： <span>{{gdSN}}</span>
+          编码：
+          <span>{{gdSN}}</span>
         </div>
         <div class="guaruntee">
           保障:
@@ -35,10 +38,14 @@
       <!-- 商家保障  -->
       <div class="shopGuarantee">
         <div class="deliveryTo">
-          <span>配送至: <em>广东省广州市</em></span>
+          <span>配送至:
+            <em>广东省广州市</em>
+          </span>
         </div>
         <div class="deliveryFee">
-          <span>最低快递价:<em>圆通速递6元</em></span>
+          <span>最低快递价:
+            <em>圆通速递6元</em>
+          </span>
         </div>
         <div class="shopTip">本商品由
           <span>佰川堂大药房旗舰店</span>
@@ -65,7 +72,8 @@
             <input type="text" name="gdNum" :value="num" class="fl">
             <i class="fl" @click="plus()">+</i>
           </div>
-          <span class="store">库存 <em>23432</em>件</span>
+          <span class="store">库存
+            <em>23432</em>件</span>
         </div>
       </div>
       <!-- 商品说明书/图文详情 -->
@@ -74,12 +82,12 @@
           <span :class="{isActive:curNum == 0}" @click="tabChange(0)">商品简介</span>
           <span :class="{isActive:curNum == 1}" @click="tabChange(1)">图文详情</span>
         </div>
-        <div class="instructions" v-show="curNum == 0" >
+        <div class="instructions" v-show="curNum == 0">
           <ul>
             <li v-for="(item,index) in goodInstructions" :key="index">
               <span>{{item.name}}:</span>
               <span>{{item.value}}</span>
-            </li>                                 
+            </li>
           </ul>
           <!-- <img src="~@/assets/images/gdDetail/checkPass.jpg"> -->
         </div>
@@ -88,70 +96,70 @@
         </div>
       </div>
     </section>
-     <section class="operBar clearfix">
-         <router-link to="/shopCar" class="fl">
-         <i></i>
-         购物车
-         </router-link>
-         <router-link to="/orderConfirm" class="fr">立即购买</router-link>
-         <span class="fr" @click="addShopCar()">加入购物车</span>
-     </section>
+    <section class="operBar clearfix">
+      <router-link to="/shopCar" class="fl">
+        <i></i>
+        购物车
+      </router-link>
+      <router-link to="/orderConfirm" class="fr">立即购买</router-link>
+      <span class="fr" @click="addShopCar()">加入购物车</span>
+    </section>
   </section>
 </template>
 <script>
-import pageHead from "@/components/header";
-import { apiUrl } from "@/config/baseConfig";
+import pageHead from '@/components/header'
+import { apiUrl } from '@/config/baseConfig'
 
 export default {
   data() {
     return {
       curNum: 0,
       specifications: [],
-      goodInstructions:[],
-      gdTitle: "",
+      goodInstructions: [],
+      gdTitle: '',
       price: 0.0,
       originPrice: 0.0,
-      gdSN: "",
-      imgUrl: "",
+      gdSN: '',
+      imgUrl: '',
       num: 1,
       storage: 200
-    };
+    }
   },
   created: function() {
-    this.pageInit();
+    this.pageInit()
   },
   watch: {
     $route(to, from) {
-      if (to.name !== "gdDetail") return;
-      this.pageInit();
+      if (to.name !== 'gdDetail') return
+      this.pageInit()
     }
   },
   methods: {
     pageInit() {
-      let gdSN = this.$route.params.gdSN;
+      let gdSN = this.$route.params.gdSN
       Ma.fetch({
-        url: apiUrl + "gdDetail",
-        method: "get",
+        url: apiUrl + 'gdDetail',
+        method: 'get',
         body: { gdSN: gdSN },
         callback: res => {
-          let G = res.goodsInfo;
-          this.gdTitle = G.gdTitle;
-          this.price = G.price;
-          this.specifications = G.specifications;
-          this.originPrice = G.originPrice;
-          this.gdSN = G.gdSN;
-          this.imgUrl = G.imgUrl;
-          this.goodInstructions = G.goodInstructions;
+          let G = res.goodsInfo
+          this.gdTitle = G.gdTitle
+          this.price = G.price
+          this.specifications = G.specifications
+          this.originPrice = G.originPrice
+          this.gdSN = G.gdSN
+          this.imgUrl = G.imgUrl
+          this.goodInstructions = G.goodInstructions
         }
-      });
+      })
     },
     tabChange(index) {
-      this.curNum = index;
+      this.curNum = index
     },
     addShopCar() {
       Ma.fetch({
-        url: apiUrl + "addShopCar",
-        method: "post",
+        url: apiUrl + 'addShopCar',
+        method: 'post',
         body: {
           gdSN: this.gdSN,
           gdTitle: this.gdTitle,
@@ -163,30 +171,30 @@ export default {
         callback: res => {
           Ma.pop({
             content: res.msg,
-            btnArr: ["确定"]
-          });
+            btnArr: ['确定']
+          })
         }
-      });
+      })
     },
     minus() {
       if (this.num == 1) {
-        this.num = 1;
+        this.num = 1
       } else {
-        this.num--;
+        this.num--
       }
     },
     plus() {
       if (this.num >= this.storage) {
-        this.num = this.storage;
+        this.num = this.storage
       } else {
-        this.num++;
+        this.num++
       }
     }
   },
   components: {
     pageHead
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 $imgBg: #eeeeee;
@@ -194,7 +202,7 @@ $red: #df064e;
 $fontGrey: #cccccc;
 $borderGrey: #8d8d8d;
 
-$imgSrc: "../assets/images/gdDetail/";
+$imgSrc: '../assets/images/gdDetail/';
 .content {
   background-color: #f0f2f5;
   .carousel {
@@ -234,7 +242,7 @@ $imgSrc: "../assets/images/gdDetail/";
     padding: 0 0.2rem;
     h3 {
       padding-left: 0.75rem;
-      background: url($imgSrc + "rxIcon.jpg") no-repeat;
+      background: url($imgSrc+'rxIcon.jpg') no-repeat;
       background-size: 7%;
       background-position: 3% 12%;
       margin: 0.25rem 0;
@@ -253,7 +261,7 @@ $imgSrc: "../assets/images/gdDetail/";
         em {
           color: $red;
           &:before {
-            content: "￥";
+            content: '￥';
             display: inline-block;
             height: 0.6rem;
             line-height: 0.6rem;
@@ -264,7 +272,7 @@ $imgSrc: "../assets/images/gdDetail/";
       span:nth-child(2) {
         color: $fontGrey;
         &:before {
-          content: "￥";
+          content: '￥';
           display: inline-block;
           height: 0.6rem;
           line-height: 0.6rem;
@@ -306,13 +314,13 @@ $imgSrc: "../assets/images/gdDetail/";
           line-height: 0.28rem;
         }
         &:first-child:before {
-          content: "正";
+          content: '正';
         }
         &:nth-child(2):before {
-          content: "退";
+          content: '退';
         }
         &:last-child:before {
-          content: "保";
+          content: '保';
         }
       }
     }
@@ -332,11 +340,11 @@ $imgSrc: "../assets/images/gdDetail/";
       em {
         font-weight: bold;
         &:before {
-          content: "";
+          content: '';
           display: inline-block;
           width: 0.2rem;
           height: 0.28rem;
-          background: url($imgSrc + "location.png") no-repeat;
+          background: url($imgSrc+'location.png') no-repeat;
           background-size: cover;
           vertical-align: middle;
           margin: 0 0.1rem 0 0.3rem;
@@ -354,7 +362,7 @@ $imgSrc: "../assets/images/gdDetail/";
         margin: 0 0.2rem;
         font-weight: bold;
         &:after {
-          content: "!";
+          content: '!';
           display: inline-block;
           width: 0.26rem;
           height: 0.26rem;
