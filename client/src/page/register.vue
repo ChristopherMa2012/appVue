@@ -26,7 +26,7 @@
 <script>
 import pageHead from '@/components/header'
 import fetch from '@/utils/fetchData'
-import {apiUrl} from '@/config/baseConfig'
+import { apiUrl } from '@/config/baseConfig'
 
 export default {
   data() {
@@ -45,36 +45,35 @@ export default {
         url: apiUrl + 'register',
         method: 'post',
         body: {
-          'userName': this.userName,
-          'password': this.password,
-          'pwdConfirm':this.pwdConfirm
+          userName: this.userName,
+          password: this.password,
+          pwdConfirm: this.pwdConfirm
         }
-      }).then(res => {
-        if(res.success){
-          let result = confirm('恭喜你注册成功');
-          result && this.$router.push('/');
-        } else{
-          alert('注册失败。请稍后再试')
-        }
-      }).catch(e => {
-        log(e.message);
-
       })
-
+        .then(res => {
+          if (res.success) {
+            let result = confirm('恭喜你注册成功')
+            result && this.$router.push('/')
+          } else {
+            alert('注册失败。请稍后再试')
+          }
+        })
+        .catch(e => {
+          log(e.message)
+        })
     }
   }
 }
-
 </script>
 <style lang="scss" scoped>
-$borderGrey:#eeeeee;
-$red:#e6186f;
+$borderGrey: #eeeeee;
+$red: #e6186f;
 .content {
   overflow: hidden;
   background-color: white;
   .formBox {
     width: 6rem;
-    margin: .4rem auto 0;
+    margin: 0.4rem auto 0;
     .userName,
     .pwd {
       margin-bottom: 0.2rem;
@@ -105,9 +104,9 @@ $red:#e6186f;
     color: white;
     margin: 0.5rem auto 0.2rem;
   }
-  .toLogin{
-    margin-left:0.55rem;
-    color:#6c6cad;
+  .toLogin {
+    margin-left: 0.55rem;
+    color: #6c6cad;
   }
   .accOper {
     width: 6rem;
@@ -117,5 +116,4 @@ $red:#e6186f;
     }
   }
 }
-
 </style>

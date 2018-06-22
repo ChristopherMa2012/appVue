@@ -1,83 +1,84 @@
 <template>
-	<section class="bodyContain">
-		<page-head :params="paramsObj"></page-head>
-		<section class="content">
-			<div class="tabBar">
-				<span  v-bind:class="{isActive: curNum == 0 }" @click="tabChange(0)">商家优惠券</span>
-				<span  v-bind:class="{isActive: curNum == 1 }" @click="tabChange(1)">红包</span>
-				<span  v-bind:class="{isActive: curNum == 2 }" @click="tabChange(2)">不可用 (<em>0</em>)</span>
-			</div>
-			 <div class="containBox">
-				   <ul class="discountList" v-show="curNum == 0">
-						<li class="clearfix">
-						<div class="discVal fl">100</div>
-						<div class="discDet fl">
-							<div>优惠券：满2000元使用</div>
-							<div class="discShop">该券由金康大药房提供</div>
-							<div>2016-05-18至2016-12-31</div>
-						</div>
-						</li> 
-					</ul>
-					  <ul class="redPaperList" v-show="curNum == 1">
-						<li class="clearfix">
-						<div class="redPaperVal fl">100</div>
-						<div class="redPaperDet fl">
-							<div>平台红包：满200元使用</div>
-							<div>2016-05-18至2016-12-31</div>
-						</div>
-						</li>
-						<li class="clearfix">
-						<div class="redPaperVal fl">100</div>
-						<div class="redPaperDet fl">
-							<div>平台红包：满200元使用</div>
-							<div>2016-05-18至2016-12-31</div>
-						</div>
-						</li>    
-					</ul>
-			 </div>
-		</section>
-	</section>
+  <section class="bodyContain">
+    <page-head :params="paramsObj"></page-head>
+    <section class="content">
+      <div class="tabBar">
+        <span v-bind:class="{isActive: curNum == 0 }" @click="tabChange(0)">商家优惠券</span>
+        <span v-bind:class="{isActive: curNum == 1 }" @click="tabChange(1)">红包</span>
+        <span v-bind:class="{isActive: curNum == 2 }" @click="tabChange(2)">不可用 (
+          <em>0</em>)</span>
+      </div>
+      <div class="containBox">
+        <ul class="discountList" v-show="curNum == 0">
+          <li class="clearfix">
+            <div class="discVal fl">100</div>
+            <div class="discDet fl">
+              <div>优惠券：满2000元使用</div>
+              <div class="discShop">该券由金康大药房提供</div>
+              <div>2016-05-18至2016-12-31</div>
+            </div>
+          </li>
+        </ul>
+        <ul class="redPaperList" v-show="curNum == 1">
+          <li class="clearfix">
+            <div class="redPaperVal fl">100</div>
+            <div class="redPaperDet fl">
+              <div>平台红包：满200元使用</div>
+              <div>2016-05-18至2016-12-31</div>
+            </div>
+          </li>
+          <li class="clearfix">
+            <div class="redPaperVal fl">100</div>
+            <div class="redPaperDet fl">
+              <div>平台红包：满200元使用</div>
+              <div>2016-05-18至2016-12-31</div>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+  </section>
 </template>
 <script>
-import pageHead from "@/components/header";
+import pageHead from '@/components/header'
 
 export default {
   data() {
     return {
       curNum: 0,
       paramsObj: {
-        pageTitle: "用户资产",
+        pageTitle: '用户资产',
         moreBtnStatus: true,
         editMode: false
       }
-    };
+    }
   },
   watch: {
     $route(to, from) {
-      if (to.name == "userAssets") {
-        this.pageInit();
+      if (to.name == 'userAssets') {
+        this.pageInit()
       }
     }
   },
   created: function() {
-    this.pageInit();
+    this.pageInit()
   },
   methods: {
     pageInit() {
-      if (this.$route.params.module == "redPaper") {
-        this.curNum = 1;
+      if (this.$route.params.module == 'redPaper') {
+        this.curNum = 1
       } else {
-        this.curNum = 0;
+        this.curNum = 0
       }
     },
     tabChange(index) {
-      this.curNum = index;
+      this.curNum = index
     }
   },
   components: {
     pageHead
   }
-};
+}
 </script>
 <style lang='scss' scoped>
 $red: #f40e24;
@@ -116,14 +117,14 @@ $bgColor: #f0f2f5;
           text-align: center;
           position: relative;
           &:before {
-            content: "￥";
+            content: '￥';
             width: 0.2rem;
             display: inline-block;
             color: $red;
             font-size: 12px;
           }
           &:after {
-            content: "";
+            content: '';
             width: 0.18rem;
             height: 0.18rem;
             border-radius: 50%;
@@ -147,7 +148,7 @@ $bgColor: #f0f2f5;
             }
           }
           &:before {
-            content: "";
+            content: '';
             width: 0.18rem;
             height: 0.18rem;
             border-radius: 50%;
@@ -176,14 +177,14 @@ $bgColor: #f0f2f5;
         text-align: center;
         position: relative;
         &:before {
-          content: "￥";
+          content: '￥';
           width: 0.2rem;
           display: inline-block;
           color: $red;
           font-size: 12px;
         }
         &:after {
-          content: "";
+          content: '';
           width: 0.18rem;
           height: 0.18rem;
           border-radius: 50%;
@@ -207,7 +208,7 @@ $bgColor: #f0f2f5;
           }
         }
         &:before {
-          content: "";
+          content: '';
           width: 0.18rem;
           height: 0.18rem;
           border-radius: 50%;

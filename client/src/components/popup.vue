@@ -3,7 +3,7 @@
     <section class="popup">
       <div class="title">提示</div>
       <div class="popupBody">
-        <span>asdfsdafsadffffdasdfsdafsdf</span>
+        <span></span>
       </div>
       <div class="oper clearfix">
         <span class="fl">确定</span>

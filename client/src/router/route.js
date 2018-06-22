@@ -1,24 +1,23 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import App from '@/app'
-import Home from '@/page/home'
-import Login from '@/page/login'
-import Register from '@/page/register'
-import PwdChange from '@/page/pwdChange'
-import GdDetail from '@/page/gdDetail'
-import Search from '@/page/search'
-import SearchRes from '@/page/searchRes'
-import User from '@/page/user'
-import OrderConfirm from '@/page/orderConfirm'
-import PayComplete from '@/page/payComplete'
-import MyPoint from '@/page/myPoint'
-import MyOrder from '@/page/myOrder'
-import Address from '@/page/address'
-import AddrEdit from '@/page/addrEdit'
-import UserAssets from '@/page/userAssets'
-import OrderDetail from '@/page/orderDetail'
-import OrderPay from '@/page/orderPay'
-import ShopCar from '@/page/shopCar'
+//路由懒加载
+const Home =  () => import('@/page/home');
+const Login =  () => import('@/page/login');
+const Register =  () => import('@/page/register');
+const PwdChange =  () => import('@/page/pwdChange');
+const GdDetail =  () => import('@/page/gdDetail');
+const Search =  () => import('@/page/search');
+const SearchRes =  () => import('@/page/searchRes');
+const User =  () => import('@/page/user');
+const OrderConfirm =  () => import('@/page/orderConfirm');
+const MyPoint =  () => import('@/page/myPoint');
+const MyOrder =  () => import('@/page/myOrder');
+const Address =  () => import('@/page/address');
+const AddrEdit =  () => import('@/page/addrEdit');
+const UserAssets =  () => import('@/page/userAssets');
+const OrderDetail =  () => import('@/page/orderDetail');
+const OrderPay =  () => import('@/page/orderPay');
+const ShopCar =  () => import('@/page/shopCar');
 
 Vue.use(Router)
 
@@ -77,14 +76,14 @@ export default new Router({
     path: '/user',
     name: 'user',
     component: User,
-    children: [
-      {
-        path: '/payComplete',
-        name: 'payComplete',
-        component: PayComplete
-      }
+    // children: [
+    //   {
+    //     path: '/payComplete',
+    //     name: 'payComplete',
+    //     component: PayComplete
+    //   }
 
-    ]
+    // ]
   },
   {
     path: '/myOrder',

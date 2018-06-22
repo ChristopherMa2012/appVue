@@ -23,52 +23,52 @@
         </li>
       </ul>
       <div class="newAddr">
-      	   <span @click="addAction()">新增地址</span>
+        <span @click="addAction()">新增地址</span>
       </div>
     </section>
   </section>
 </template>
 <script>
-import pageHead from "@/components/header";
-import { apiUrl } from "@/config/baseConfig";
+import pageHead from '@/components/header'
+import { apiUrl } from '@/config/baseConfig'
 
 export default {
   data() {
     return {
       addrList: [],
       toAddrEdit: null
-    };
+    }
   },
   created: function() {
-    this.pageInit();
+    this.pageInit()
   },
   watch: {
     $route(to, from) {
-      this.pageInit();
+      this.pageInit()
     }
   },
   methods: {
     pageInit: function() {
       Ma.fetch({
-        url: apiUrl + "addrList",
-        method: "get",
+        url: apiUrl + 'addrList',
+        method: 'get',
         callback: res => {
-          this.addrList = res.addrList;
+          this.addrList = res.addrList
         }
-      });
+      })
     },
     editAction: function(index) {
-      sessionStorage.setItem("addrObj", JSON.stringify(this.addrList[index]));
-      this.$router.push({ name: "addrEdit", params: { funway: "edit" } });
+      sessionStorage.setItem('addrObj', JSON.stringify(this.addrList[index]))
+      this.$router.push({ name: 'addrEdit', params: { funway: 'edit' } })
     },
     addAction: function() {
-      this.$router.push({ name: "addrEdit", params: { funway: "newAdd" } });
+      this.$router.push({ name: 'addrEdit', params: { funway: 'newAdd' } })
     }
   },
   components: {
     pageHead
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 $lightgrey: #8e8e8e;

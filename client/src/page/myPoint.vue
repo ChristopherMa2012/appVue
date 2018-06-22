@@ -3,8 +3,12 @@
     <page-head></page-head>
     <section class="content">
       <div class="outline">
-        <span>您现有积分：<i>234</i></span>
-        <span>可抵扣：<i>12.23</i></span>
+        <span>您现有积分：
+          <i>234</i>
+        </span>
+        <span>可抵扣：
+          <i>12.23</i>
+        </span>
       </div>
       <h1>积分问题</h1>
       <div class="question">
@@ -37,12 +41,11 @@ export default {
     pageHead
   }
 }
-
 </script>
 <style lang='scss' scoped>
 $red: #f40e24;
 $borderColor: #e7e7e7;
-$bgColor:#f0f2f5;
+$bgColor: #f0f2f5;
 $imgSrc: '/src/assets/images/myPoint/';
 .content {
   h1 {
@@ -53,7 +56,7 @@ $imgSrc: '/src/assets/images/myPoint/';
   }
   .outline {
     padding-left: 1.45rem;
-    background: url($imgSrc + 'pointIcon.png') no-repeat;
+    background: url($imgSrc+'pointIcon.png') no-repeat;
     background-size: 0.5rem 0.5rem;
     background-position: 0.5rem 0.4rem;
     background-color: white;
@@ -99,5 +102,4 @@ $imgSrc: '/src/assets/images/myPoint/';
     line-height: 0.3rem;
   }
 }
-
 </style>

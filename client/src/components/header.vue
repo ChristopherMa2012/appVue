@@ -15,7 +15,7 @@
 </template>
 <script>
 import router from "@/router/route";
-import { bus } from "@/common/bus";
+// import { bus } from "@/common/bus";
 
 export default {
   data() {
@@ -95,12 +95,12 @@ export default {
     edit() {
       this.editStatus = false;
       this.completeStatus = true;
-      bus.$emit("headEdit");
+      this.$emit("headEdit");
     },
     complete() {
       this.editStatus = true;
       this.completeStatus = false;
-      bus.$emit("headEditComplete");
+      this.$emit("headEditComplete");
     }
   }
 };

@@ -23,7 +23,7 @@ mongoose.connect('mongodb://localhost/appvue');
 app.all("*", (req, res, next) => {
 	res.set("Access-Control-Allow-origin", "http://www.vueapp.tech:8080");
 	res.set("Access-Control-Allow-Headers", "Content-Type");
-	//res.set("Access-Control-Allow-Methods", "GET,PUT,POST");
+	res.set("Access-Control-Allow-Methods", "GET,PUT,POST");
 	res.set("Access-Control-Allow-Credentials", true);
 	if (req.method === 'OPTIONS') {
 		res.status(200).end();

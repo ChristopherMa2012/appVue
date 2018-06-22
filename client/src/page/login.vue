@@ -14,7 +14,7 @@
         </div>
         <div class="loginTip">{{loginTip}}</div>
       </div>
-      <div class="loginBtn"  @click="loginAction">登录</div>
+      <div class="loginBtn" @click="loginAction">登录</div>
       <div class="accOper clearfix">
         <router-link to="/pwdChange" class="forgetPwd fl">忘记密码</router-link>
         <router-link to="/register" class="toRegister fr">立即注册</router-link>
@@ -23,43 +23,43 @@
   </section>
 </template>
 <script>
-import pageHead from "@/components/header";
-import { apiUrl } from "@/config/baseConfig";
+import pageHead from '@/components/header'
+import { apiUrl } from '@/config/baseConfig'
 
 export default {
-  data() {
+  data () {
     return {
-      userName: "",
-      password: "",
-      loginTip: ""
-    };
+      userName: '',
+      password: '',
+      loginTip: ''
+    }
   },
   components: {
     pageHead
   },
   methods: {
-    confirmAction(opts) {
+    confirmAction (opts) {
       Ma.fetch({
-        url: apiUrl + "login",
-        method: "post",
+        url: apiUrl + 'login',
+        method: 'post',
         body: opts,
         callback: res => {
-          this.loginResHandle(res.status);
+          this.loginResHandle(res.status)
         }
-      });
+      })
     },
-    loginResHandle(status, self) {
+    loginResHandle (status, self) {
       switch (status) {
         case 200:
-          self.$router.push("/");
-          break;
+          self.$router.push('/')
+          break
         case 202:
-          self.loginTip = "该用户已登录，无须重复登录";
-          break;
+          self.loginTip = '该用户已登录，无须重复登录'
+          break
         case 300:
           Ma.pop({
-            content: "已有用户在该浏览器登录，是否注销该用户并登录",
-            btnArr: ["确定", "取消"],
+            content: '已有用户在该浏览器登录，是否注销该用户并登录',
+            btnArr: ['确定', '取消'],
             eventArr: [
               {
                 event: confirmAction,
@@ -69,29 +69,29 @@ export default {
                 }
               }
             ]
-          });
-          break;
+          })
+          break
         case 400:
-          self.loginTip = "用户名或密码不正确";
-          break;
+          self.loginTip = '用户名或密码不正确'
+          break
       }
     },
-    loginAction() {
-      this.loginTip = "";
+    loginAction () {
+      this.loginTip = ''
       Ma.fetch({
-        url: apiUrl + "login",
-        method: "post",
+        url: apiUrl + 'login',
+        method: 'post',
         body: {
           name: this.userName,
           password: this.password
         },
         callback: res => {
-          this.loginResHandle(res.status, this);
+          this.loginResHandle(res.status, this)
         }
-      });
+      })
     }
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 $borderGrey: #eeeeee;

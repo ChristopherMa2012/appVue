@@ -42,10 +42,10 @@
   </section>
 </template>
 <script>
-import pageHead from "@/components/header";
-import pageFoot from "@/components/footer";
-import { mapState } from "vuex";
-import { apiUrl } from "@/config/baseConfig";
+import pageHead from '@/components/header'
+import pageFoot from '@/components/footer'
+import { mapState } from 'vuex'
+import { apiUrl } from '@/config/baseConfig'
 
 export default {
   data() {
@@ -53,51 +53,48 @@ export default {
       isActive: false,
       tabNum: 0,
       goodsList: []
-    };
+    }
   },
   computed: {
     ...mapState({
       categoryArr: state => state.home.categoryArr
     })
-    //...mapState(['categoryArr'])
   },
   created: function() {
-    this.pageInit();
+    this.pageInit()
   },
-  watch: {
-    $route(to, from) {}
-  },
+
   methods: {
     pageInit() {
       Ma.fetch({
-        url: apiUrl + "goodsList",
-        method: "get",
+        url: apiUrl + 'goodsList',
+        method: 'get',
         callback: res => {
-          this.goodsList = res.goodsList;
+          this.goodsList = res.goodsList
         }
-      });
+      })
     },
     searchAction() {
-      this.$router.push("/search");
+      this.$router.push('/search')
     },
     tabChange(index) {
-      this.tabNum = index;
+      this.tabNum = index
     }
   },
   components: {
     pageHead,
     pageFoot
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 $lightgrey: lightgrey;
 $red: #e6186f;
-$imgSrc: "../assets/images/index/";
+$imgSrc: '../assets/images/index/';
 
 .indexTop {
   height: 3.6rem;
-  background: url($imgSrc + "topBg.jpg") no-repeat center center;
+  background: url($imgSrc+'topBg.jpg') no-repeat center center;
   background-size: cover;
   overflow: hidden;
   div {
@@ -189,7 +186,7 @@ ul.tabBar {
         line-height: 0.4rem;
         color: $red;
         &:before {
-          content: "￥";
+          content: '￥';
           display: inline-block;
           color: $red;
           font-size: 12px;

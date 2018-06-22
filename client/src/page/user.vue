@@ -64,59 +64,59 @@
   </section>
 </template>
 <script>
-import pageHead from "@/components/header";
-import { apiUrl } from "@/config/baseConfig";
+import pageHead from '@/components/header'
+import { apiUrl } from '@/config/baseConfig'
 
 export default {
   data() {
     return {
-      name: "",
+      name: '',
       point: 0,
       redPaper: 0,
       discount: 0,
       paramsObj: {
-        pageTitle: "用户中心",
+        pageTitle: '用户中心',
         moreBtnStatus: true,
         editMode: false
       }
-    };
+    }
   },
   watch: {
     $route(to, from) {
-      if (to.name == "user") {
-        this.pageInit();
+      if (to.name == 'user') {
+        this.pageInit()
       }
     }
   },
   created: function() {
-    this.pageInit();
+    this.pageInit()
   },
   methods: {
     pageInit() {
       Ma.fetch({
-        url: apiUrl + "userInfo",
-        method: "get",
+        url: apiUrl + 'userInfo',
+        method: 'get',
         callback: res => {
-          this.name = res.userInfo.name;
-          this.point = res.userInfo.point;
-          this.redPaper = res.userInfo.redPaper;
-          this.discount = res.userInfo.discount;
+          this.name = res.userInfo.name
+          this.point = res.userInfo.point
+          this.redPaper = res.userInfo.redPaper
+          this.discount = res.userInfo.discount
         }
-      });
+      })
     }
   },
   components: {
     pageHead
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 $lightgrey: #c2c2c2;
 $red: #e6186f;
-$imgSrc: "../assets/images/user/";
+$imgSrc: '../assets/images/user/';
 .content {
   .head {
-    background: url($imgSrc + "userCenterBg.png") no-repeat;
+    background: url($imgSrc+'userCenterBg.png') no-repeat;
     background-size: cover;
     height: 1.6rem;
     padding-top: 0.3rem;
@@ -188,7 +188,7 @@ $imgSrc: "../assets/images/user/";
             display: inline-block;
             width: 0.29rem;
             height: 0.29rem;
-            background: url($imgSrc + "toPayIcon.png") no-repeat;
+            background: url($imgSrc+'toPayIcon.png') no-repeat;
             background-size: cover;
             vertical-align: middle;
           }
@@ -196,7 +196,7 @@ $imgSrc: "../assets/images/user/";
             i {
               width: 0.3rem;
               height: 0.28rem;
-              background: url($imgSrc + "toRecieveIcon.png") no-repeat;
+              background: url($imgSrc+'toRecieveIcon.png') no-repeat;
               background-size: cover;
             }
           }
@@ -221,7 +221,7 @@ $imgSrc: "../assets/images/user/";
         height: 0.83rem;
         line-height: 0.83rem;
         i {
-          background: url($imgSrc + "addrIcon.png") no-repeat;
+          background: url($imgSrc+'addrIcon.png') no-repeat;
           background-size: cover;
         }
       }
@@ -231,7 +231,7 @@ $imgSrc: "../assets/images/user/";
         i {
           width: 0.28rem;
           height: 0.28rem;
-          background: url($imgSrc + "serviceIcon.png") no-repeat;
+          background: url($imgSrc+'serviceIcon.png') no-repeat;
           background-size: cover;
         }
       }
@@ -242,7 +242,7 @@ $imgSrc: "../assets/images/user/";
         i {
           width: 0.28rem;
           height: 0.28rem;
-          background: url($imgSrc + "aboutIcon.png") no-repeat;
+          background: url($imgSrc+'aboutIcon.png') no-repeat;
           background-size: cover;
         }
       }

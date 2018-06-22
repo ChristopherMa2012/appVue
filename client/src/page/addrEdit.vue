@@ -36,50 +36,49 @@
   </section>
 </template>
 <script>
-import pageHead from "@/components/header";
-import { apiUrl } from "@/config/baseConfig";
+import pageHead from '@/components/header'
+import { apiUrl } from '@/config/baseConfig'
 
 export default {
   data() {
     return {
       showDelBtn: true,
-      name: "",
-      phone: "",
-      province: "",
-      city: "",
-      area: "",
-      addrDetail: ""  
-    };
+      name: '',
+      phone: '',
+      province: '',
+      city: '',
+      area: '',
+      addrDetail: ''
+    }
   },
   created: function() {
-    this.dataInit();
+    this.dataInit()
   },
   watch: {
     $route(to, from) {
-      if (to.name == "address") return;
-      this.dataInit();
+      if (to.name == 'address') return
+      this.dataInit()
     }
   },
   methods: {
     deleteAction: function(e) {
       Ma.fetch({
-        url: apiUrl + "deleteAddr",
-        method: "get",
+        url: apiUrl + 'deleteAddr',
+        method: 'get',
         body: {
           addrId: this.addrId
         },
         callback: res => {
           let callback = () => {
-            this.$router.go(-1);
-          };          
+            this.$router.go(-1)
+          }
           Ma.pop({
             content: res.msg,
-            btnArr: ["确定"],
-            eventArr: [{event:callback}]
-          });
-
+            btnArr: ['确定'],
+            eventArr: [{ event: callback }]
+          })
         }
-      });
+      })
     },
     saveAction: function(e) {
       if (
@@ -90,10 +89,10 @@ export default {
         this.area &&
         this.addrDetail
       ) {
-        let url = this.addrId ? 'addrModify' : 'addAddress';
+        let url = this.addrId ? 'addrModify' : 'addAddress'
         Ma.fetch({
           url: apiUrl + url,
-          method: "post",
+          method: 'post',
           body: {
             name: this.name,
             phone: this.phone,
@@ -104,56 +103,56 @@ export default {
             addrId: this.addrId
           },
           callback: res => {
-            let self = this;
+            let self = this
             Ma.pop({
               content: res.msg,
-              btnArr: ["确定"],
-              eventArr: [{'event':self.addAddrSucc}]
-            });
+              btnArr: ['确定'],
+              eventArr: [{ event: self.addAddrSucc }]
+            })
           }
         })
       } else {
         Ma.pop({
-          content: "请填写完整再提交",
-          btnArr: ["确定"]
-        });
+          content: '请填写完整再提交',
+          btnArr: ['确定']
+        })
       }
     },
     //新增地址成功回调函数
     addAddrSucc: function() {
-      this.$router.go(-1);
+      this.$router.go(-1)
     },
     //编辑收货地址数据初始化
     dataInit: function() {
-      let funWay = this.$route.params.funway;
-      if (funWay == "newAdd") {
-        this.name = "";
-        this.phone = "";
-        this.province = "";
-        this.city = "";
-        this.area = "";
-        this.addrDetail = "";
-        this.addrId = "";
-        this.pageTitle = "新增收货地址";
-        this.showDelBtn = false;
-        return;
+      let funWay = this.$route.params.funway
+      if (funWay == 'newAdd') {
+        this.name = ''
+        this.phone = ''
+        this.province = ''
+        this.city = ''
+        this.area = ''
+        this.addrDetail = ''
+        this.addrId = ''
+        this.pageTitle = '新增收货地址'
+        this.showDelBtn = false
+        return
       }
-      let addrObj = JSON.parse(sessionStorage.getItem("addrObj"));
-      this.name = addrObj.name;
-      this.phone = addrObj.phone;
-      this.province = addrObj.province;
-      this.city = addrObj.city;
-      this.area = addrObj.area;
-      this.addrDetail = addrObj.addrDetail;
-      this.addrId = addrObj._id;
-      this.pageTitle = "修改收货地址";
-      this.showDelBtn = true;
+      let addrObj = JSON.parse(sessionStorage.getItem('addrObj'))
+      this.name = addrObj.name
+      this.phone = addrObj.phone
+      this.province = addrObj.province
+      this.city = addrObj.city
+      this.area = addrObj.area
+      this.addrDetail = addrObj.addrDetail
+      this.addrId = addrObj._id
+      this.pageTitle = '修改收货地址'
+      this.showDelBtn = true
     }
   },
   components: {
     pageHead
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 $lightgrey: #eeeeee;
@@ -172,7 +171,7 @@ $red: #df064e;
         line-height: 0.72rem;
         width: 1.55rem;
         &:before {
-          content: "*";
+          content: '*';
           display: inline-block;
           color: $red;
           vertical-align: middle;

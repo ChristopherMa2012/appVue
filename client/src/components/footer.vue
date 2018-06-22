@@ -29,23 +29,8 @@
 <script>
 import fetch from '@/utils/fetchData';
 import { apiUrl } from '@/config/baseConfig';
-export default {
-  methods: {
-    //toMyOrder() {
-    //   fetch({
-    //     url: apiUrl + 'isLogin',
-    //     method: 'get'
-    //   }).then(res => {
-    //     if(res.status == 202){
-    //       this.$router.push('/user');
-    //     }else{
-    //       this.$router.push('/login');
-    //     }
-    //   }).catch(e => {
-    //     console.log(e);
-    //   })
-    // }
-  }
+export default{
+  
 }
 
 </script>

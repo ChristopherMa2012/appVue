@@ -1,52 +1,54 @@
 <template>
   <section class="bodyContain">
-      <page-head page-title='购物车'></page-head>
-      <section class="content">
-            <ul>
-              <li class="clearfix" v-for="(item,index) in goodsList" :key="index" v-show="item.gdItemShow">
-                   <i class="circle fl" :class="{checkedCircle: item.checked }" @click="select(index)" v-show="editMode"></i>
-                   <i class="circle fl" :class="{checkedCircle: item.editChecked }" v-show="!editMode" @click="editSelect(index)"></i>
-                   <img :src="item.imgUrl" class="fl">
-                   <div class="gdInfo fl">
-                       <h4>{{item.gdTitle}}</h4>
-                       <div class="specifi">{{item.specifications}}</div>
-                       <div class="clearfix">
-                            <span class="price fl">￥{{item.price}}</span>
-                            <div class="num fr">
-                                <i class="minus" @click="minus(index)">-</i>
-                                <input type="text" :value="item.num">
-                                <i class="plus"  @click="plus(index)">+</i>
-                            </div>
-                       </div>
-                   </div>
-              </li>       
-            </ul>
-            <div class="settlementBar clearfix"   v-if="editMode">
-                <div class="fl">
-                   <i class="circle" :class="{checkedCircle:checkedAll}"  @click="select(-1)"></i>
-                   <span>全选</span>
-                   <span class="total">合计：<em>￥{{totalPrice}}</em></span>
-                </div>  
-                <div class="settleBtn fr" @click="settleBtn">去结算</div>
+    <page-head page-title='购物车'></page-head>
+    <section class="content">
+      <ul>
+        <li class="clearfix" v-for="(item,index) in goodsList" :key="index" v-show="item.gdItemShow">
+          <i class="circle fl" :class="{checkedCircle: item.checked }" @click="select(index)" v-show="editMode"></i>
+          <i class="circle fl" :class="{checkedCircle: item.editChecked }" v-show="!editMode" @click="editSelect(index)"></i>
+          <img :src="item.imgUrl" class="fl">
+          <div class="gdInfo fl">
+            <h4>{{item.gdTitle}}</h4>
+            <div class="specifi">{{item.specifications}}</div>
+            <div class="clearfix">
+              <span class="price fl">￥{{item.price}}</span>
+              <div class="num fr">
+                <i class="minus" @click="minus(index)">-</i>
+                <input type="text" :value="item.num">
+                <i class="plus" @click="plus(index)">+</i>
+              </div>
             </div>
-            <div class="editBar clearfix" v-else>
-                <div class="fl">
-                  <i class="circle" :class="{checkedCircle:editCheckedAll}" @click="editSelect(-1)"></i>
-                  <span>全选</span>
-                </div>
-                <div class="fr">
-                  <button>分享</button>
-                  <button>移入关注</button>
-                  <button @click="gdDeleteAction()">删除</button>
-                </div>
-            </div>
-      </section>
+          </div>
+        </li>
+      </ul>
+      <div class="settlementBar clearfix" v-if="editMode">
+        <div class="fl">
+          <i class="circle" :class="{checkedCircle:checkedAll}" @click="select(-1)"></i>
+          <span>全选</span>
+          <span class="total">合计：
+            <em>￥{{totalPrice}}</em>
+          </span>
+        </div>
+        <div class="settleBtn fr" @click="settleBtn">去结算</div>
+      </div>
+      <div class="editBar clearfix" v-else>
+        <div class="fl">
+          <i class="circle" :class="{checkedCircle:editCheckedAll}" @click="editSelect(-1)"></i>
+          <span>全选</span>
+        </div>
+        <div class="fr">
+          <button>分享</button>
+          <button>移入关注</button>
+          <button @click="gdDeleteAction()">删除</button>
+        </div>
+      </div>
+    </section>
   </section>
 </template>
 <script>
-import pageHead from "@/components/header";
-import { apiUrl } from "@/config/baseConfig";
-import { bus } from "@/common/bus";
+import pageHead from '@/components/header'
+import { apiUrl } from '@/config/baseConfig'
+import { bus } from '@/common/bus'
 
 export default {
   data() {
@@ -55,180 +57,180 @@ export default {
       checkedAll: false, //全选
       editCheckedAll: false, //编辑模式下的全选
       goodsList: [],
-      totalPrice: "0.00",
+      totalPrice: '0.00',
       editMode: true
-    };
+    }
   },
   created: function() {
-    this.pageInit();
-    bus.$on("headEdit", () => {
-      this.editMode = false;
-    });
-    bus.$on("headEditComplete", () => {
-      this.editMode = true;
-    });
+    this.pageInit()
+    bus.$on('headEdit', () => {
+      this.editMode = false
+    })
+    bus.$on('headEditComplete', () => {
+      this.editMode = true
+    })
   },
   watch: {
     $route(to, from) {
-      if (from.name == "shopCar") return;
-      this.pageInit();
+      if (from.name == 'shopCar') return
+      this.pageInit()
     }
   },
   methods: {
     pageInit() {
       Ma.fetch({
-        url: apiUrl + "shopCarList",
-        method: "get",
+        url: apiUrl + 'shopCarList',
+        method: 'get',
         callback: res => {
           res.goodsList.forEach(item => {
-            item.checked = false;
-            item.editChecked = false;
-            item.gdItemShow = true;
-          });
-          this.goodsList = res.goodsList;
+            item.checked = false
+            item.editChecked = false
+            item.gdItemShow = true
+          })
+          this.goodsList = res.goodsList
         }
-      });
+      })
     },
     minus(index) {
-      let num = this.goodsList[index].num;
+      let num = this.goodsList[index].num
       if (num == 1) {
-        num = 1;
+        num = 1
       } else {
-        this.shopCarNumMod(1, index);
-        if (!this.goodsList[index].checked) return;
+        this.shopCarNumMod(1, index)
+        if (!this.goodsList[index].checked) return
         this.totalPrice = (
           Number(this.totalPrice) - this.goodsList[index].price
-        ).toFixed(2);
+        ).toFixed(2)
       }
     },
     plus(index) {
-      let num = this.goodsList[index].num;
+      let num = this.goodsList[index].num
       if (num >= this.storage) {
-        num = this.storage;
+        num = this.storage
       } else {
-        this.shopCarNumMod(2, index);
-        if (!this.goodsList[index].checked) return;
+        this.shopCarNumMod(2, index)
+        if (!this.goodsList[index].checked) return
         this.totalPrice = (
           Number(this.totalPrice) + this.goodsList[index].price
-        ).toFixed(2);
+        ).toFixed(2)
       }
     },
     shopCarNumMod(way, index) {
       Ma.fetch({
-        url: apiUrl + "shopCarNumMod",
-        method: "get",
+        url: apiUrl + 'shopCarNumMod',
+        method: 'get',
         body: { modifyWay: way, gdSN: this.goodsList[index].gdSN },
         callback: res => {
           if (res.status == 200 && way == 1) {
-            this.goodsList[index].num--;
+            this.goodsList[index].num--
           } else if (res.status == 200 && way == 2) {
-            this.goodsList[index].num++;
+            this.goodsList[index].num++
           }
         }
-      });
+      })
     },
     select(index) {
       if (index != -1) {
         if (this.goodsList[index].checked) {
-          this.goodsList[index].checked = false;
-          this.checkedAll = false;
+          this.goodsList[index].checked = false
+          this.checkedAll = false
           this.totalPrice = (
             Number(this.totalPrice) -
             this.goodsList[index].price * this.goodsList[index].num
-          ).toFixed(2);
+          ).toFixed(2)
         } else {
-          this.goodsList[index].checked = true;
-          this.checkedAll = this.goodsList.every(item => item.checked == true);
+          this.goodsList[index].checked = true
+          this.checkedAll = this.goodsList.every(item => item.checked == true)
           this.totalPrice = (
             Number(this.totalPrice) +
             this.goodsList[index].price * this.goodsList[index].num
-          ).toFixed(2);
+          ).toFixed(2)
         }
-        return;
+        return
       }
 
       if (this.checkedAll) {
-        this.checkedAll = false;
+        this.checkedAll = false
         this.goodsList.forEach(item => {
-          item.checked = false;
-        });
-        this.totalPrice = 0.0;
+          item.checked = false
+        })
+        this.totalPrice = 0.0
       } else {
-        this.checkedAll = true;
+        this.checkedAll = true
         this.goodsList.forEach(item => {
-          item.checked = true;
-        });
-        let temPrice = 0;
+          item.checked = true
+        })
+        let temPrice = 0
         this.goodsList.forEach(item => {
-          temPrice += item.price * item.num;
-        });
-        this.totalPrice = temPrice.toFixed(2);
+          temPrice += item.price * item.num
+        })
+        this.totalPrice = temPrice.toFixed(2)
       }
     },
     editSelect(index) {
       if (index == -1) {
         if (this.editCheckedAll) {
-          this.editCheckedAll = false;
+          this.editCheckedAll = false
           this.goodsList.forEach(item => {
-            item.editChecked = false;
-          });
+            item.editChecked = false
+          })
         } else {
-          this.editCheckedAll = true;
+          this.editCheckedAll = true
           this.goodsList.forEach(item => {
-            item.editChecked = true;
-          });
+            item.editChecked = true
+          })
         }
       } else {
         if (this.goodsList[index].editChecked) {
-          this.goodsList[index].editChecked = false;
-          this.editCheckedAll = false;
+          this.goodsList[index].editChecked = false
+          this.editCheckedAll = false
         } else {
-          this.goodsList[index].editChecked = true;
+          this.goodsList[index].editChecked = true
           this.editCheckedAll = this.goodsList.every(
             item => item.editChecked == true
-          );
+          )
         }
       }
     },
     gdDeleteAction() {
-      let gdSNArr = [];
-      let self = this;
+      let gdSNArr = []
+      let self = this
       this.goodsList.forEach(item => {
-        if (item.editChecked) gdSNArr.push(item.gdSN);
-      });
+        if (item.editChecked) gdSNArr.push(item.gdSN)
+      })
       Ma.fetch({
-        url: apiUrl + "gdDelete",
-        method: "post",
+        url: apiUrl + 'gdDelete',
+        method: 'post',
         body: {
           gdSNArr
         },
         callback(res) {
           if (res.status == 200) {
             gdSNArr.forEach((item, index) => {
-              self.goodsList[index].gdItemShow = false;
-            });
+              self.goodsList[index].gdItemShow = false
+            })
           }
         }
-      });
+      })
     },
-    settleBtn(){
-     let isChecked =  this.goodsList.every(item=>{
+    settleBtn() {
+      let isChecked = this.goodsList.every(item => {
         return item.checked == false
       })
-      if(isChecked){
+      if (isChecked) {
         Ma.pop({
-          content:'请选择要购买的商品',
+          content: '请选择要购买的商品',
           btnArr: ['确定']
         })
-        return;
+        return
       }
-      this.$router.push('/orderConfirm');
+      this.$router.push('/orderConfirm')
     }
   },
   components: {
     pageHead
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 $borderGrey: #8d8d8d;
@@ -248,7 +250,7 @@ $red: #df064e;
   background-color: $red;
   text-align: center;
   &:before {
-    content: "✓";
+    content: '✓';
     display: block;
     color: white;
   }

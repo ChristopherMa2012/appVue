@@ -1,21 +1,20 @@
 <template>
-  <section class="bodyContain">
-      <page-head></page-head>
-      <section class="content">
-           
-      </section>
-  </section>
+    <section class="bodyContain">
+        <page-head></page-head>
+        <section class="content">
+
+        </section>
+    </section>
 </template>
 <script>
 import pageHead from '@/components/header'
 
 export default {
-     components:{
-         pageHead               
-     }
+  components: {
+    pageHead
+  }
 }
 </script>
 
 <style lang="scss" scoped>
-
 </style>
