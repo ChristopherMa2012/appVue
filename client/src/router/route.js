@@ -1,23 +1,23 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 //路由懒加载
-const Home =  () => import('@/page/home');
-const Login =  () => import('@/page/login');
-const Register =  () => import('@/page/register');
-const PwdChange =  () => import('@/page/pwdChange');
-const GdDetail =  () => import('@/page/gdDetail');
-const Search =  () => import('@/page/search');
-const SearchRes =  () => import('@/page/searchRes');
-const User =  () => import('@/page/user');
-const OrderConfirm =  () => import('@/page/orderConfirm');
-const MyPoint =  () => import('@/page/myPoint');
-const MyOrder =  () => import('@/page/myOrder');
-const Address =  () => import('@/page/address');
-const AddrEdit =  () => import('@/page/addrEdit');
-const UserAssets =  () => import('@/page/userAssets');
-const OrderDetail =  () => import('@/page/orderDetail');
-const OrderPay =  () => import('@/page/orderPay');
-const ShopCar =  () => import('@/page/shopCar');
+const Home =  () => import('@/views/home/home');
+const Login =  () => import('@/views/login/login');
+const Register =  () => import('@/views/register/register');
+const passwordChange =  () => import('@/views/passwordChange/passwordChange');
+const goodDetail =  () => import('@/views/goodDetail/goodDetail');
+const Search =  () => import('@/views/search/search');
+const SearchRes =  () => import('@/views/searchRes/searchRes');
+const User =  () => import('@/views/user/user');
+const OrderConfirm =  () => import('@/views/orderConfirm/orderConfirm');
+const MyPoint =  () => import('@/views/myPoint/myPoint');
+const MyOrder =  () => import('@/views/myOrder/myOrder');
+const Address =  () => import('@/views/address/address');
+const addressEdit =  () => import('@/views/addressEdit/addressEdit');
+const UserAssets =  () => import('@/views/userAssets/userAssets');
+const OrderDetail =  () => import('@/views/orderDetail/orderDetail');
+const OrderPay =  () => import('@/views/orderPay/orderPay');
+const ShopCar =  () => import('@/views/shopCar/shopCar');
 
 Vue.use(Router)
 
@@ -38,14 +38,14 @@ export default new Router({
     component: Register
   },
   {
-    path: '/pwdChange',
-    name: 'pwdChange',
-    component: PwdChange
+    path: '/passwordChange',
+    name: 'passwordChange',
+    component: passwordChange
   },
   {
-    path: '/gdDetail/:gdSN',
-    name: 'gdDetail',
-    component: GdDetail
+    path: '/goodDetail/:gdSN',
+    name: 'goodDetail',
+    component: goodDetail
   },
   {
     path: '/search',
@@ -63,9 +63,9 @@ export default new Router({
     component: Address
   },
   {
-    path: '/addrEdit/',
-    name: 'addrEdit',
-    component: AddrEdit
+    path: '/addressEdit/',
+    name: 'addressEdit',
+    component: addressEdit
   },
   {
     path: '/orderConfirm',

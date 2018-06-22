@@ -44,10 +44,10 @@ export default {
         case "register":
           title = "用户注册";
           break;
-        case "pwdChange":
+        case "passwordChange":
           title = "密码修改";
           break;
-        case "gdDetail":
+        case "goodDetail":
           title = "商品详情";
           break;
         case "search":
@@ -59,7 +59,7 @@ export default {
         case "address":
           title = "地址管理";
           break;
-        case "addrEdit":
+        case "addressEdit":
           title = "地址编辑";
           break;
         case "orderConfirm":

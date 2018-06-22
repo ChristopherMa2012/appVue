@@ -51,7 +51,7 @@
           <span>佰川堂大药房旗舰店</span>
           <span>广西壮族自治区桂平市</span> 发货
         </div>
-        <!-- <img src="~@/assets/images/gdDetail/guarantee.jpg"> -->
+        <!-- <img src="~@/assets/images/goodDetail/guarantee.jpg"> -->
       </div>
       <!-- 购买信息 -->
       <div class="buyInfo">
@@ -89,7 +89,7 @@
               <span>{{item.value}}</span>
             </li>
           </ul>
-          <!-- <img src="~@/assets/images/gdDetail/checkPass.jpg"> -->
+          <!-- <img src="~@/assets/images/goodDetail/checkPass.jpg"> -->
         </div>
         <div class="imgDetail" v-show="curNum == 1">
           <img :src="imgUrl">
@@ -130,7 +130,7 @@ export default {
   },
   watch: {
     $route(to, from) {
-      if (to.name !== 'gdDetail') return
+      if (to.name !== 'goodDetail') return
       this.pageInit()
     }
   },
@@ -138,7 +138,7 @@ export default {
     pageInit() {
       let gdSN = this.$route.params.gdSN
       Ma.fetch({
-        url: apiUrl + 'gdDetail',
+        url: apiUrl + 'goodDetail',
         method: 'get',
         body: { gdSN: gdSN },
         callback: res => {
@@ -202,7 +202,7 @@ $red: #df064e;
 $fontGrey: #cccccc;
 $borderGrey: #8d8d8d;
 
-$imgSrc: '../assets/images/gdDetail/';
+$imgSrc: '../../assets/images/goodDetail/';
 .content {
   background-color: #f0f2f5;
   .carousel {

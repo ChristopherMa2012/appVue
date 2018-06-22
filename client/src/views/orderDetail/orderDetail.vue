@@ -131,7 +131,7 @@ export default {
 <style lang="scss" scoped>
 $red: #e6186f;
 $borderGrey: #cdd3ce;
-$imgSrc: '../assets/images/orderDetail/';
+$imgSrc: '../../assets/images/orderDetail/';
 .content {
   .receiverInfo {
     padding-bottom: 0.2rem;

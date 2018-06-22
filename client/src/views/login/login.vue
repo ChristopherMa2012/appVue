@@ -16,7 +16,7 @@
       </div>
       <div class="loginBtn" @click="loginAction">登录</div>
       <div class="accOper clearfix">
-        <router-link to="/pwdChange" class="forgetPwd fl">忘记密码</router-link>
+        <router-link to="/passwordChange" class="forgetPwd fl">忘记密码</router-link>
         <router-link to="/register" class="toRegister fr">立即注册</router-link>
       </div>
     </section>

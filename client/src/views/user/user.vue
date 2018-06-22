@@ -4,7 +4,7 @@
     <section class="content">
       <!-- 会员信息头 -->
       <div class="head clearfix">
-        <img src="../assets/images/user/userHead.jpg" alt="用户头像" class="userImg fl">
+        <img src="../../assets/images/user/userHead.jpg" alt="用户头像" class="userImg fl">
         <div class="fl userInfo">
           <div class="userName">{{name}}</div>
           <div class="userDegree">注册会员</div>
@@ -113,7 +113,7 @@ export default {
 <style lang="scss" scoped>
 $lightgrey: #c2c2c2;
 $red: #e6186f;
-$imgSrc: '../assets/images/user/';
+$imgSrc: '../../assets/images/user/';
 .content {
   .head {
     background: url($imgSrc+'userCenterBg.png') no-repeat;

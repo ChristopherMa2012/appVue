@@ -36,7 +36,7 @@ export default {
   data() {
     return {
       addrList: [],
-      toAddrEdit: null
+      toaddressEdit: null
     }
   },
   created: function() {
@@ -59,10 +59,10 @@ export default {
     },
     editAction: function(index) {
       sessionStorage.setItem('addrObj', JSON.stringify(this.addrList[index]))
-      this.$router.push({ name: 'addrEdit', params: { funway: 'edit' } })
+      this.$router.push({ name: 'addressEdit', params: { funway: 'edit' } })
     },
     addAction: function() {
-      this.$router.push({ name: 'addrEdit', params: { funway: 'newAdd' } })
+      this.$router.push({ name: 'addressEdit', params: { funway: 'newAdd' } })
     }
   },
   components: {

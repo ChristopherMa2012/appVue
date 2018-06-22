@@ -21,7 +21,7 @@
         <ul class="clearfix" v-for="(item,index) in categoryArr" v-show="index == tabNum" :key="index">
           <li v-for="item in goodsList[index]" :key="item.gdSN">
             <figure>
-              <router-link :to="{path:'/gdDetail/'+ item.gdSN}">
+              <router-link :to="{path:'/goodDetail/'+ item.gdSN}">
                 <div>
                   <img :src="item.imgUrl">
                 </div>
@@ -90,7 +90,7 @@ export default {
 <style lang="scss" scoped>
 $lightgrey: lightgrey;
 $red: #e6186f;
-$imgSrc: '../assets/images/index/';
+$imgSrc: '../../assets/images/index/';
 
 .indexTop {
   height: 3.6rem;
